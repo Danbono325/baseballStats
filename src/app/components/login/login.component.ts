@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, AfterViewInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -6,7 +7,7 @@ import { Component, OnInit, ElementRef, AfterViewInit } from "@angular/core";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private router: Router) {}
 
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
@@ -14,4 +15,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {}
+
+  login() {
+    this.router.navigate(["overview"]);
+  }
 }
