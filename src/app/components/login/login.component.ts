@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   public microsoftSignIn() {
     let that = this;
     var loginRequest = {
-      scopes: ["user.read", "mail.send"] // optional Array<string>
+      scopes: ["user.read", "mail.send", "profile"] // optional Array<string>
     };
 
     that.userAgentApplication.loginPopup(loginRequest).then(
