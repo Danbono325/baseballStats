@@ -10,7 +10,7 @@
   h1 {
     margin-left: 1vw;
     margin-top: 5vh;
-    color: white;
+    color: black;
   }
 }
 
@@ -19,10 +19,10 @@
   font-size: 3rem;
 }
 ::placeholder {
-  color: white;
+  color: lightgray;
 }
 .login-box {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   margin-top: 15vh;
 
@@ -36,12 +36,12 @@
       background: none;
       margin-bottom: 15px;
       border: none;
-      border-bottom: 1px solid white;
-      color: white;
+      border-bottom: 1px solid black;
+      color: black;
       &:focus {
         transition: border-bottom 0.25s ease;
         outline: none;
-        border-bottom: white 1px solid;
+        border-bottom: black 1px solid;
       }
     }
     font-size: 1.3rem;
@@ -51,7 +51,7 @@
   }
   .options {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     .remember {
       display: flex;
       input {
@@ -61,12 +61,12 @@
     }
 
     .login-btn {
-      width: 30%;
+      width: 20%;
       color: black;
       border-radius: 15px;
       padding: 5px;
       margin: 0 auto;
-      margin-left: 13vw;
+      margin-left: 18vw;
       border: 0.5px solid black;
       background-color: white;
       &:hover {
