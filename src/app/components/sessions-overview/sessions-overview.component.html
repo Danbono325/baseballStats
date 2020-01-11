@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<h1>Hello {{ curUser.givenName }}</h1>
+<h2>Sessions Overview</h2>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Joe Smith</th>
+        <th>RH</th>
+        <th>6'2</th>
+        <th>Junior</th>
+      </tr>
+    </thead>
+    <!-- </table>
+  <table class="table"> -->
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">CH Max. Velo</th>
+        <th scope="col">CH Avg. Velo</th>
+        <th scope="col">FB Max. Velo</th>
+        <th scope="col">FB Avg. Velo</th>
+        <th scope="col">CU Max. Velo</th>
+        <th scope="col">CU Avg. Velo</th>
+        <th scope="col">SL Max. Velo</th>
+        <th scope="col">SL Avg. Velo</th>
+        <th scope="col">Session</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td>12/21/19</td>
+      <td>88</td>
+      <td>82</td>
+      <td>88</td>
+      <td>82</td>
+      <td>88</td>
+      <td>82</td>
+      <td>88</td>
+      <td>82</td>
+      <td>
+        <button class="btn btn-primary" routerLink="/session">Session</button>
+      </td>
+    </tbody>
+  </table>
+</div>
