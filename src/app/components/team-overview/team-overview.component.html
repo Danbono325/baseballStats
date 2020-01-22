@@ -12,18 +12,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Joe Smith</td>
-        <td>RH</td>
+     
+      <tr  *ngFor="let pitcher of pitchers">
+        <td>{{pitcher.name}}</td>
+        <td>{{pitcher.throws}}</td>
         <td>5'11</td>
         <td>Freshman</td>
         <td>
-          <button class="btn btn-primary" routerLink="/session">
+          <button class="btn btn-primary" routerLink="/session/{{pitcher.id}}">
             Sessions
           </button>
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>Joe Smith</td>
         <td>RH</td>
         <td>5'11</td>
@@ -50,7 +51,7 @@
         <td>5'11</td>
         <td>Freshman</td>
         <td><button class="btn btn-primary">Sessions</button></td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>

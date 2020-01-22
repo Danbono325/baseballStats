@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: "overview", component: TeamOverviewComponent },
   { path: "stats", component: TeamStatsComponent },
   { path: "sessions-overview/:id", component: SessionsOverviewComponent },
-  { path: "session", component: SessionComponent }
+  { path: "session/:id", component: SessionComponent }
 ];
 
 @NgModule({
