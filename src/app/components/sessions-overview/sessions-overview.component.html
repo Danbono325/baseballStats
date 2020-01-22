@@ -2,8 +2,8 @@
 <h2>Sessions Overview</h2>
 <div class="container">
   <div class="pitcher-dets col-md-12">
-    <p>John Doe</p>
-    <p>RH</p>
+    <p>{{currentPitcher.name}}</p>
+    <p>{{currentPitcher.throws}}</p>
     <p>5'11</p>
     <p>Junior</p>
   </div>
@@ -41,7 +41,7 @@
       <td class="text-center">88</td>
       <td class="text-center">82</td>
       <td>
-        <button class="btn btn-primary" routerLink="/session">Session</button>
+        <button class="btn btn-primary" routerLink="/session/{{currentPitcher.id}}">Session</button>
       </td>
     </tbody>
   </table>

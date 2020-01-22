@@ -13,4 +13,4 @@ export class Pitcher {
         }
         this.id= id;
     }
-}
+} 
