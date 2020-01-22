@@ -2,22 +2,43 @@
   <img src="../../../assets/logo.svg" alt="" />
   <h1>MU Baseball Pitch+</h1>
 </div>
+<!-- SLIDER WITH CONTROLS -->
 <div class="container">
-  <h1 class="header"></h1>
-
-  <div class="login-box">
-    <div class="inputs">
-      <input type="text" placeholder="Email" #email />
-      <input type="password" placeholder="Password" #password />
-    </div>
-    <div class="options">
-      <div class="remember">
-        <input type="checkbox" id="remember" />
-        <label for="remember">Remember Me</label>
+  <div id="slider2" class="carousel slide mb-5" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          class="d-block img-fluid"
+          src="https://source.unsplash.com/wgq4eit198Q/700x400"
+          alt="First Slide"
+        />
       </div>
-      <button class="login-btn" (click)="microsoftSignIn()">
-        Log In
-      </button>
+      <div class="carousel-item">
+        <img
+          class="d-block img-fluid"
+          src="https://source.unsplash.com/WLUHO9A_xik/700x400"
+          alt="Second Slide"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          class="d-block img-fluid"
+          src="https://source.unsplash.com/4yta6mU66dE/700x400"
+          alt="Third Slide"
+        />
+      </div>
     </div>
+
+    <!-- Controls-->
+    <a href="#slider2" class="carousel-control-prev" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+
+    <a href="#slider2" class="carousel-control-next" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
   </div>
 </div>
+<button class="login-btn" (click)="microsoftSignIn()">
+  Log In
+</button>
