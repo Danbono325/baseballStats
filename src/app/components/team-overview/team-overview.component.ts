@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
+import { ApiService } from 'src/app/services/api.service';
+import {Pitcher } from '../../models/Pitcher';
 
 @Component({
   selector: "app-team-overview",
@@ -10,10 +12,13 @@ import { Router } from "@angular/router";
 export class TeamOverviewComponent implements OnInit {
   curUser;
 
+  pitchers: Pitcher[] = [];
+
   constructor(
     private elementRef: ElementRef,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) {}
 
   ngAfterViewInit() {
@@ -26,5 +31,12 @@ export class TeamOverviewComponent implements OnInit {
     if (this.curUser == null) {
       this.router.navigate([""]);
     }
+
+    this.apiService.getAllPictherData().subscribe(data => {
+      for(var i = 0; i < data.length; i++) {
+        let pitcher = new Pitcher(data[i].player_name, data[i].handedness, data[i]._id);
+        this.pitchers.push(pitcher);
+      }
+    })
   }
 }

@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "overview", component: TeamOverviewComponent },
   { path: "stats", component: TeamStatsComponent },
-  { path: "sessions-overview", component: SessionsOverviewComponent },
-  { path: "session", component: SessionComponent }
+  { path: "sessions-overview/:id", component: SessionsOverviewComponent },
+  { path: "session/:id", component: SessionComponent }
 ];
 
 @NgModule({
