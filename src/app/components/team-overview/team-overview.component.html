@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
-<h1>Hello {{ curUser.givenName }}</h1>
+<!-- <h1>Hello {{ curUser.givenName }}</h1> -->
+<h2>Team Overview</h2>
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
@@ -12,7 +13,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+     
+      <tr  *ngFor="let pitcher of pitchers">
+        <td>{{pitcher.name}}</td>
+        <td>{{pitcher.throws}}</td>
+        <td>5'11</td>
+        <td>Freshman</td>
+        <td>
+          <button class="btn btn-primary" routerLink="/session/{{pitcher.id}}">
+            Sessions
+          </button>
+        </td>
+      </tr>
+      <!-- <tr>
         <td>Joe Smith</td>
         <td>RH</td>
         <td>5'11</td>
@@ -39,14 +52,7 @@
         <td>5'11</td>
         <td>Freshman</td>
         <td><button class="btn btn-primary">Sessions</button></td>
-      </tr>
-      <tr>
-        <td>Joe Smith</td>
-        <td>RH</td>
-        <td>5'11</td>
-        <td>Freshman</td>
-        <td><button class="btn btn-primary">Sessions</button></td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
