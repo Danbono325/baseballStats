@@ -1,70 +1,64 @@
 <app-navbar></app-navbar>
-<h1>Hello {{ curUser.givenName }}</h1>
+<!-- <h1>Hello {{ curUser.givenName }}</h1> -->
 <h2>Session Pitches</h2>
-<!-- <div class="container"> -->
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>Joe Smith</th>
-      <th>RH</th>
-      <th>6'2</th>
-      <th>Junior</th>
-    </tr>
-  </thead>
-  <thead class="thead-light">
-    <tr>
-      <th>Date 12/21/19</th>
-      <th>CH Max. Velo 89</th>
-      <th>CH Avg. Velo 82</th>
-      <th>FB Max. Velo 89</th>
-      <th>FB Avg. Velo 82</th>
-      <th>CU Max. Velo 89</th>
-      <th>CU Avg. Velo 82</th>
-      <th>SL Max. Velo 89</th>
-      <th>SL Avg. Velo 82</th>
-    </tr>
-    <tr>
-      <td>Pitch No.</td>
-      <td>R. Height</td>
-      <td>R. Side</td>
-      <td>V. Break</td>
-      <td>H. Break</td>
-      <td>Spin Efficiency</td>
-      <td>True Spin</td>
-      <td>Strike</td>
-      <td>Gyros</td>
-      <div class="dropdown">
-        <button
-          class="btn btn-sm dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Pitch Type
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Fastball</a>
-          <a class="dropdown-item" href="#">Changeup</a>
-          <a class="dropdown-item" href="#">Slider</a>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="pitcher-dets col-md-8 mr-5">
+      <p>John Doe</p>
+      <p>RH</p>
+      <p>5'11</p>
+      <p>Junior</p>
+    </div>
+    <div class="col-md-3">
+      <div class="pitcher-dets">
+        <p>Summary</p>
       </div>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>82</td>
-      <td>88</td>
-      <td>82</td>
-      <td>88</td>
-      <td>82</td>
-      <td>88</td>
-      <td>82</td>
-      <td>82</td>
-      <td>FB</td>
-    </tr>
-  </tbody>
-</table>
-<!-- </div> -->
+    </div>
+  </div>
+  <div class="row">
+    <table class="table col-md-8 mr-5">
+      <thead class="thead-dark">
+        <tr>
+          <th>Pitch No.</th>
+          <th class="text-center">R. Height</th>
+          <th class="text-center">R. Side</th>
+          <th class="text-center">V. Break</th>
+          <th class="text-center">H. Break</th>
+          <th class="text-center">Spin Eff.</th>
+          <th class="text-center">True Spin</th>
+          <th class="text-center">Strike</th>
+          <th class="text-center">Gyros</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center">1</td>
+          <td class="text-center">82</td>
+          <td class="text-center">88</td>
+          <td class="text-center">82</td>
+          <td class="text-center">88</td>
+          <td class="text-center">82</td>
+          <td class="text-center">88</td>
+          <td class="text-center">82</td>
+          <td class="text-center">82</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table col-md-3">
+      <thead class="thead table-info">
+        <tr>
+          <th>Pitch Type</th>
+          <th>Avg.</th>
+          <th>Max.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fastball</td>
+          <td>82</td>
+          <td>88</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

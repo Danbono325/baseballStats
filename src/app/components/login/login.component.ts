@@ -9,9 +9,6 @@ import { UserService } from "src/app/services/user.service";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  //d65eed6d-9372-4e9b-bdc4-25d64ef67a0c
-  //d65eed6d-9372-4e9b-bdc4-25d64ef67a0c
-
   userData;
   userAgentApplication;
 
