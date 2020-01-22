@@ -2,49 +2,63 @@
 <!-- <h1>Hello {{ curUser.givenName }}</h1> -->
 <h2>Session Pitches</h2>
 <div class="container">
-  <div class="pitcher-dets">
-    <p>John Doe</p>
-    <p>RH</p>
-    <p>5'11</p>
-    <p>Junior</p>
+  <div class="row">
+    <div class="pitcher-dets col-md-8 mr-5">
+      <p>John Doe</p>
+      <p>RH</p>
+      <p>5'11</p>
+      <p>Junior</p>
+    </div>
+    <div class="col-md-3">
+      <div class="pitcher-dets">
+        <p>Summary</p>
+      </div>
+    </div>
   </div>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th>Pitch No.</th>
-        <th>R. Height</th>
-        <th>R. Side</th>
-        <th>V. Break</th>
-        <th>H. Break</th>
-        <th>Spin Efficiency</th>
-        <th>True Spin</th>
-        <th>Strike</th>
-        <th>Gyros</th>
-      </tr>
-      <!-- <tr>
-        <th>Date 12/21/19</th>
-        <th>CH Max. Velo 89</th>
-        <th>CH Avg. Velo 82</th>
-        <th>FB Max. Velo 89</th>
-        <th>FB Avg. Velo 82</th>
-        <th>CU Max. Velo 89</th>
-        <th>CU Avg. Velo 82</th>
-        <th>SL Max. Velo 89</th>
-        <th>SL Avg. Velo 82</th>
-      </tr> -->
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>82</td>
-        <td>88</td>
-        <td>82</td>
-        <td>88</td>
-        <td>82</td>
-        <td>88</td>
-        <td>82</td>
-        <td>82</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <table class="table col-md-8 mr-5">
+      <thead class="thead-dark">
+        <tr>
+          <th>Pitch No.</th>
+          <th class="text-center">R. Height</th>
+          <th class="text-center">R. Side</th>
+          <th class="text-center">V. Break</th>
+          <th class="text-center">H. Break</th>
+          <th class="text-center">Spin Eff.</th>
+          <th class="text-center">True Spin</th>
+          <th class="text-center">Strike</th>
+          <th class="text-center">Gyros</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center">1</td>
+          <td class="text-center">82</td>
+          <td class="text-center">88</td>
+          <td class="text-center">82</td>
+          <td class="text-center">88</td>
+          <td class="text-center">82</td>
+          <td class="text-center">88</td>
+          <td class="text-center">82</td>
+          <td class="text-center">82</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table col-md-3">
+      <thead class="thead table-info">
+        <tr>
+          <th>Pitch Type</th>
+          <th>Avg.</th>
+          <th>Max.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fastball</td>
+          <td>82</td>
+          <td>88</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

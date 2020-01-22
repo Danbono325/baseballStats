@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "overview", component: TeamOverviewComponent },
   { path: "stats", component: TeamStatsComponent },
-  { path: "sessions-overview/:id", component: SessionsOverviewComponent },
+  { path: "sessions-overview", component: SessionsOverviewComponent },
   { path: "session", component: SessionComponent }
 ];
 
