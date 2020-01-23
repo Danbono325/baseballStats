@@ -17,6 +17,8 @@ export class SessionsOverviewComponent implements OnInit {
   currentPitcher;
   curPlayerID;
 
+  sessions;
+
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit() {
@@ -25,12 +27,16 @@ export class SessionsOverviewComponent implements OnInit {
     });
 
     this.apiService.getPitcherById(this.curPlayerID).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       let pitcher = new Pitcher(data['player_name'], data['handedness'], data['_id']);
       this.createPitcher(pitcher);
     })
-    // console.log(this.currentPitcher);
-
+    
+    this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
+      console.log('sessions: ', data);
+      this.sessions = data;
+    })
+    console.log(this.sessions);
     this.curUser = this.userService.getUserData();
   }
 

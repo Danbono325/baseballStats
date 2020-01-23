@@ -18,6 +18,10 @@ export class ApiService {
    getPitcherById(pitcherID): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:3000/pitchers/' + pitcherID);
    }
+   
+   getSessionsById(pitcherId): Observable<any[]> {
+     return this.http.get<any[]>('http://localhost:3000/sessions/' + pitcherId);
+   }
 
 
 }

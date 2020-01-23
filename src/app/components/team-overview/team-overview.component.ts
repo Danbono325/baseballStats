@@ -27,10 +27,10 @@ export class TeamOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.curUser = this.userService.getUserData();
-    if (this.curUser == null) {
-      this.router.navigate([""]);
-    }
+    // this.curUser = this.userService.getUserData();
+    // if (this.curUser == null) {
+    //   this.router.navigate([""]);
+    // }
 
     this.apiService.getAllPictherData().subscribe(data => {
       for(var i = 0; i < data.length; i++) {

@@ -31,7 +31,8 @@
       </tr>
     </thead>
     <tbody>
-      <td>12/21/19</td>
+     <tr *ngFor="let session of sessions">
+      <td>{{session.date | date}}</td>
       <td class="text-center">88</td>
       <td class="text-center">82</td>
       <td class="text-center">88</td>
@@ -43,6 +44,7 @@
       <td>
         <button class="btn btn-primary" routerLink="/session/{{currentPitcher.id}}">Session</button>
       </td>
+    </tr>
     </tbody>
   </table>
 </div>
