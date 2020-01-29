@@ -28,7 +28,7 @@ export class SessionsOverviewComponent implements OnInit {
 
     this.apiService.getPitcherById(this.curPlayerID).subscribe(data => {
       // console.log(data);
-      let pitcher = new Pitcher(data['player_name'], data['handedness'], data['_id']);
+      let pitcher = new Pitcher(data['player_name'], data['handedness'], data['_id'], data['height'], data['dob']);
       this.createPitcher(pitcher);
     })
     

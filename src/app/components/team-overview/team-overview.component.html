@@ -8,7 +8,7 @@
         <th scope="col">Name</th>
         <th scope="col">Throws</th>
         <th scope="col">Height</th>
-        <th scope="col">Class</th>
+        <th scope="col">Age</th>
         <th>Sessions</th>
       </tr>
     </thead>
@@ -17,8 +17,8 @@
       <tr  *ngFor="let pitcher of pitchers">
         <td>{{pitcher.name}}</td>
         <td>{{pitcher.throws}}</td>
-        <td>5'11</td>
-        <td>Freshman</td>
+        <td>{{pitcher.height}}</td>
+        <td>{{pitcher.age}}</td>
         <td>
           <button class="btn btn-primary" routerLink="/sessions-overview/{{pitcher.id}}">
             Sessions

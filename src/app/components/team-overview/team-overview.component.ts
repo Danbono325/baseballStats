@@ -33,10 +33,13 @@ export class TeamOverviewComponent implements OnInit {
     // }
 
     this.apiService.getAllPictherData().subscribe(data => {
+      
       for(var i = 0; i < data.length; i++) {
-        let pitcher = new Pitcher(data[i].player_name, data[i].handedness, data[i]._id);
+        let pitcher = new Pitcher(data[i].player_name, data[i].handedness, data[i]._id, data[i].height, data[i].dob);
         this.pitchers.push(pitcher);
       }
     })
+
+    console.log(this.pitchers);
   }
 }

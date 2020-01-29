@@ -8,19 +8,21 @@ import {Pitcher} from '../models/Pitcher';
 })
 export class ApiService {
 
+  apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
+
   constructor(private http: HttpClient) {
    }
 
    getAllPictherData(): Observable<any[]>{
-     return this.http.get<any[]>('http://localhost:3000/pitchers');
+     return this.http.get<any[]>(this.apiHost + '/pitchers');
    }
 
    getPitcherById(pitcherID): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/pitchers/' + pitcherID);
+    return this.http.get<any[]>(this.apiHost + '/pitchers/' + pitcherID);
    }
    
    getSessionsById(pitcherId): Observable<any[]> {
-     return this.http.get<any[]>('http://localhost:3000/sessions/' + pitcherId);
+     return this.http.get<any[]>(this.apiHost + '/sessions/' + pitcherId);
    }
 
 
