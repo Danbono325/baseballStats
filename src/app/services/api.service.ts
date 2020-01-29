@@ -25,5 +25,9 @@ export class ApiService {
      return this.http.get<any[]>(this.apiHost + '/sessions/' + pitcherId);
    }
 
+   getAvgMaxByPT(sessionID, pitchType): Observable<any[]> {
+     return this.http.get<any[]>(this.apiHost + "/sessions/" + sessionID + "/" + pitchType);
+   }
+
 
 }
