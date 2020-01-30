@@ -7,6 +7,7 @@
     <p>{{currentPitcher.height}}</p>
     <p>{{currentPitcher.age}}</p>
   </div>
+  <div class="table-responsive">
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -15,10 +16,16 @@
         <th colspan="2" class="text-center">2 Seam Fastball</th>
         <th colspan="2" class="text-center">Changeup</th>
         <th colspan="2" class="text-center">Slider</th>
+        <th colspan="2" class="text-center">Slider</th>
+        <th colspan="2" class="text-center">Slider</th>
         <th></th>
       </tr>
       <tr>
         <th scope="col">Date</th>
+        <th scope="col" class="text-center">Max. Velo</th>
+        <th scope="col" class="text-center">Avg. Velo</th>
+        <th scope="col" class="text-center">Max. Velo</th>
+        <th scope="col" class="text-center">Avg. Velo</th>
         <th scope="col" class="text-center">Max. Velo</th>
         <th scope="col" class="text-center">Avg. Velo</th>
         <th scope="col" class="text-center">Max. Velo</th>
@@ -41,10 +48,15 @@
       <td class="text-center">{{this.sessionMaxAvg[i]["Changeup"][1] | number : '1.1-1'}}</td>
       <td class="text-center">{{this.sessionMaxAvg[i]["Slider"][0] | number : '1.1-1'}}</td>
       <td class="text-center">{{this.sessionMaxAvg[i]["Slider"][1] | number : '1.1-1'}}</td>
+      <td class="text-center">{{this.sessionMaxAvg[i]["Slider"][0] | number : '1.1-1'}}</td>
+      <td class="text-center">{{this.sessionMaxAvg[i]["Slider"][1] | number : '1.1-1'}}</td>
+      <td class="text-center">{{this.sessionMaxAvg[i]["Slider"][0] | number : '1.1-1'}}</td>
+      <td class="text-center">{{this.sessionMaxAvg[i]["Slider"][1] | number : '1.1-1'}}</td>
       <td>
-        <button class="btn btn-primary" routerLink="/session/{{currentPitcher.id}}">Session</button>
+        <button class="btn btn-primary" routerLink="/session/{{currentPitcher.id}}/{{session.idSession}}">Session</button>
       </td>
     </tr>
     </tbody>
   </table>
+</div>
 </div>
