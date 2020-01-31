@@ -64,6 +64,7 @@ export class SessionsOverviewComponent implements OnInit {
 
     //console.log(this.sessions);
     this.curUser = this.userService.getUserData();
+    console.log('USER: ', this.curUser);
   }
 
   makeMaxAvg(id, maxAvg) {

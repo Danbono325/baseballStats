@@ -3,12 +3,7 @@
     <h5 class="text-center">Release Height VS Release Side</h5>
     <div>
       <div style="display: block">
-        <canvas
-          baseChart
-          [datasets]="releaseChartData"
-          [options]="releaseChartOptions"
-          [chartType]="scatterChartType"
-        >
+        <canvas id="releaseChart">
         </canvas>
       </div>
     </div>
@@ -19,10 +14,7 @@
     <div>
       <div style="display: block">
         <canvas
-          baseChart
-          [datasets]="releaseAvgChartData"
-          [options]="releaseChartOptions"
-          [chartType]="scatterChartType"
+        id="releaseAvgChart"
         >
         </canvas>
       </div>

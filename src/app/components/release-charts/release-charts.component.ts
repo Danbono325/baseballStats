@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
+
+import * as Chart from 'chart.js';
 
 @Component({
   selector: "app-release-charts",
@@ -7,10 +9,13 @@ import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
   styleUrls: ["./release-charts.component.scss"]
 })
 export class ReleaseChartsComponent implements OnInit {
-  public scatterChartType: ChartType = "scatter";
+
+  
+
+  scatterChartType: ChartType = "scatter";
 
   // Chart options for the release height and release side chart
-  public releaseChartOptions: ChartOptions = {
+  releaseChartOptions: ChartOptions = {
     responsive: true,
     scales: {
       yAxes: [
@@ -40,7 +45,7 @@ export class ReleaseChartsComponent implements OnInit {
     }
   };
 
-  public releaseChartData: ChartDataSets[] = [
+  releaseChartData: ChartDataSets[] = [
     {
       data: [
         { x: 2.9, y: 6.65 },
@@ -95,7 +100,7 @@ export class ReleaseChartsComponent implements OnInit {
     }
   ];
 
-  public releaseAvgChartData: ChartDataSets[] = [
+  releaseAvgChartData: ChartDataSets[] = [
     {
       data: [{ x: 2.9, y: 6.65 }],
       backgroundColor: ["blue"],
@@ -128,5 +133,37 @@ export class ReleaseChartsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  
+  ngOnInit() {
+    this.makeCharts();
+   
+  }
+
+
+  releaseChartCTX: any;
+  releaseChart: any;
+  releaseAvgChart: any;
+  releaseAvgChartCTX: any;
+
+  makeCharts() {
+    this.releaseChart = document.getElementById('releaseChart');
+    this.releaseChartCTX = this.releaseChart.getContext('2d');
+    let release_chart = new Chart(this.releaseChartCTX, {
+      type: 'scatter',
+      data: {
+        datasets: this.releaseChartData
+    },
+      options: this.releaseChartOptions
+    });
+
+    this.releaseAvgChart = document.getElementById('releaseAvgChart');
+    this.releaseAvgChartCTX = this.releaseAvgChart.getContext('2d');
+    let releaseAvg_chart = new Chart(this.releaseAvgChartCTX, {
+      type: 'scatter',
+      data: {
+        datasets: this.releaseAvgChartData
+    },
+      options: this.releaseChartOptions
+    });
+  }
 }
