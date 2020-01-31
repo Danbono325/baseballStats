@@ -5,13 +5,15 @@ import { TeamOverviewComponent } from "./components/team-overview/team-overview.
 import { TeamStatsComponent } from "./components/team-stats/team-stats.component";
 import { SessionsOverviewComponent } from "./components/sessions-overview/sessions-overview.component";
 import { SessionComponent } from "./components/session/session.component";
+import { ReleaseChartsComponent } from "./components/release-charts/release-charts.component";
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "overview", component: TeamOverviewComponent },
   { path: "stats", component: TeamStatsComponent },
   { path: "sessions-overview/:id", component: SessionsOverviewComponent },
-  { path: "session/:id/:sessionID", component: SessionComponent }
+  { path: "session/:id/:sessionID", component: SessionComponent },
+  { path: "charts", component: ReleaseChartsComponent }
 ];
 
 @NgModule({

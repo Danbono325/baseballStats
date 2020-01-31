@@ -91,3 +91,37 @@
     </table>
   </div>
 </div>
+<!-- <app-release-charts></app-release-charts>
+<app-movement-charts></app-movement-charts> -->
+
+<div class="row">
+  <div class="col-md-6">
+    <h5 class="text-center">Release Height VS Release Side</h5>
+    <div>
+      <div style="display: block">
+        <canvas
+          baseChart
+          [datasets]="releaseChartData"
+          [options]="releaseChartOptions"
+          [chartType]="scatterChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <h5 class="text-center">Release Height VS Release Side (Avg)</h5>
+    <div>
+      <div style="display: block">
+        <canvas
+          baseChart
+          [datasets]="releaseAvgChartData"
+          [options]="releaseChartOptions"
+          [chartType]="scatterChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
