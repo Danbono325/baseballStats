@@ -31,6 +31,22 @@ export class SessionChartsComponent implements OnInit {
       movementSL: [{}],
       movementCB: [{}],
       movementCU: [{}]
+    },
+    {
+      release4FBAvg: [{}],
+      release2FBAvg: [{}],
+      releaseCHAvg: [{}],
+      releaseSLAvg: [{}],
+      releaseCBAvg: [{}],
+      releaseCUAvg: [{}]
+    },
+    {
+      movement4FBAvg: [{}],
+      movement2FBAvg: [{}],
+      movementCHAvg: [{}],
+      movementSLAvg: [{}],
+      movementCBAvg: [{}],
+      movementCUAvg: [{}]
     }
   ];
 
@@ -275,19 +291,14 @@ export class SessionChartsComponent implements OnInit {
       console.log("Values: ", values);
       this.makeSessionCharts(0, values);
       // this.sessionMaxAvg.push({i: maxAvg});
-
-    
     });
 
-      this.apiService
-        .getChartDataAvg(102036)
-        .subscribe(data => {
-          let averages = data;
-          console.log("Averages: ", averages);
-          this.makeSessionChartsAvg(0, averages);
-          // this.sessionMaxAvg.push({i: maxAvg});
-        });
-
+    this.apiService.getChartDataAvg(102036).subscribe(data => {
+      let averages = data;
+      console.log("Averages: ", averages);
+      this.makeSessionChartsAvg(0, averages);
+      // this.sessionMaxAvg.push({i: maxAvg});
+    });
   }
 
   makeSessionCharts(id, values) {
