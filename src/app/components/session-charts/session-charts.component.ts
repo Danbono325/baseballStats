@@ -16,14 +16,14 @@ export class SessionChartsComponent implements OnInit {
 
   allPitches = [];
 
-  releaseArray = {
-    release4FB: [{}],
-    release2FB: [{}],
-    releaseCH: [{}],
-    releaseSL: [{}],
-    releaseCB: [{}],
-    releaseCU: [{}]
-  };
+  releaseArray = [{
+    "release4FB": [{}],
+    "release2FB": [{}],
+    "releaseCH": [{}],
+    "releaseSL": [{}],
+    "releaseCB": [{}],
+    "releaseCU": [{}]
+  }];
 
   public releaseChartOptions: ChartOptions = {
     responsive: true,
@@ -90,42 +90,42 @@ export class SessionChartsComponent implements OnInit {
 
   public releaseChartData: ChartDataSets[] = [
     {
-      data: this.releaseArray.release4FB,
+      data: this.releaseArray[0]["release4FB"],
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 2,
       pointBackgroundColor: "blue"
     },
     {
-      data: this.releaseArray.releaseCB,
+      data: this.releaseArray[0]["releaseCB"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 3,
       pointBackgroundColor: "red"
     },
     {
-      data: this.releaseArray.releaseSL,
+      data: this.releaseArray[0]["releaseSL"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 3,
       pointBackgroundColor: "orange"
     },
     {
-      data: this.releaseArray.releaseCU,
+      data: this.releaseArray[0]["releaseCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 3,
       pointBackgroundColor: "green"
     },
     {
-      data: this.releaseArray.release2FB,
+      data: this.releaseArray[0]["release2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
       pointRadius: 3,
       pointBackgroundColor: "yellow"
     },
     {
-      data: this.releaseArray.releaseCH,
+      data: this.releaseArray[0]["releaseCH"],
       backgroundColor: ["pink"],
       label: "Changeup",
       pointRadius: 3,
@@ -313,37 +313,37 @@ export class SessionChartsComponent implements OnInit {
     for (var i = 0; i < values.length; i++) {
       switch (values[i]["Pitch_Type_pitchType"]) {
         case 0:
-          this.releaseArray.release4FB.push({
+          this.releaseArray[0]["release4FB"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
           break;
         case 1:
-          this.releaseArray.releaseCU.push({
+          this.releaseArray[0]["releaseCU"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
           break;
         case 3:
-          this.releaseArray.releaseCB.push({
+          this.releaseArray[0]["releaseCB"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
           break;
         case 4:
-          this.releaseArray.releaseSL.push({
+          this.releaseArray[0]["releaseSL"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
           break;
         case 5:
-          this.releaseArray.release2FB.push({
+          this.releaseArray[0]["release2FB"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
           break;
         case 6:
-          this.releaseArray.releaseCH.push({
+          this.releaseArray[0]["releaseCH"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
