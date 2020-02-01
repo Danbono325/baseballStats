@@ -13,17 +13,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let pitcher of pitchers">
-        <td>{{pitcher.name}}</td>
-        <td>{{pitcher.throws}}</td>
-        <td>{{pitcher.height}}</td>
-        <td>{{pitcher.age}}</td>
+      <tr *ngFor="let pitcher of pitchers">
+        <td>{{ pitcher.name }}</td>
+        <td>{{ pitcher.throws }}</td>
+        <td>{{ pitcher.height }}</td>
+        <td>{{ pitcher.age }}</td>
         <td>
-          <button class="btn btn-primary" routerLink="/sessions-overview/{{pitcher.id}}">
+          <button
+            class="btn btn-primary"
+            routerLink="/sessions-overview/{{ pitcher.id }}"
+          >
             Sessions
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-primary" routerLink="/sessions-overview/1">
+    Sessions
+  </button>
 </div>

@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h5 class="text-center">Release Height VS Release Side</h5>
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="releaseChartData"
+            [options]="releaseChartOptions"
+            [chartType]="scatterChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <h5 class="text-center">Release Height VS Release Side (Avg)</h5>
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="releaseAvgChartData"
+            [options]="releaseChartOptions"
+            [chartType]="scatterChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h5 class="text-center">Vertical Break VS Horizontal Break</h5>
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="movementChartData"
+            [options]="movementChartOptions"
+            [chartType]="scatterChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 my-5">
+      <h5 class="text-center">Vertical Break VS Horizontal Break (Avg)</h5>
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="movementAvgChartData"
+            [options]="movementChartOptions"
+            [chartType]="scatterChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
