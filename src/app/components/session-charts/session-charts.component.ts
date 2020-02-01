@@ -278,7 +278,6 @@ export class SessionChartsComponent implements OnInit {
 
     
     });
-<<<<<<< HEAD
 
       this.apiService
         .getChartDataAvg(102036)
@@ -289,8 +288,6 @@ export class SessionChartsComponent implements OnInit {
           // this.sessionMaxAvg.push({i: maxAvg});
         });
 
-=======
->>>>>>> 1c2f5b8d905d6534fddb1c5858f9c874d8625699
   }
 
   makeSessionCharts(id, values) {
