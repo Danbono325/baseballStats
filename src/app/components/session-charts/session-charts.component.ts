@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ChartDataSets, ChartType, ChartOptions } from "chart.js";
 import { ActivatedRoute } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
+import { Chart } from "../../models/Chart";
 
 @Component({
   selector: "app-session-charts",
@@ -46,8 +47,8 @@ export class SessionChartsComponent implements OnInit {
             labelString: "Release Side"
           },
           ticks: {
-            min: -2.5,
-            max: 2.5
+            min: -5,
+            max: 5
           }
         }
       ]
@@ -135,28 +136,28 @@ export class SessionChartsComponent implements OnInit {
   public releaseAvgChartData: ChartDataSets[] = [
     {
       data: [{ x: 2.9, y: 6.65 }],
-      backgroundColor: ["blue"],
+      backgroundColor: "blue",
       label: "Fastball",
       pointRadius: 5,
       pointBackgroundColor: "blue"
     },
     {
       data: [{ x: 3.2, y: 6.3 }],
-      backgroundColor: ["red"],
+      backgroundColor: "red",
       label: "Curveball",
       pointRadius: 5,
       pointBackgroundColor: "red"
     },
     {
       data: [{ x: 2.65, y: 6.4 }],
-      backgroundColor: ["orange"],
+      backgroundColor: "orange",
       label: "Slider",
       pointRadius: 5,
       pointBackgroundColor: "orange"
     },
     {
       data: [{ x: 2, y: 6.7 }],
-      backgroundColor: ["green"],
+      backgroundColor: "green",
       label: "Cut Fastball",
       pointRadius: 5,
       pointBackgroundColor: "green"
