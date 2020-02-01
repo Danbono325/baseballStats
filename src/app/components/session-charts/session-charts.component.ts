@@ -291,22 +291,14 @@ export class SessionChartsComponent implements OnInit {
       console.log("Values: ", values);
       this.makeSessionCharts(0, values);
       // this.sessionMaxAvg.push({i: maxAvg});
-
-    
     });
-<<<<<<< HEAD
 
-      this.apiService
-        .getChartDataAvg(102036)
-        .subscribe(data => {
-          let averages = data;
-          console.log("Averages: ", averages);
-          this.makeSessionChartsAvg(0, averages);
-          // this.sessionMaxAvg.push({i: maxAvg});
-        });
-
-=======
->>>>>>> 1c2f5b8d905d6534fddb1c5858f9c874d8625699
+    this.apiService.getChartDataAvg(102036).subscribe(data => {
+      let averages = data;
+      console.log("Averages: ", averages);
+      this.makeSessionChartsAvg(0, averages);
+      // this.sessionMaxAvg.push({i: maxAvg});
+    });
   }
 
   makeSessionCharts(id, values) {
