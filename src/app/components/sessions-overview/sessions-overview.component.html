@@ -2,49 +2,95 @@
 <h2>Sessions Overview</h2>
 <div class="container">
   <div class="pitcher-dets col-md-12">
-    <p>{{currentPitcher.name}}</p>
-    <p>{{currentPitcher.throws}}</p>
-    <p>5'11</p>
-    <p>Junior</p>
+    <p>{{ currentPitcher.name }}</p>
+    <p>{{ currentPitcher.throws }}</p>
+    <p>{{ currentPitcher.height }}</p>
+    <p>{{ currentPitcher.age }}</p>
   </div>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col"></th>
-        <th colspan="2" class="text-center">Changeup</th>
-        <th colspan="2" class="text-center">Fastball</th>
-        <th colspan="2" class="text-center">Cut Fastball</th>
-        <th colspan="2" class="text-center">Slider</th>
-        <th></th>
-      </tr>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col" class="text-center">Max. Velo</th>
-        <th scope="col" class="text-center">Avg. Velo</th>
-        <th scope="col" class="text-center">Max. Velo</th>
-        <th scope="col" class="text-center">Avg. Velo</th>
-        <th scope="col" class="text-center">Max. Velo</th>
-        <th scope="col" class="text-center">Avg. Velo</th>
-        <th scope="col" class="text-center">Max. Velo</th>
-        <th scope="col" class="text-center">Avg. Velo</th>
-        <th scope="col">Session</th>
-      </tr>
-    </thead>
-    <tbody>
-     <tr *ngFor="let session of sessions">
-      <td>{{session.date | date}}</td>
-      <td class="text-center">88</td>
-      <td class="text-center">82</td>
-      <td class="text-center">88</td>
-      <td class="text-center">82</td>
-      <td class="text-center">88</td>
-      <td class="text-center">82</td>
-      <td class="text-center">88</td>
-      <td class="text-center">82</td>
-      <td>
-        <button class="btn btn-primary" routerLink="/session/{{currentPitcher.id}}">Session</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"></th>
+          <th colspan="2" class="text-center">4 Seam Fastball</th>
+          <th colspan="2" class="text-center">2 Seam Fastball</th>
+          <th colspan="2" class="text-center">Changeup</th>
+          <th colspan="2" class="text-center">Slider</th>
+          <th colspan="2" class="text-center">Curveball</th>
+          <th colspan="2" class="text-center">Cut Fastball</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col" class="text-center">Session</th>
+          <th scope="col" class="text-center">Max. Velo</th>
+          <th scope="col" class="text-center">Avg. Velo</th>
+          <th scope="col" class="text-center">Max. Velo</th>
+          <th scope="col" class="text-center">Avg. Velo</th>
+          <th scope="col" class="text-center">Max. Velo</th>
+          <th scope="col" class="text-center">Avg. Velo</th>
+          <th scope="col" class="text-center">Max. Velo</th>
+          <th scope="col" class="text-center">Avg. Velo</th>
+          <th scope="col" class="text-center">Max. Velo</th>
+          <th scope="col" class="text-center">Avg. Velo</th>
+          <th scope="col" class="text-center">Max. Velo</th>
+          <th scope="col" class="text-center">Avg. Velo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let session of sessions; let i = index">
+          <td>{{ session.date | date }}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              routerLink="/session/{{ currentPitcher.id }}/{{
+                session.idSession
+              }}"
+            >
+              Session
+            </button>
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["4 Seam Fastball"][0] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["4 Seam Fastball"][1] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["2 Seam Fastball"][0] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["2 Seam Fastball"][1] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Changeup"][0] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Changeup"][1] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Slider"][0] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Slider"][1] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Curveball"][0] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Curveball"][1] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Cut Fastball"][0] | number: "1.1-1" }}
+          </td>
+          <td class="text-center">
+            {{ this.sessionMaxAvg[i]["Cut Fastball"][1] | number: "1.1-1" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div>
+  <app-session-charts></app-session-charts>
 </div>

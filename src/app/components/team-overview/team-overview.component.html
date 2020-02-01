@@ -8,51 +8,28 @@
         <th scope="col">Name</th>
         <th scope="col">Throws</th>
         <th scope="col">Height</th>
-        <th scope="col">Class</th>
+        <th scope="col">Age</th>
         <th>Sessions</th>
       </tr>
     </thead>
     <tbody>
-     
-      <tr  *ngFor="let pitcher of pitchers">
-        <td>{{pitcher.name}}</td>
-        <td>{{pitcher.throws}}</td>
-        <td>5'11</td>
-        <td>Freshman</td>
+      <tr *ngFor="let pitcher of pitchers">
+        <td>{{ pitcher.name }}</td>
+        <td>{{ pitcher.throws }}</td>
+        <td>{{ pitcher.height }}</td>
+        <td>{{ pitcher.age }}</td>
         <td>
-          <button class="btn btn-primary" routerLink="/sessions-overview/{{pitcher.id}}">
+          <button
+            class="btn btn-primary"
+            routerLink="/sessions-overview/{{ pitcher.id }}"
+          >
             Sessions
           </button>
         </td>
       </tr>
-      <!-- <tr>
-        <td>Joe Smith</td>
-        <td>RH</td>
-        <td>5'11</td>
-        <td>Freshman</td>
-        <td><button class="btn btn-primary">Sessions</button></td>
-      </tr>
-      <tr>
-        <td>Joe Smith</td>
-        <td>RH</td>
-        <td>5'11</td>
-        <td>Freshman</td>
-        <td><button class="btn btn-primary">Sessions</button></td>
-      </tr>
-      <tr>
-        <td>Joe Smith</td>
-        <td>RH</td>
-        <td>5'11</td>
-        <td>Freshman</td>
-        <td><button class="btn btn-primary">Sessions</button></td>
-      </tr>
-      <tr>
-        <td>Joe Smith</td>
-        <td>RH</td>
-        <td>5'11</td>
-        <td>Freshman</td>
-        <td><button class="btn btn-primary">Sessions</button></td>
-      </tr> -->
     </tbody>
   </table>
+  <button class="btn btn-primary" routerLink="/sessions-overview/1">
+    Sessions
+  </button>
 </div>

@@ -14,17 +14,19 @@ export class SessionComponent implements OnInit {
   curUser;
   currentPitcher;
   curPlayerID;
+  curSessionID;
 
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.curPlayerID = params['id'];
+      this.curSessionID = params['sessionID'];
     });
 
     this.apiService.getPitcherById(this.curPlayerID).subscribe(data => {
       console.log(data);
-      let pitcher = new Pitcher(data['player_name'], data['handedness'], data['_id']);
+      let pitcher = new Pitcher(data['player_name'], data['handedness'], data['_id'], data['height'], data['dob']);
       this.createPitcher(pitcher);
     })
     // console.log(this.currentPitcher);
