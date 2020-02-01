@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ChartDataSets, ChartType, ChartOptions } from "chart.js";
 import { ActivatedRoute } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
-import { Chart } from "../../models/Chart";
 
 @Component({
   selector: "app-session-charts",
@@ -16,13 +15,21 @@ export class SessionChartsComponent implements OnInit {
 
   allPitches = [];
 
-  releaseArray = [{
+  chartsArray = [{
     "release4FB": [{}],
     "release2FB": [{}],
     "releaseCH": [{}],
     "releaseSL": [{}],
     "releaseCB": [{}],
     "releaseCU": [{}]
+  },
+  {
+    "movement4FB": [{}],
+    "movement2FB": [{}],
+    "movementCH": [{}],
+    "movementSL": [{}],
+    "movementCB": [{}],
+    "movementCU": [{}]
   }];
 
   public releaseChartOptions: ChartOptions = {
@@ -86,46 +93,46 @@ export class SessionChartsComponent implements OnInit {
     }
   };
 
-  release4FB = [{}];
+  
 
   public releaseChartData: ChartDataSets[] = [
     {
-      data: this.releaseArray[0]["release4FB"],
+      data: this.chartsArray[0]["release4FB"],
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 2,
       pointBackgroundColor: "blue"
     },
     {
-      data: this.releaseArray[0]["releaseCB"],
+      data: this.chartsArray[0]["releaseCB"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 3,
       pointBackgroundColor: "red"
     },
     {
-      data: this.releaseArray[0]["releaseSL"],
+      data: this.chartsArray[0]["releaseSL"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 3,
       pointBackgroundColor: "orange"
     },
     {
-      data: this.releaseArray[0]["releaseCU"],
+      data: this.chartsArray[0]["releaseCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 3,
       pointBackgroundColor: "green"
     },
     {
-      data: this.releaseArray[0]["release2FB"],
+      data: this.chartsArray[0]["release2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
       pointRadius: 3,
       pointBackgroundColor: "yellow"
     },
     {
-      data: this.releaseArray[0]["releaseCH"],
+      data: this.chartsArray[0]["releaseCH"],
       backgroundColor: ["pink"],
       label: "Changeup",
       pointRadius: 3,
@@ -164,61 +171,52 @@ export class SessionChartsComponent implements OnInit {
     }
   ];
 
+
   public movementChartData: ChartDataSets[] = [
     {
-      data: [
-        { x: -1, y: 10 },
-        { x: 0, y: 11 },
-        { x: 0, y: 12 },
-        { x: 1, y: 13 },
-        { x: 2, y: 12.5 }
-      ],
+      data: this.chartsArray[1]["movement4FB"],
       backgroundColor: ["blue"],
       label: "Fastball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "blue"
     },
     {
-      data: [
-        { x: -1, y: 10 },
-        { x: 0, y: 11 },
-        { x: 0, y: 12 },
-        { x: 1, y: 13 },
-        { x: 2, y: 12.5 }
-      ],
+      data: this.chartsArray[1]["movementCB"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 3,
       pointBackgroundColor: "red"
     },
     {
-      data: [
-        { x: 2, y: -10 },
-        { x: 1, y: -11.5 },
-        { x: 0, y: -9.5 },
-        { x: 0, y: -12 },
-        { x: 2.95, y: -10.5 }
-      ],
+      data: this.chartsArray[1]["movementSL"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 3,
       pointBackgroundColor: "orange"
     },
     {
-      data: [
-        { x: 5, y: 10 },
-        { x: 6.14, y: 11.6 },
-        { x: 7.5, y: 9.65 },
-        { x: 6.35, y: 11.55 },
-        { x: 5.5, y: 12.5 }
-      ],
+      data: this.chartsArray[1]["movementCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 3,
       pointBackgroundColor: "green"
+    },
+    {
+      data: this.chartsArray[1]["movement2FB"],
+      backgroundColor: ["yellow"],
+      label: "2 Seam Fastball",
+      pointRadius: 3,
+      pointBackgroundColor: "yellow"
+    },
+    {
+      data: this.chartsArray[1]["movementCH"],
+      backgroundColor: ["pink"],
+      label: "Changeup",
+      pointRadius: 3,
+      pointBackgroundColor: "pink"
     }
   ];
-
+  
   public movementAvgChartData: ChartDataSets[] = [
     {
       data: [{ x: 10, y: 15 }],
@@ -258,6 +256,7 @@ export class SessionChartsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.activatedRoute.params.subscribe(params => {
       this.curPlayerID = params["id"];
     });
@@ -288,7 +287,9 @@ export class SessionChartsComponent implements OnInit {
       //     // this.sessionMaxAvg.push({i: maxAvg});
       //   });
     });
+
   }
+
 
   makeSessionCharts(id, values) {
     // console.log(id)
@@ -313,39 +314,63 @@ export class SessionChartsComponent implements OnInit {
     for (var i = 0; i < values.length; i++) {
       switch (values[i]["Pitch_Type_pitchType"]) {
         case 0:
-          this.releaseArray[0]["release4FB"].push({
+          this.chartsArray[0]["release4FB"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
+          });
+          this.chartsArray[1]["movement4FB"].push({
+            x: values[i]["horizontalBreak"],
+            y: values[i]["verticalBreak"]
           });
           break;
         case 1:
-          this.releaseArray[0]["releaseCU"].push({
+          this.chartsArray[0]["releaseCU"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
+          });
+          this.chartsArray[1]["movementCU"].push({
+            x: values[i]["horizontalBreak"],
+            y: values[i]["verticalBreak"]
           });
           break;
         case 3:
-          this.releaseArray[0]["releaseCB"].push({
+          this.chartsArray[0]["releaseCB"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
+          });
+          this.chartsArray[1]["movementCB"].push({
+            x: values[i]["horizontalBreak"],
+            y: values[i]["verticalBreak"]
           });
           break;
         case 4:
-          this.releaseArray[0]["releaseSL"].push({
+          this.chartsArray[0]["releaseSL"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
+          });
+          this.chartsArray[1]["movementSL"].push({
+            x: values[i]["horizontalBreak"],
+            y: values[i]["verticalBreak"]
           });
           break;
         case 5:
-          this.releaseArray[0]["release2FB"].push({
+          this.chartsArray[0]["release2FB"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
+          this.chartsArray[1]["movement2FB"].push({
+            x: values[i]["horizontalBreak"],
+            y: values[i]["verticalBreak"]
+          });
           break;
         case 6:
-          this.releaseArray[0]["releaseCH"].push({
+          this.chartsArray[0]["releaseCH"].push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
+          });
+          this.chartsArray[1]["movementCH"].push({
+            x: values[i]["horizontalBreak"],
+            y: values[i]["verticalBreak"]
           });
           break;
         default:

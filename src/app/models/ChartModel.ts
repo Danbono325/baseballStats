@@ -1,4 +1,4 @@
-export interface Chart {
+export interface ChartModel {
   // data: [{ x: 2, y: 6.7 }],
   //   backgroundColor: ["green"],
   //   label: "Cut Fastball",
