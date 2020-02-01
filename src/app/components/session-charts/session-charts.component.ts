@@ -303,7 +303,7 @@ export class SessionChartsComponent implements OnInit {
       this.curPlayerID = params["id"];
     });
 
-    this.apiService.getSessionsById(102036).subscribe(data => {
+    this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
       console.log("chart sessions: ", data);
       this.sessions = data;
       // console.log(data.length);
@@ -314,14 +314,14 @@ export class SessionChartsComponent implements OnInit {
       // }
     });
 
-    this.apiService.getChartData(102036).subscribe(data => {
+    this.apiService.getChartData(this.curPlayerID).subscribe(data => {
       let values = data;
       console.log("Values: ", values);
       this.makeSessionCharts(0, values);
       // this.sessionMaxAvg.push({i: maxAvg});
     });
 
-    this.apiService.getChartDataAvg(102036).subscribe(data => {
+    this.apiService.getChartDataAvg(this.curPlayerID).subscribe(data => {
       let averages = data;
       console.log("Averages: ", averages);
       this.makeSessionChartsAvg(0, averages);
