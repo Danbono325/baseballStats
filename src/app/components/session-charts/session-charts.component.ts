@@ -46,8 +46,8 @@ export class SessionChartsComponent implements OnInit {
             labelString: "Release Side"
           },
           ticks: {
-            min: -2.5,
-            max: 2.5
+            min: -5,
+            max: 5
           }
         }
       ]
