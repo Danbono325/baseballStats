@@ -17,16 +17,40 @@ export class ApiService {
   }
 
   getPitcherById(pitcherID): Observable<any[]> {
-    return this.http.get<any[]>(this.apiHost + "/pitchers/" + pitcherID);
+    return this.http.get<any[]>(this.apiHost + "/pitcher/" + pitcherID);
   }
 
   getSessionsById(pitcherId): Observable<any[]> {
-    return this.http.get<any[]>(this.apiHost + "/sessions/" + pitcherId);
+    return this.http.get<any[]>(this.apiHost + "/sessions/all/" + pitcherId);
   }
 
   getAvgMaxByPT(sessionID, pitchType): Observable<any[]> {
     return this.http.get<any[]>(
-      this.apiHost + "/sessions/" + sessionID + "/" + pitchType
+      this.apiHost + "/MaxAvg/one/" + sessionID + "/" + pitchType
+    );
+  }
+
+  getChartData(pitcherId): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.apiHost + "/sessions/all/chartData/" + pitcherId
+    );
+  }
+
+  getChartDataAvg(pitcherId): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.apiHost + "/sessions/all/chartDataAvg/" + pitcherId
+    );
+  }
+
+  getChartDataSession(sessionID): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.apiHost + "/sessions/one/chartData/" + sessionID
+    );
+  }
+
+  getChartDataSessionAvg(sessionID): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.apiHost + "/sessions/one/chartData/" + sessionID
     );
   }
 }

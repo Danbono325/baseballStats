@@ -16,8 +16,7 @@ import { ApiService } from "./services/api.service";
 import { TeamStatsComponent } from "./components/team-stats/team-stats.component";
 import { SessionsOverviewComponent } from "./components/sessions-overview/sessions-overview.component";
 import { SessionComponent } from "./components/session/session.component";
-import { ReleaseChartsComponent } from "./components/release-charts/release-charts.component";
-import { MovementChartsComponent } from "./components/movement-charts/movement-charts.component";
+import { SessionChartsComponent } from './components/session-charts/session-charts.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,7 @@ import { MovementChartsComponent } from "./components/movement-charts/movement-c
     TeamStatsComponent,
     SessionsOverviewComponent,
     SessionComponent,
-    ReleaseChartsComponent,
-    MovementChartsComponent
+    SessionChartsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartsModule],
   providers: [UserService, ApiService],
