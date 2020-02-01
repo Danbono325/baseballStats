@@ -60,7 +60,7 @@ export class SessionChartsComponent implements OnInit {
             labelString: "Release Height"
           },
           ticks: {
-            min: 5,
+            min: 3,
             max: 7
           }
         }
@@ -72,8 +72,8 @@ export class SessionChartsComponent implements OnInit {
             labelString: "Release Side"
           },
           ticks: {
-            min: -2.5,
-            max: 2.5
+            min: -4,
+            max: 4
           }
         }
       ]
@@ -116,42 +116,42 @@ export class SessionChartsComponent implements OnInit {
       data: this.chartsArray[0]["release4FB"],
       backgroundColor: ["blue"],
       label: "Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "blue"
     },
     {
       data: this.chartsArray[0]["releaseCB"],
       backgroundColor: ["red"],
       label: "Curveball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "red"
     },
     {
       data: this.chartsArray[0]["releaseSL"],
       backgroundColor: ["orange"],
       label: "Slider",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "orange"
     },
     {
       data: this.chartsArray[0]["releaseCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "green"
     },
     {
       data: this.chartsArray[0]["release2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "yellow"
     },
     {
       data: this.chartsArray[0]["releaseCH"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "hotpink"
     }
   ];
@@ -161,42 +161,42 @@ export class SessionChartsComponent implements OnInit {
       data: this.chartsArray[2]["release4FBAvg"],
       backgroundColor: ["blue"],
       label: "Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "blue"
     },
     {
       data: this.chartsArray[2]["releaseCBAvg"],
       backgroundColor: ["red"],
       label: "Curveball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "red"
     },
     {
       data: this.chartsArray[2]["releaseSLAvg"],
       backgroundColor: ["orange"],
       label: "Slider",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "orange"
     },
     {
       data: this.chartsArray[2]["releaseCUAvg"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "green"
     },
     {
       data: this.chartsArray[2]["release2FBAvg"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "yellow"
     },
     {
       data: this.chartsArray[2]["releaseCHAvg"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "hotpink"
     }
   ];
@@ -206,42 +206,42 @@ export class SessionChartsComponent implements OnInit {
       data: this.chartsArray[1]["movement4FB"],
       backgroundColor: ["blue"],
       label: "Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "blue"
     },
     {
       data: this.chartsArray[1]["movementCB"],
       backgroundColor: ["red"],
       label: "Curveball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "red"
     },
     {
       data: this.chartsArray[1]["movementSL"],
       backgroundColor: ["orange"],
       label: "Slider",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "orange"
     },
     {
       data: this.chartsArray[1]["movementCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "green"
     },
     {
       data: this.chartsArray[1]["movement2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "yellow"
     },
     {
       data: this.chartsArray[1]["movementCH"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "hotpink"
     }
   ];
@@ -251,42 +251,42 @@ export class SessionChartsComponent implements OnInit {
       data: this.chartsArray[3]["movement4FBAvg"],
       backgroundColor: ["blue"],
       label: "Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "blue"
     },
     {
       data: this.chartsArray[3]["movementCBAvg"],
       backgroundColor: ["red"],
       label: "Curveball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "red"
     },
     {
       data: this.chartsArray[3]["movementSLAvg"],
       backgroundColor: ["orange"],
       label: "Slider",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "orange"
     },
     {
       data: this.chartsArray[3]["movementCUAvg"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "green"
     },
     {
       data: this.chartsArray[3]["movement2FBAvg"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "yellow"
     },
     {
       data: this.chartsArray[3]["movementCHAvg"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
-      pointRadius: 2,
+      pointRadius: 4,
       pointBackgroundColor: "hotpink"
     }
   ];
@@ -303,7 +303,7 @@ export class SessionChartsComponent implements OnInit {
       this.curPlayerID = params["id"];
     });
 
-    this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
+    this.apiService.getSessionsById(102036).subscribe(data => {
       console.log("chart sessions: ", data);
       this.sessions = data;
       // console.log(data.length);
@@ -314,14 +314,14 @@ export class SessionChartsComponent implements OnInit {
       // }
     });
 
-    this.apiService.getChartData(this.curPlayerID).subscribe(data => {
+    this.apiService.getChartData(102036).subscribe(data => {
       let values = data;
       console.log("Values: ", values);
       this.makeSessionCharts(0, values);
       // this.sessionMaxAvg.push({i: maxAvg});
     });
 
-    this.apiService.getChartDataAvg(this.curPlayerID).subscribe(data => {
+    this.apiService.getChartDataAvg(102036).subscribe(data => {
       let averages = data;
       console.log("Averages: ", averages);
       this.makeSessionChartsAvg(0, averages);
