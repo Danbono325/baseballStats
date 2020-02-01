@@ -57,11 +57,13 @@ export class SessionChartsComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Release Height"
+            labelString: "Release Height",
+            fontSize: 14
           },
           ticks: {
             min: 3,
-            max: 7
+            max: 7,
+            fontSize: 14
           }
         }
       ],
@@ -69,14 +71,21 @@ export class SessionChartsComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Release Side"
+            labelString: "Release Side",
+            fontSize: 14
           },
           ticks: {
             min: -4,
-            max: 4
+            max: 4,
+            fontSize: 14
           }
         }
       ]
+    },
+    legend: {
+      labels: {
+        fontSize: 14
+      }
     }
   };
 
@@ -88,11 +97,13 @@ export class SessionChartsComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Vertical Break (Inch)"
+            labelString: "Vertical Break (Inch)",
+            fontSize: 14
           },
           ticks: {
             min: -30,
-            max: 30
+            max: 30,
+            fontSize: 14
           }
         }
       ],
@@ -100,14 +111,21 @@ export class SessionChartsComponent implements OnInit {
         {
           scaleLabel: {
             display: true,
-            labelString: "Horizontal Break (Inch)"
+            labelString: "Horizontal Break (Inch)",
+            fontSize: 14
           },
           ticks: {
             min: -20,
-            max: 20
+            max: 20,
+            fontSize: 14
           }
         }
       ]
+    },
+    legend: {
+      labels: {
+        fontSize: 14
+      }
     }
   };
 
