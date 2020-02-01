@@ -4,7 +4,7 @@ import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 @Component({
   selector: "app-movement-charts",
   templateUrl: "./movement-charts.component.html",
-  styleUrls: ["./movement-charts.component.scss"]
+  styleUrls: ["./movement-charts.component.scss"],
 })
 export class MovementChartsComponent implements OnInit {
   public scatterChartType: ChartType = "scatter";

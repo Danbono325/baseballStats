@@ -12,10 +12,10 @@ export class ReleaseChartsComponent implements OnInit {
 
   
 
-  scatterChartType: ChartType = "scatter";
+  public scatterChartType: ChartType = "scatter";
 
   // Chart options for the release height and release side chart
-  releaseChartOptions: ChartOptions = {
+  public releaseChartOptions: ChartOptions = {
     responsive: true,
     scales: {
       yAxes: [
@@ -45,7 +45,7 @@ export class ReleaseChartsComponent implements OnInit {
     }
   };
 
-  releaseChartData: ChartDataSets[] = [
+  public releaseChartData: ChartDataSets[] = [
     {
       data: [
         { x: 2.9, y: 6.65 },
@@ -100,7 +100,7 @@ export class ReleaseChartsComponent implements OnInit {
     }
   ];
 
-  releaseAvgChartData: ChartDataSets[] = [
+  public releaseAvgChartData: ChartDataSets[] = [
     {
       data: [{ x: 2.9, y: 6.65 }],
       backgroundColor: ["blue"],
@@ -135,35 +135,9 @@ export class ReleaseChartsComponent implements OnInit {
 
   
   ngOnInit() {
-    this.makeCharts();
    
   }
 
 
-  releaseChartCTX: any;
-  releaseChart: any;
-  releaseAvgChart: any;
-  releaseAvgChartCTX: any;
-
-  makeCharts() {
-    this.releaseChart = document.getElementById('releaseChart');
-    this.releaseChartCTX = this.releaseChart.getContext('2d');
-    let release_chart = new Chart(this.releaseChartCTX, {
-      type: 'scatter',
-      data: {
-        datasets: this.releaseChartData
-    },
-      options: this.releaseChartOptions
-    });
-
-    this.releaseAvgChart = document.getElementById('releaseAvgChart');
-    this.releaseAvgChartCTX = this.releaseAvgChart.getContext('2d');
-    let releaseAvg_chart = new Chart(this.releaseAvgChartCTX, {
-      type: 'scatter',
-      data: {
-        datasets: this.releaseAvgChartData
-    },
-      options: this.releaseChartOptions
-    });
-  }
+  
 }
