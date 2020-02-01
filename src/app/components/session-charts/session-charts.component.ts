@@ -292,15 +292,21 @@ export class SessionChartsComponent implements OnInit {
       this.makeSessionCharts(0, values);
       // this.sessionMaxAvg.push({i: maxAvg});
 
-      // this.apiService
-      //   .getChartDataAvg(data[i]["idSession"])
-      //   .subscribe(data => {
-      //     let averages = data;
-      //     //console.log("Values: ", values);
-      //     this.makeSessionChartsAvg(i, averages);
-      //     // this.sessionMaxAvg.push({i: maxAvg});
-      //   });
+    
     });
+<<<<<<< HEAD
+
+      this.apiService
+        .getChartDataAvg(102036)
+        .subscribe(data => {
+          let averages = data;
+          console.log("Averages: ", averages);
+          this.makeSessionChartsAvg(0, averages);
+          // this.sessionMaxAvg.push({i: maxAvg});
+        });
+
+=======
+>>>>>>> 1c2f5b8d905d6534fddb1c5858f9c874d8625699
   }
 
   makeSessionCharts(id, values) {
@@ -395,75 +401,75 @@ export class SessionChartsComponent implements OnInit {
     console.log("Pitches", this.allPitches);
   }
 
-  // makeSessionChartsAvg(id, values) {
-  //   // console.log(id)
-  //   var pitchTypes = {};
-  //   //console.log("Values", values);
+  makeSessionChartsAvg(id, values) {
+    // console.log(id)
+    var pitchTypes = {};
+    //console.log("Values", values);
 
-  //   pitchTypes["4 Seam Fastball"] = [0, 0];
-  //   pitchTypes["2 Seam Fastball"] = [0, 0];
-  //   pitchTypes["Changeup"] = [0, 0];
-  //   pitchTypes["Curveball"] = [0, 0];
-  //   pitchTypes["Slider"] = [0, 0];
-  //   pitchTypes["Cut Fastball"] = [0, 0];
+    pitchTypes["4 Seam Fastball"] = [0, 0];
+    pitchTypes["2 Seam Fastball"] = [0, 0];
+    pitchTypes["Changeup"] = [0, 0];
+    pitchTypes["Curveball"] = [0, 0];
+    pitchTypes["Slider"] = [0, 0];
+    pitchTypes["Cut Fastball"] = [0, 0];
 
-  //   for (var i = 0; i < values.length; i++) {
-  //     switch (values[i]["Pitch_Type_pitchType"]) {
-  //       case 0:
-  //         pitchTypes["4 Seam Fastball"] = [
-  //           values[i]["AVG(verticalBreak)"],
-  //           values[i]["AVG(horizontalBreak)"],
-  //           values[i]["AVG(releaseHeight)"],
-  //           values[i]["AVG(releaseSide)"]
-  //         ];
-  //         break;
-  //       case 1:
-  //         pitchTypes["Cut Fastball"] = [
-  //           values[i]["AVG(verticalBreak)"],
-  //           values[i]["AVG(horizontalBreak)"],
-  //           values[i]["AVG(releaseHeight)"],
-  //           values[i]["AVG(releaseSide)"]
-  //         ];
-  //         break;
-  //       case 3:
-  //         pitchTypes["Curveball"] = [
-  //           values[i]["AVG(verticalBreak)"],
-  //           values[i]["AVG(horizontalBreak)"],
-  //           values[i]["AVG(releaseHeight)"],
-  //           values[i]["AVG(releaseSide)"]
-  //         ];
-  //         break;
-  //       case 4:
-  //         pitchTypes["Slider"] = [
-  //           values[i]["AVG(verticalBreak)"],
-  //           values[i]["AVG(horizontalBreak)"],
-  //           values[i]["AVG(releaseHeight)"],
-  //           values[i]["AVG(releaseSide)"]
-  //         ];
-  //         break;
-  //       case 5:
-  //         pitchTypes["2 Seam Fastball"] = [
-  //           values[i]["AVG(verticalBreak)"],
-  //           values[i]["AVG(horizontalBreak)"],
-  //           values[i]["AVG(releaseHeight)"],
-  //           values[i]["AVG(releaseSide)"]
-  //         ];
-  //         break;
-  //       case 6:
-  //         pitchTypes["Changeup"] = [
-  //           values[i]["AVG(verticalBreak)"],
-  //           values[i]["AVG(horizontalBreak)"],
-  //           values[i]["AVG(releaseHeight)"],
-  //           values[i]["AVG(releaseSide)"]
-  //         ];
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   }
+    for (var i = 0; i < values.length; i++) {
+      switch (values[i]["Pitch_Type_pitchType"]) {
+        case 0:
+          pitchTypes["4 Seam Fastball"] = [
+            values[i]["AVG(verticalBreak)"],
+            values[i]["AVG(horizontalBreak)"],
+            values[i]["AVG(releaseHeight)"],
+            values[i]["AVG(releaseSide)"]
+          ];
+          break;
+        case 1:
+          pitchTypes["Cut Fastball"] = [
+            values[i]["AVG(verticalBreak)"],
+            values[i]["AVG(horizontalBreak)"],
+            values[i]["AVG(releaseHeight)"],
+            values[i]["AVG(releaseSide)"]
+          ];
+          break;
+        case 3:
+          pitchTypes["Curveball"] = [
+            values[i]["AVG(verticalBreak)"],
+            values[i]["AVG(horizontalBreak)"],
+            values[i]["AVG(releaseHeight)"],
+            values[i]["AVG(releaseSide)"]
+          ];
+          break;
+        case 4:
+          pitchTypes["Slider"] = [
+            values[i]["AVG(verticalBreak)"],
+            values[i]["AVG(horizontalBreak)"],
+            values[i]["AVG(releaseHeight)"],
+            values[i]["AVG(releaseSide)"]
+          ];
+          break;
+        case 5:
+          pitchTypes["2 Seam Fastball"] = [
+            values[i]["AVG(verticalBreak)"],
+            values[i]["AVG(horizontalBreak)"],
+            values[i]["AVG(releaseHeight)"],
+            values[i]["AVG(releaseSide)"]
+          ];
+          break;
+        case 6:
+          pitchTypes["Changeup"] = [
+            values[i]["AVG(verticalBreak)"],
+            values[i]["AVG(horizontalBreak)"],
+            values[i]["AVG(releaseHeight)"],
+            values[i]["AVG(releaseSide)"]
+          ];
+          break;
+        default:
+          break;
+      }
+    }
 
-  //   this.sessionChartsAvg.push(pitchTypes);
-  //   console.log("avg charts: ", pitchTypes);
-  //   // console.log(this.sessionMaxAvg[0]);
-  // }
+    // this.sessionChartsAvg.push(pitchTypes);
+    // console.log("avg charts: ", pitchTypes);
+    // console.log(this.sessionMaxAvg[0]);
+  }
 }
