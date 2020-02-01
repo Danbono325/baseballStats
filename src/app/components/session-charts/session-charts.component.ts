@@ -14,8 +14,15 @@ export class SessionChartsComponent implements OnInit {
   sessions;
 
   allPitches = [];
-  sessionCharts = [];
-  sessionChartsAvg = [];
+
+  releaseArray = {
+    release4FB: [{}],
+    release2FB: [{}],
+    releaseCH: [{}],
+    releaseSL: [{}],
+    releaseCB: [{}],
+    releaseCU: [{}]
+  };
 
   public releaseChartOptions: ChartOptions = {
     responsive: true,
@@ -39,8 +46,8 @@ export class SessionChartsComponent implements OnInit {
             labelString: "Release Side"
           },
           ticks: {
-            min: -4,
-            max: 4
+            min: -2.5,
+            max: 2.5
           }
         }
       ]
@@ -79,53 +86,49 @@ export class SessionChartsComponent implements OnInit {
   };
 
   release4FB = [{}];
-  
+
   public releaseChartData: ChartDataSets[] = [
     {
-      data: this.release4FB,
+      data: this.releaseArray.release4FB,
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 2,
       pointBackgroundColor: "blue"
     },
     {
-      data: [
-        { x: 3.2, y: 6.3 },
-        { x: 2.9, y: 6.2 },
-        { x: 3, y: 6 },
-        { x: 2.95, y: 6.1 },
-        { x: 2.7, y: 6.15 }
-      ],
+      data: this.releaseArray.releaseCB,
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 3,
       pointBackgroundColor: "red"
     },
     {
-      data: [
-        { x: 2.65, y: 6.4 },
-        { x: 2.7, y: 6.54 },
-        { x: 2.82, y: 6.6 },
-        { x: 2.25, y: 6.3 },
-        { x: 2.95, y: 6.45 }
-      ],
+      data: this.releaseArray.releaseSL,
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 3,
       pointBackgroundColor: "orange"
     },
     {
-      data: [
-        { x: 2, y: 6.7 },
-        { x: 2.14, y: 6.6 },
-        { x: 2.5, y: 6.65 },
-        { x: 2.35, y: 6.55 },
-        { x: 2.2, y: 6.5 }
-      ],
+      data: this.releaseArray.releaseCU,
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 3,
       pointBackgroundColor: "green"
+    },
+    {
+      data: this.releaseArray.release2FB,
+      backgroundColor: ["yellow"],
+      label: "2 Seam Fastball",
+      pointRadius: 3,
+      pointBackgroundColor: "yellow"
+    },
+    {
+      data: this.releaseArray.releaseCH,
+      backgroundColor: ["pink"],
+      label: "Changeup",
+      pointRadius: 3,
+      pointBackgroundColor: "pink"
     }
   ];
 
@@ -309,50 +312,40 @@ export class SessionChartsComponent implements OnInit {
     for (var i = 0; i < values.length; i++) {
       switch (values[i]["Pitch_Type_pitchType"]) {
         case 0:
-          this.release4FB.push({
+          this.releaseArray.release4FB.push({
             x: values[i]["releaseSide"],
             y: values[i]["releaseHeight"]
           });
           break;
         case 1:
-          pitchTypes["Cut Fastball"] = [
-            values[i]["verticalBreak"],
-            values[i]["horizontalBreak"],
-            values[i]["releaseHeight"],
-            values[i]["releaseSide"]
-          ];
+          this.releaseArray.releaseCU.push({
+            x: values[i]["releaseSide"],
+            y: values[i]["releaseHeight"]
+          });
           break;
         case 3:
-          pitchTypes["Curveball"] = [
-            values[i]["verticalBreak"],
-            values[i]["horizontalBreak"],
-            values[i]["releaseHeight"],
-            values[i]["releaseSide"]
-          ];
+          this.releaseArray.releaseCB.push({
+            x: values[i]["releaseSide"],
+            y: values[i]["releaseHeight"]
+          });
           break;
         case 4:
-          pitchTypes["Slider"] = [
-            values[i]["verticalBreak"],
-            values[i]["horizontalBreak"],
-            values[i]["releaseHeight"],
-            values[i]["releaseSide"]
-          ];
+          this.releaseArray.releaseSL.push({
+            x: values[i]["releaseSide"],
+            y: values[i]["releaseHeight"]
+          });
           break;
         case 5:
-          pitchTypes["2 Seam Fastball"] = [
-            values[i]["verticalBreak"],
-            values[i]["horizontalBreak"],
-            values[i]["releaseHeight"],
-            values[i]["releaseSide"]
-          ];
+          this.releaseArray.release2FB.push({
+            x: values[i]["releaseSide"],
+            y: values[i]["releaseHeight"]
+          });
           break;
         case 6:
-          pitchTypes["Changeup"] = [
-            values[i]["verticalBreak"],
-            values[i]["horizontalBreak"],
-            values[i]["releaseHeight"],
-            values[i]["releaseSide"]
-          ];
+          this.releaseArray.releaseCH.push({
+            x: values[i]["releaseSide"],
+            y: values[i]["releaseHeight"]
+          });
           break;
         default:
           break;
@@ -364,75 +357,75 @@ export class SessionChartsComponent implements OnInit {
     console.log("Pitches", this.allPitches);
   }
 
-  makeSessionChartsAvg(id, values) {
-    // console.log(id)
-    var pitchTypes = {};
-    //console.log("Values", values);
+  // makeSessionChartsAvg(id, values) {
+  //   // console.log(id)
+  //   var pitchTypes = {};
+  //   //console.log("Values", values);
 
-    pitchTypes["4 Seam Fastball"] = [0, 0];
-    pitchTypes["2 Seam Fastball"] = [0, 0];
-    pitchTypes["Changeup"] = [0, 0];
-    pitchTypes["Curveball"] = [0, 0];
-    pitchTypes["Slider"] = [0, 0];
-    pitchTypes["Cut Fastball"] = [0, 0];
+  //   pitchTypes["4 Seam Fastball"] = [0, 0];
+  //   pitchTypes["2 Seam Fastball"] = [0, 0];
+  //   pitchTypes["Changeup"] = [0, 0];
+  //   pitchTypes["Curveball"] = [0, 0];
+  //   pitchTypes["Slider"] = [0, 0];
+  //   pitchTypes["Cut Fastball"] = [0, 0];
 
-    for (var i = 0; i < values.length; i++) {
-      switch (values[i]["Pitch_Type_pitchType"]) {
-        case 0:
-          pitchTypes["4 Seam Fastball"] = [
-            values[i]["AVG(verticalBreak)"],
-            values[i]["AVG(horizontalBreak)"],
-            values[i]["AVG(releaseHeight)"],
-            values[i]["AVG(releaseSide)"]
-          ];
-          break;
-        case 1:
-          pitchTypes["Cut Fastball"] = [
-            values[i]["AVG(verticalBreak)"],
-            values[i]["AVG(horizontalBreak)"],
-            values[i]["AVG(releaseHeight)"],
-            values[i]["AVG(releaseSide)"]
-          ];
-          break;
-        case 3:
-          pitchTypes["Curveball"] = [
-            values[i]["AVG(verticalBreak)"],
-            values[i]["AVG(horizontalBreak)"],
-            values[i]["AVG(releaseHeight)"],
-            values[i]["AVG(releaseSide)"]
-          ];
-          break;
-        case 4:
-          pitchTypes["Slider"] = [
-            values[i]["AVG(verticalBreak)"],
-            values[i]["AVG(horizontalBreak)"],
-            values[i]["AVG(releaseHeight)"],
-            values[i]["AVG(releaseSide)"]
-          ];
-          break;
-        case 5:
-          pitchTypes["2 Seam Fastball"] = [
-            values[i]["AVG(verticalBreak)"],
-            values[i]["AVG(horizontalBreak)"],
-            values[i]["AVG(releaseHeight)"],
-            values[i]["AVG(releaseSide)"]
-          ];
-          break;
-        case 6:
-          pitchTypes["Changeup"] = [
-            values[i]["AVG(verticalBreak)"],
-            values[i]["AVG(horizontalBreak)"],
-            values[i]["AVG(releaseHeight)"],
-            values[i]["AVG(releaseSide)"]
-          ];
-          break;
-        default:
-          break;
-      }
-    }
+  //   for (var i = 0; i < values.length; i++) {
+  //     switch (values[i]["Pitch_Type_pitchType"]) {
+  //       case 0:
+  //         pitchTypes["4 Seam Fastball"] = [
+  //           values[i]["AVG(verticalBreak)"],
+  //           values[i]["AVG(horizontalBreak)"],
+  //           values[i]["AVG(releaseHeight)"],
+  //           values[i]["AVG(releaseSide)"]
+  //         ];
+  //         break;
+  //       case 1:
+  //         pitchTypes["Cut Fastball"] = [
+  //           values[i]["AVG(verticalBreak)"],
+  //           values[i]["AVG(horizontalBreak)"],
+  //           values[i]["AVG(releaseHeight)"],
+  //           values[i]["AVG(releaseSide)"]
+  //         ];
+  //         break;
+  //       case 3:
+  //         pitchTypes["Curveball"] = [
+  //           values[i]["AVG(verticalBreak)"],
+  //           values[i]["AVG(horizontalBreak)"],
+  //           values[i]["AVG(releaseHeight)"],
+  //           values[i]["AVG(releaseSide)"]
+  //         ];
+  //         break;
+  //       case 4:
+  //         pitchTypes["Slider"] = [
+  //           values[i]["AVG(verticalBreak)"],
+  //           values[i]["AVG(horizontalBreak)"],
+  //           values[i]["AVG(releaseHeight)"],
+  //           values[i]["AVG(releaseSide)"]
+  //         ];
+  //         break;
+  //       case 5:
+  //         pitchTypes["2 Seam Fastball"] = [
+  //           values[i]["AVG(verticalBreak)"],
+  //           values[i]["AVG(horizontalBreak)"],
+  //           values[i]["AVG(releaseHeight)"],
+  //           values[i]["AVG(releaseSide)"]
+  //         ];
+  //         break;
+  //       case 6:
+  //         pitchTypes["Changeup"] = [
+  //           values[i]["AVG(verticalBreak)"],
+  //           values[i]["AVG(horizontalBreak)"],
+  //           values[i]["AVG(releaseHeight)"],
+  //           values[i]["AVG(releaseSide)"]
+  //         ];
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   }
 
-    this.sessionChartsAvg.push(pitchTypes);
-    console.log("avg charts: ", pitchTypes);
-    // console.log(this.sessionMaxAvg[0]);
-  }
+  //   this.sessionChartsAvg.push(pitchTypes);
+  //   console.log("avg charts: ", pitchTypes);
+  //   // console.log(this.sessionMaxAvg[0]);
+  // }
 }
