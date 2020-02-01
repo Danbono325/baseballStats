@@ -9,42 +9,60 @@
     <p>5'11</p>
     <p>Junior</p>
     </div>
-    <div class="col-md-3">
+    <!-- <div class="col-md-3">
       <div class="pitcher-dets">
         <p>Summary</p>
       </div>
-    </div>
+    </div> -->
   </div>
-  <div class="row">
-    <table class="table col-md-8 mr-5">
+  <div class="row ">
+    <div class="table-responsive">
+    <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th>Pitch No.</th>
-          <th class="text-center">R. Height</th>
-          <th class="text-center">R. Side</th>
-          <th class="text-center">V. Break</th>
-          <th class="text-center">H. Break</th>
-          <th class="text-center">Spin Eff.</th>
-          <th class="text-center">True Spin</th>
-          <th class="text-center">Strike</th>
-          <th class="text-center">Gyros</th>
+          <th>Pitch Type</th>
+          <th>R. Side</th>
+          <th>R. Height</th>
+          <th>H. Break</th>
+          <th>V. Break</th>
+          <th>Spin</th>
+          <th>True Spin</th>
+          <th>SZX</th>
+          <th>SZY</th>
+          <th>Speed</th>
+          <th>Spin Conf.</th>
+          <th>Spin Eff.</th>
+          <th>Launch Angle</th>
+          <th>H. Angle</th>
+          <th>Rifle Spin</th>
+          <th>Gyro</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="text-center">1</td>
-          <td class="text-center">82</td>
-          <td class="text-center">88</td>
-          <td class="text-center">82</td>
-          <td class="text-center">88</td>
-          <td class="text-center">82</td>
-          <td class="text-center">88</td>
-          <td class="text-center">82</td>
-          <td class="text-center">82</td>
+        <tr *ngFor="let data of sessionData">
+<!-- releaseSide, horizontalBreak, verticalBreak, spin, trueSpin, szx, szy, speed, 
+  spinConfidence, spinEfficiency, launchAngle, rifleSpin, horizontalAngle, gyroDegree -->
+          <td>{{data["Pitch_Type_pitchType"] | pitchType }}</td>
+          <td>{{data["releaseSide"]  | number: "1.1-1"}}</td>
+          <td>{{data["releaseHeight"]  | number: "1.1-1"}}</td>
+          <td>{{data["horizontalBreak"]  | number: "1.1-1"}}</td>
+          <td>{{data["verticalBreak"]  | number: "1.1-1"}}</td>
+          <td>{{data["spin"]  | number: "1.1-1"}}</td>
+          <td>{{data["trueSpin"]  | number: "1.1-1"}}</td>
+          <td>{{data["szx"]  | number: "1.1-1"}}</td>
+          <td>{{data["szy"]  | number: "1.1-1"}}</td>
+          <td>{{data["speed"]  | number: "1.1-1"}}</td>
+          <td>{{data["spinConfidence"]  | number: "1.1-1"}}</td>
+          <td>{{data["spinEfficiency"]  | number: "1.1-1"}}</td>
+          <td>{{data["launchAngle"]  | number: "1.1-1"}}</td>
+          <td>{{data["rifleSpin"]  | number: "1.1-1"}}</td>
+          <td>{{data["horizontalAngle"]  | number: "1.1-1"}}</td>
+          <td>{{data["gyroDegree"]  | number: "1.1-1"}}</td>
         </tr>
       </tbody>
     </table>
-    <table class="table col-md-3">
+  </div>
+    <!-- <table class="table col-md-3">
       <thead class="thead table-info">
         <tr>
           <th>Pitch Type</th>
@@ -59,6 +77,6 @@
           <td>88</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </div>
 </div>

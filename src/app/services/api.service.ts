@@ -30,6 +30,13 @@ export class ApiService {
     );
   }
 
+  getSessionData(sessionID): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.apiHost + "/session/" + sessionID
+    );
+  }
+
+
   getChartData(pitcherId): Observable<any[]> {
     return this.http.get<any[]>(
       this.apiHost + "/sessions/all/chartData/" + pitcherId

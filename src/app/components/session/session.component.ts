@@ -15,6 +15,7 @@ export class SessionComponent implements OnInit {
   currentPitcher;
   curPlayerID;
   curSessionID;
+  sessionData;
 
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute, private userService: UserService) {}
 
@@ -28,8 +29,13 @@ export class SessionComponent implements OnInit {
       console.log(data);
       let pitcher = new Pitcher(data['player_name'], data['handedness'], data['_id'], data['height'], data['dob']);
       this.createPitcher(pitcher);
-    })
+    });
     // console.log(this.currentPitcher);
+
+    this.apiService.getSessionData(this.curSessionID).subscribe(data => {
+      this.sessionData = data;
+      console.log(data);
+    });
 
     this.curUser = this.userService.getUserData();
   }

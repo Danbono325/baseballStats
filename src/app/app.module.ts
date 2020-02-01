@@ -18,6 +18,11 @@ import { SessionsOverviewComponent } from "./components/sessions-overview/sessio
 import { SessionComponent } from "./components/session/session.component";
 import { SessionChartsComponent } from './components/session-charts/session-charts.component';
 
+//Pipe
+import { PitchType } from './pipes/pitch-type.pipe';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +32,8 @@ import { SessionChartsComponent } from './components/session-charts/session-char
     TeamStatsComponent,
     SessionsOverviewComponent,
     SessionComponent,
-    SessionChartsComponent
+    SessionChartsComponent,
+    PitchType
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartsModule],
   providers: [UserService, ApiService],
