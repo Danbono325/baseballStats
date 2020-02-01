@@ -15,22 +15,24 @@ export class SessionChartsComponent implements OnInit {
 
   allPitches = [];
 
-  chartsArray = [{
-    "release4FB": [{}],
-    "release2FB": [{}],
-    "releaseCH": [{}],
-    "releaseSL": [{}],
-    "releaseCB": [{}],
-    "releaseCU": [{}]
-  },
-  {
-    "movement4FB": [{}],
-    "movement2FB": [{}],
-    "movementCH": [{}],
-    "movementSL": [{}],
-    "movementCB": [{}],
-    "movementCU": [{}]
-  }];
+  chartsArray = [
+    {
+      release4FB: [{}],
+      release2FB: [{}],
+      releaseCH: [{}],
+      releaseSL: [{}],
+      releaseCB: [{}],
+      releaseCU: [{}]
+    },
+    {
+      movement4FB: [{}],
+      movement2FB: [{}],
+      movementCH: [{}],
+      movementSL: [{}],
+      movementCB: [{}],
+      movementCU: [{}]
+    }
+  ];
 
   public releaseChartOptions: ChartOptions = {
     responsive: true,
@@ -93,8 +95,6 @@ export class SessionChartsComponent implements OnInit {
     }
   };
 
-  
-
   public releaseChartData: ChartDataSets[] = [
     {
       data: this.chartsArray[0]["release4FB"],
@@ -107,36 +107,36 @@ export class SessionChartsComponent implements OnInit {
       data: this.chartsArray[0]["releaseCB"],
       backgroundColor: ["red"],
       label: "Curveball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "red"
     },
     {
       data: this.chartsArray[0]["releaseSL"],
       backgroundColor: ["orange"],
       label: "Slider",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "orange"
     },
     {
       data: this.chartsArray[0]["releaseCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "green"
     },
     {
       data: this.chartsArray[0]["release2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "yellow"
     },
     {
       data: this.chartsArray[0]["releaseCH"],
-      backgroundColor: ["pink"],
+      backgroundColor: ["hotpink"],
       label: "Changeup",
-      pointRadius: 3,
-      pointBackgroundColor: "pink"
+      pointRadius: 2,
+      pointBackgroundColor: "hotpink"
     }
   ];
 
@@ -171,7 +171,6 @@ export class SessionChartsComponent implements OnInit {
     }
   ];
 
-
   public movementChartData: ChartDataSets[] = [
     {
       data: this.chartsArray[1]["movement4FB"],
@@ -184,39 +183,39 @@ export class SessionChartsComponent implements OnInit {
       data: this.chartsArray[1]["movementCB"],
       backgroundColor: ["red"],
       label: "Curveball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "red"
     },
     {
       data: this.chartsArray[1]["movementSL"],
       backgroundColor: ["orange"],
       label: "Slider",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "orange"
     },
     {
       data: this.chartsArray[1]["movementCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "green"
     },
     {
       data: this.chartsArray[1]["movement2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
-      pointRadius: 3,
+      pointRadius: 2,
       pointBackgroundColor: "yellow"
     },
     {
       data: this.chartsArray[1]["movementCH"],
-      backgroundColor: ["pink"],
+      backgroundColor: ["hotpink"],
       label: "Changeup",
-      pointRadius: 3,
-      pointBackgroundColor: "pink"
+      pointRadius: 2,
+      pointBackgroundColor: "hotpink"
     }
   ];
-  
+
   public movementAvgChartData: ChartDataSets[] = [
     {
       data: [{ x: 10, y: 15 }],
@@ -256,7 +255,6 @@ export class SessionChartsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.activatedRoute.params.subscribe(params => {
       this.curPlayerID = params["id"];
     });
@@ -287,9 +285,7 @@ export class SessionChartsComponent implements OnInit {
       //     // this.sessionMaxAvg.push({i: maxAvg});
       //   });
     });
-
   }
-
 
   makeSessionCharts(id, values) {
     // console.log(id)
