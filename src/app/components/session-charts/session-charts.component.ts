@@ -31,6 +31,22 @@ export class SessionChartsComponent implements OnInit {
       movementSL: [{}],
       movementCB: [{}],
       movementCU: [{}]
+    },
+    {
+      release4FBAvg: [{}],
+      release2FBAvg: [{}],
+      releaseCHAvg: [{}],
+      releaseSLAvg: [{}],
+      releaseCBAvg: [{}],
+      releaseCUAvg: [{}]
+    },
+    {
+      movement4FBAvg: [{}],
+      movement2FBAvg: [{}],
+      movementCHAvg: [{}],
+      movementSLAvg: [{}],
+      movementCBAvg: [{}],
+      movementCUAvg: [{}]
     }
   ];
 
