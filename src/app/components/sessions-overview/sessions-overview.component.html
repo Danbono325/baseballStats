@@ -22,6 +22,7 @@
         </tr>
         <tr>
           <th scope="col">Date</th>
+          <th scope="col" class="text-center">Session</th>
           <th scope="col" class="text-center">Max. Velo</th>
           <th scope="col" class="text-center">Avg. Velo</th>
           <th scope="col" class="text-center">Max. Velo</th>
@@ -34,12 +35,21 @@
           <th scope="col" class="text-center">Avg. Velo</th>
           <th scope="col" class="text-center">Max. Velo</th>
           <th scope="col" class="text-center">Avg. Velo</th>
-          <th scope="col">Session</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let session of sessions; let i = index">
           <td>{{ session.date | date }}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              routerLink="/session/{{ currentPitcher.id }}/{{
+                session.idSession
+              }}"
+            >
+              Session
+            </button>
+          </td>
           <td class="text-center">
             {{ this.sessionMaxAvg[i]["4 Seam Fastball"][0] | number: "1.1-1" }}
           </td>
@@ -65,29 +75,22 @@
             {{ this.sessionMaxAvg[i]["Slider"][1] | number: "1.1-1" }}
           </td>
           <td class="text-center">
-            {{ this.sessionMaxAvg[i]["Slider"][0] | number: "1.1-1" }}
+            {{ this.sessionMaxAvg[i]["Curveball"][0] | number: "1.1-1" }}
           </td>
           <td class="text-center">
-            {{ this.sessionMaxAvg[i]["Slider"][1] | number: "1.1-1" }}
+            {{ this.sessionMaxAvg[i]["Curveball"][1] | number: "1.1-1" }}
           </td>
           <td class="text-center">
-            {{ this.sessionMaxAvg[i]["Slider"][0] | number: "1.1-1" }}
+            {{ this.sessionMaxAvg[i]["Cut Fastball"][0] | number: "1.1-1" }}
           </td>
           <td class="text-center">
-            {{ this.sessionMaxAvg[i]["Slider"][1] | number: "1.1-1" }}
-          </td>
-          <td>
-            <button
-              class="btn btn-primary"
-              routerLink="/session/{{ currentPitcher.id }}/{{
-                session.idSession
-              }}"
-            >
-              Session
-            </button>
+            {{ this.sessionMaxAvg[i]["Cut Fastball"][1] | number: "1.1-1" }}
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+<div>
+  <app-session-charts></app-session-charts>
 </div>

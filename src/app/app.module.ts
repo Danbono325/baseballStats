@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
+import { ChartsModule } from "ng2-charts";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -15,6 +16,7 @@ import { ApiService } from "./services/api.service";
 import { TeamStatsComponent } from "./components/team-stats/team-stats.component";
 import { SessionsOverviewComponent } from "./components/sessions-overview/sessions-overview.component";
 import { SessionComponent } from "./components/session/session.component";
+import { SessionChartsComponent } from './components/session-charts/session-charts.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { SessionComponent } from "./components/session/session.component";
     TeamOverviewComponent,
     TeamStatsComponent,
     SessionsOverviewComponent,
-    SessionComponent
+    SessionComponent,
+    SessionChartsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartsModule],
   providers: [UserService, ApiService],
   bootstrap: [AppComponent]
 })
