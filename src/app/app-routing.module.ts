@@ -5,8 +5,7 @@ import { TeamOverviewComponent } from "./components/team-overview/team-overview.
 import { TeamStatsComponent } from "./components/team-stats/team-stats.component";
 import { SessionsOverviewComponent } from "./components/sessions-overview/sessions-overview.component";
 import { SessionComponent } from "./components/session/session.component";
-import { ReleaseChartsComponent } from "./components/release-charts/release-charts.component";
-import { MovementChartsComponent } from './components/movement-charts/movement-charts.component';
+import { SessionChartsComponent } from "./components/session-charts/session-charts.component";
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -14,7 +13,7 @@ const routes: Routes = [
   { path: "stats", component: TeamStatsComponent },
   { path: "sessions-overview/:id", component: SessionsOverviewComponent },
   { path: "session/:id/:sessionID", component: SessionComponent },
-  { path: "charts", component: MovementChartsComponent }
+  { path: "charts", component: SessionChartsComponent }
 ];
 
 @NgModule({
