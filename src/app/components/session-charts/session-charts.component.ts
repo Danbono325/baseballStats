@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ChartDataSets, ChartType, ChartOptions } from "chart.js";
 import { ActivatedRoute } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
+import 'chartjs-plugin-zoom';
 
 @Component({
   selector: "app-session-charts",
@@ -86,6 +87,18 @@ export class SessionChartsComponent implements OnInit {
       labels: {
         fontSize: 14
       }
+    },
+    plugins: {
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy',
+        },
+        zoom: {
+          enabled: true,
+          mode: 'xy'
+        }
+      }
     }
   };
 
@@ -125,6 +138,18 @@ export class SessionChartsComponent implements OnInit {
     legend: {
       labels: {
         fontSize: 14
+      }
+    },
+    plugins: {
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy',
+        },
+        zoom: {
+          enabled: true,
+          mode: 'xy'
+        }
       }
     }
   };
