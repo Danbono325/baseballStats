@@ -30,12 +30,13 @@ export class ApiService {
     );
   }
 
-  getSessionData(sessionID): Observable<any[]> {
-    return this.http.get<any[]>(
-      this.apiHost + "/session/" + sessionID
-    );
+  getAvgMax(pitcherId): Observable<any[]> {
+    return this.http.get<any[]>(this.apiHost + "/MaxAvg/all/" + pitcherId);
   }
 
+  getSessionData(sessionID): Observable<any[]> {
+    return this.http.get<any[]>(this.apiHost + "/session/" + sessionID);
+  }
 
   getChartData(pitcherId): Observable<any[]> {
     return this.http.get<any[]>(

@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
-import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
+import { ApiService } from "src/app/services/api.service";
+import { Pitcher } from "src/app/models/Pitcher";
 
 @Component({
   selector: "app-team-stats",
@@ -8,11 +9,14 @@ import { Router } from "@angular/router";
   styleUrls: ["./team-stats.component.scss"]
 })
 export class TeamStatsComponent implements OnInit {
-  curUser;
+  pitchers: Pitcher[] = [];
+
+  pitcherdata;
+  tableData = [];
 
   constructor(
     private elementRef: ElementRef,
-    private userService: UserService,
+    private apiService: ApiService,
     private router: Router
   ) {}
 
@@ -22,9 +26,75 @@ export class TeamStatsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.curUser = this.userService.getUserData();
-    if (this.curUser == null) {
-      this.router.navigate([""]);
+    this.apiService.getAllPictherData().subscribe(data => {
+      this.pitcherdata = data;
+      console.log("Data ", this.pitcherdata);
+      for (var i = 0; i < this.pitcherdata.length; i++) {
+        this.apiService.getAvgMax(this.pitcherdata[i]._id).subscribe(data => {
+          console.log("data ", data);
+          this.makeTableData(i, data);
+        });
+      }
+    });
+  }
+
+  makeTableData(id, maxAvg) {
+    // console.log(id)
+    console.log("MAX AVG", maxAvg);
+    var pitchTypes = {};
+
+    pitchTypes["4 Seam Fastball"] = [0, 0];
+    pitchTypes["2 Seam Fastball"] = [0, 0];
+    pitchTypes["Changeup"] = [0, 0];
+    pitchTypes["Curveball"] = [0, 0];
+    pitchTypes["Slider"] = [0, 0];
+    pitchTypes["Cut Fastball"] = [0, 0];
+
+    for (var i = 0; i < maxAvg.length; i++) {
+      switch (maxAvg[i]["Pitch_Type_pitchType"]) {
+        case 0:
+          pitchTypes["4 Seam Fastball"] = [
+            maxAvg[i]["MAX(speed)"],
+            maxAvg[i]["AVG(speed)"]
+          ];
+          break;
+        case 1:
+          pitchTypes["Cut Fastball"] = [
+            maxAvg[i]["MAX(speed)"],
+            maxAvg[i]["AVG(speed)"]
+          ];
+          break;
+        case 3:
+          pitchTypes["Curveball"] = [
+            maxAvg[i]["MAX(speed)"],
+            maxAvg[i]["AVG(speed)"]
+          ];
+          break;
+        case 4:
+          pitchTypes["Slider"] = [
+            maxAvg[i]["MAX(speed)"],
+            maxAvg[i]["AVG(speed)"]
+          ];
+          break;
+        case 5:
+          pitchTypes["2 Seam Fastball"] = [
+            maxAvg[i]["MAX(speed)"],
+            maxAvg[i]["AVG(speed)"]
+          ];
+          break;
+        case 6:
+          pitchTypes["Changeup"] = [
+            maxAvg[i]["MAX(speed)"],
+            maxAvg[i]["AVG(speed)"]
+          ];
+          break;
+        default:
+          break;
+      }
     }
+
+    this.tableData.push(pitchTypes);
+
+    // console.log(this.sessionMaxAvg[0]);
   }
 }

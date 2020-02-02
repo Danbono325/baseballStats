@@ -44,6 +44,7 @@ export class SessionsOverviewComponent implements OnInit {
       this.sessions = data;
       // console.log(data.length);
       // console.log(data[])
+
       for (var i = 0; i < data.length; i++) {
         this.apiService
           .getAvgMaxByPT(data[i]["idSession"], 0)

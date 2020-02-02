@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
-import { ApiService } from 'src/app/services/api.service';
-import {Pitcher } from '../../models/Pitcher';
+import { ApiService } from "src/app/services/api.service";
+import { Pitcher } from "../../models/Pitcher";
 
 @Component({
   selector: "app-team-overview",
@@ -33,12 +33,17 @@ export class TeamOverviewComponent implements OnInit {
     // }
 
     this.apiService.getAllPictherData().subscribe(data => {
-      
-      for(var i = 0; i < data.length; i++) {
-        let pitcher = new Pitcher(data[i].player_name, data[i].handedness, data[i]._id, data[i].height, data[i].dob);
+      for (var i = 0; i < data.length; i++) {
+        let pitcher = new Pitcher(
+          data[i].player_name,
+          data[i].handedness,
+          data[i]._id,
+          data[i].height,
+          data[i].dob
+        );
         this.pitchers.push(pitcher);
       }
-    })
+    });
 
     console.log(this.pitchers);
   }

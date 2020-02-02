@@ -2,46 +2,85 @@
 <!-- <h1>Hello {{ curUser.givenName }}</h1> -->
 <h2>Team Stats</h2>
 <div class="container">
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col"></th>
-        <th colspan="2" style="text-align:center;">Changeup</th>
-        <th colspan="2" style="text-align:center;">Fastball</th>
-        <th colspan="2" style="text-align:center;">Cut Fastball</th>
-        <th colspan="2" style="text-align:center;">Slider</th>
-        <th></th>
-      </tr>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Max. Velo</th>
-        <th scope="col">Avg. Velo</th>
-        <th scope="col">Max. Velo</th>
-        <th scope="col">Avg. Velo</th>
-        <th scope="col">Max. Velo</th>
-        <th scope="col">Avg. Velo</th>
-        <th scope="col">Max. Velo</th>
-        <th scope="col">Avg. Velo</th>
-        <th>Sessions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Joe Smith</td>
-        <td>89</td>
-        <td>82</td>
-        <td>89</td>
-        <td>82</td>
-        <td>89</td>
-        <td>82</td>
-        <td>89</td>
-        <td>82</td>
-        <td>
-          <button routerLink="/sessions-overview" class="btn btn-primary">
-            Sessions
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th></th>
+          <th></th>
+          <th colspan="2">4 Seam Fastball</th>
+          <th colspan="2">2 Seam Fastball</th>
+          <th colspan="2">Changeup</th>
+          <th colspan="2">Slider</th>
+          <th colspan="2">Curveball</th>
+          <th colspan="2">Cut Fastball</th>
+        </tr>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Session</th>
+          <th scope="col">Max. Velo</th>
+          <th scope="col">Avg. Velo</th>
+          <th scope="col">Max. Velo</th>
+          <th scope="col">Avg. Velo</th>
+          <th scope="col">Max. Velo</th>
+          <th scope="col">Avg. Velo</th>
+          <th scope="col">Max. Velo</th>
+          <th scope="col">Avg. Velo</th>
+          <th scope="col">Max. Velo</th>
+          <th scope="col">Avg. Velo</th>
+          <th scope="col">Max. Velo</th>
+          <th scope="col">Avg. Velo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pitcher of pitcherdata; let i = index">
+          <td>{{ pitcher.player_name }}</td>
+          <td>
+            <button
+              routerLink="/sessions-overview/{{ pitcher.id }}"
+              class="btn btn-primary"
+            >
+              Sessions
+            </button>
+          </td>
+          <td>
+            {{ this.tableData[i]["4 Seam Fastball"][0] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["4 Seam Fastball"][1] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["2 Seam Fastball"][0] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["2 Seam Fastball"][1] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Changeup"][0] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Changeup"][1] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Slider"][0] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Slider"][1] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Curveball"][0] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Curveball"][1] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Cut Fastball"][0] | number: "1.1-1" }}
+          </td>
+          <td>
+            {{ this.tableData[i]["Cut Fastball"][1] | number: "1.1-1" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
