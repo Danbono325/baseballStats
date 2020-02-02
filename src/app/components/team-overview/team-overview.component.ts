@@ -45,6 +45,7 @@ export class TeamOverviewComponent implements OnInit {
       }
     });
 
-    console.log(this.pitchers);
+    console.log(this.pitchers.length);
+    console.log('LENGTH: ', this.pitchers)
   }
 }
