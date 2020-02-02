@@ -38,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let session of sessions; let i = index">
+        <tr  *ngFor="let session of sessions; let i = index">
           <td>{{ session.date | date }}</td>
           <td>
             <button
@@ -86,7 +86,7 @@
           <td>
             {{ this.sessionMaxAvg[i]["Cut Fastball"][1] | number: "1.1-1" }}
           </td>
-        </tr>
+        </tr >
       </tbody>
     </table>
   </div>

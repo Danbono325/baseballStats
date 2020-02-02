@@ -8,7 +8,7 @@
       <p>{{ currentPitcher.throws }}</p>
       <p>{{ currentPitcher.height }}</p>
       <p>{{ currentPitcher.age }}</p>
-      <button class="btn btn-primary">Filter Data</button>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#filterModal">Filter Data</button>
       <button class="btn btn-primary">Session Summary</button>
     </div>
     <!-- <div class="col-md-3">
@@ -40,8 +40,31 @@
             <th>Gyro</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!isFiltered">
           <tr *ngFor="let data of sessionData">
+            <!-- releaseSide, horizontalBreak, verticalBreak, spin, trueSpin, szx, szy, speed, 
+  spinConfidence, spinEfficiency, launchAngle, rifleSpin, horizontalAngle, gyroDegree -->
+            <td>{{ data["Pitch_Type_pitchType"] | pitchType }}</td>
+            <td>{{ data["releaseSide"] | number: "1.1-1" }}</td>
+            <td>{{ data["releaseHeight"] | number: "1.1-1" }}</td>
+            <td>{{ data["horizontalBreak"] | number: "1.1-1" }}</td>
+            <td>{{ data["verticalBreak"] | number: "1.1-1" }}</td>
+            <td>{{ data["spin"] | number: "1.1-1" }}</td>
+            <td>{{ data["trueSpin"] | number: "1.1-1" }}</td>
+            <td>{{ data["szx"] | number: "1.1-1" }}</td>
+            <td>{{ data["szy"] | number: "1.1-1" }}</td>
+            <td>{{ data["speed"] | number: "1.1-1" }}</td>
+            <td>{{ data["spinConfidence"] | number: "1.1-1" }}</td>
+            <td>{{ data["spinEfficiency"] | number: "1.1-1" }}</td>
+            <td>{{ data["launchAngle"] | number: "1.1-1" }}</td>
+            <td>{{ data["rifleSpin"] | number: "1.1-1" }}</td>
+            <td>{{ data["horizontalAngle"] | number: "1.1-1" }}</td>
+            <td>{{ data["gyroDegree"] | number: "1.1-1" }}</td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="isFiltered">
+          <tr *ngFor="let data of filteredSessionData">
             <!-- releaseSide, horizontalBreak, verticalBreak, spin, trueSpin, szx, szy, speed, 
   spinConfidence, spinEfficiency, launchAngle, rifleSpin, horizontalAngle, gyroDegree -->
             <td>{{ data["Pitch_Type_pitchType"] | pitchType }}</td>
@@ -82,4 +105,56 @@
     </table> -->
   </div>
 </div>
-<app-charts></app-charts>
+<div *ngIf="!isFiltered">
+  <app-charts></app-charts>
+</div>
+
+
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="pitch-types" id="pitch-type">
+
+        <div>
+          <input type="checkbox" id="4FB"  (change)="pitchTypeCheckboxes[0] = !pitchTypeCheckboxes[0]">
+          <label for="4FB">4 Seam Fastball</label>
+        </div>
+       <div>
+        <input type="checkbox" id="2FB"  (change)="pitchTypeCheckboxes[5] = !pitchTypeCheckboxes[5]">
+        <label for="2FB">2 Seam Fastball</label>
+       </div>
+        <div>
+          <input type="checkbox" id="CB"  (change)="pitchTypeCheckboxes[3] = !pitchTypeCheckboxes[3]">
+        <label for="CB">Curveball</label>
+        </div>
+        
+        <div>
+          <input type="checkbox" id="SL"  (change)="pitchTypeCheckboxes[4] = !pitchTypeCheckboxes[4]">
+        <label for="SL">Slider</label>
+        </div>
+        
+        <div>
+          <input type="checkbox" id="Cut" (change)="pitchTypeCheckboxes[1] = !pitchTypeCheckboxes[1]">
+          <label for="Cut">Cut Fastball</label>
+        </div>
+       <div>
+        <input type="checkbox" id="CH" (change)="pitchTypeCheckboxes[6] = !pitchTypeCheckboxes[6]">
+        <label for="CH">Changeup</label>
+       </div>
+        
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="filterItems()">Filter</button>
+      </div>
+    </div>
+  </div>
+</div>

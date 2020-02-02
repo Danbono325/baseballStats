@@ -16,6 +16,12 @@ export class SessionComponent implements OnInit {
   curPlayerID;
   curSessionID;
   sessionData;
+  filteredSessionData =[];
+
+  isFiltered=false;
+
+
+  pitchTypeCheckboxes = {0: false, 5: false, 1: false, 6: false,4: false,3: false};
 
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute, private userService: UserService) {}
 
@@ -42,5 +48,54 @@ export class SessionComponent implements OnInit {
 
   createPitcher(pitcher: Pitcher) {
     this.currentPitcher = pitcher;
+  }
+
+  filterItems() {
+    this.isFiltered = true;
+    console.log(this.pitchTypeCheckboxes);
+    this.filteredSessionData = [];
+
+    for(var i =0; i < this.sessionData.length; i++){
+        switch(this.sessionData[i]['Pitch_Type_pitchType']) {
+          case 0:
+            if(this.pitchTypeCheckboxes[0]){
+              this.filteredSessionData.push(this.sessionData[i]);
+            }
+            break;
+          case 1:
+            if(this.pitchTypeCheckboxes[1]){
+              this.filteredSessionData.push(this.sessionData[i]);
+            }
+            break;
+          case 3:
+            if(this.pitchTypeCheckboxes[3]){
+              this.filteredSessionData.push(this.sessionData[i]);
+            }
+            break;
+          case 4:
+            if(this.pitchTypeCheckboxes[4]){
+              this.filteredSessionData.push(this.sessionData[i]);
+            }
+            break;
+          case 5:
+            if(this.pitchTypeCheckboxes[5]){
+              this.filteredSessionData.push(this.sessionData[i]);
+            }
+            break;
+          case 6:
+            if(this.pitchTypeCheckboxes[6]){
+              this.filteredSessionData.push(this.sessionData[i]);
+            }
+            break;
+          default:
+            break;
+        }
+
+
+    }
+
+    if(this.filteredSessionData.length == 0) {
+      this.isFiltered= false;
+    }
   }
 }
