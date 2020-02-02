@@ -42,8 +42,6 @@
         </thead>
         <tbody *ngIf="!isFiltered">
           <tr *ngFor="let data of sessionData">
-            <!-- releaseSide, horizontalBreak, verticalBreak, spin, trueSpin, szx, szy, speed, 
-  spinConfidence, spinEfficiency, launchAngle, rifleSpin, horizontalAngle, gyroDegree -->
             <td>{{ data["Pitch_Type_pitchType"] | pitchType }}</td>
             <td>{{ data["releaseSide"] | number: "1.1-1" }}</td>
             <td>{{ data["releaseHeight"] | number: "1.1-1" }}</td>
@@ -65,8 +63,6 @@
 
         <tbody *ngIf="isFiltered">
           <tr *ngFor="let data of filteredSessionData">
-            <!-- releaseSide, horizontalBreak, verticalBreak, spin, trueSpin, szx, szy, speed, 
-  spinConfidence, spinEfficiency, launchAngle, rifleSpin, horizontalAngle, gyroDegree -->
             <td>{{ data["Pitch_Type_pitchType"] | pitchType }}</td>
             <td>{{ data["releaseSide"] | number: "1.1-1" }}</td>
             <td>{{ data["releaseHeight"] | number: "1.1-1" }}</td>
@@ -87,22 +83,6 @@
         </tbody>
       </table>
     </div>
-    <!-- <table class="table col-md-3">
-      <thead class="thead table-info">
-        <tr>
-          <th>Pitch Type</th>
-          <th>Avg.</th>
-          <th>Max.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Fastball</td>
-          <td>82</td>
-          <td>88</td>
-        </tr>
-      </tbody>
-    </table> -->
   </div>
 </div>
 <div *ngIf="!isFiltered">
@@ -114,7 +94,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Filter Pitches</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
