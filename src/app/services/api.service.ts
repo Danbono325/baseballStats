@@ -58,7 +58,7 @@ export class ApiService {
 
   getChartDataSessionAvg(sessionID): Observable<any[]> {
     return this.http.get<any[]>(
-      this.apiHost + "/sessions/one/chartData/" + sessionID
+      this.apiHost + "/sessions/one/chartDataAvg/" + sessionID
     );
   }
 }

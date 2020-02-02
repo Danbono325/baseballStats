@@ -20,6 +20,7 @@ import { SessionChartsComponent } from './components/session-charts/session-char
 
 //Pipe
 import { PitchType } from './pipes/pitch-type.pipe';
+import { ChartsComponent } from './components/charts/charts.component';
 
 
 
@@ -33,7 +34,8 @@ import { PitchType } from './pipes/pitch-type.pipe';
     SessionsOverviewComponent,
     SessionComponent,
     SessionChartsComponent,
-    PitchType
+    PitchType,
+    ChartsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartsModule],
   providers: [UserService, ApiService],
