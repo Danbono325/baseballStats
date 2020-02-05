@@ -20,6 +20,8 @@ import { SessionChartsComponent } from './components/session-charts/session-char
 
 //Pipe
 import { PitchType } from './pipes/pitch-type.pipe';
+import { MuDate } from './pipes/muData.pipe';
+
 import { ChartsComponent } from './components/charts/charts.component';
 
 
@@ -35,6 +37,7 @@ import { ChartsComponent } from './components/charts/charts.component';
     SessionComponent,
     SessionChartsComponent,
     PitchType,
+    MuDate,
     ChartsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartsModule],

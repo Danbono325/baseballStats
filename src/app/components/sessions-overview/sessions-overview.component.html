@@ -39,7 +39,7 @@
       </thead>
       <tbody>
         <tr  *ngFor="let session of sessions; let i = index">
-          <td>{{ session.date | date }}</td>
+          <td>{{ session.date | muDate}}</td>
           <td>
             <button
               class="btn btn-primary"
