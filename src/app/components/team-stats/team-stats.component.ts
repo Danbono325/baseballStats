@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
-import { Pitcher } from "src/app/models/Pitcher";
+import { Pitcher } from "../../models/Pitcher";
 
 @Component({
   selector: "app-team-stats",
@@ -10,7 +10,6 @@ import { Pitcher } from "src/app/models/Pitcher";
 })
 export class TeamStatsComponent implements OnInit {
   pitchers: Pitcher[] = [];
-
   pitcherdata;
   tableData = [];
 
@@ -29,10 +28,12 @@ export class TeamStatsComponent implements OnInit {
     this.apiService.getAllPictherData().subscribe(data => {
       this.pitcherdata = data;
       console.log("Data ", this.pitcherdata);
-      for (var i = 0; i < this.pitcherdata.length; i++) {
-        this.apiService.getAvgMax(this.pitcherdata[i]._id).subscribe(data => {
-          console.log("data ", data);
-          this.makeTableData(i, data);
+      console.log(data.length);
+      for (var i = 0; i < data.length; i++) {
+        this.apiService.getAvgMax(data[i]._id).subscribe(data2 => {
+          console.log("data2 ", data2);
+          let maxAvg = data2;
+          this.makeTableData(i, maxAvg);
         });
       }
     });
@@ -40,7 +41,7 @@ export class TeamStatsComponent implements OnInit {
 
   makeTableData(id, maxAvg) {
     // console.log(id)
-    console.log("MAX AVG", maxAvg);
+    //console.log("MAX AVG", maxAvg);
     var pitchTypes = {};
 
     pitchTypes["4 Seam Fastball"] = [0, 0];
@@ -92,9 +93,6 @@ export class TeamStatsComponent implements OnInit {
           break;
       }
     }
-
     this.tableData.push(pitchTypes);
-
-    // console.log(this.sessionMaxAvg[0]);
   }
 }
