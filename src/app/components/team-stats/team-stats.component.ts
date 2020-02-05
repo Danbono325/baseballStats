@@ -25,21 +25,60 @@ export class TeamStatsComponent implements OnInit {
       "white";
   }
 
+
+  allData;
+
   ngOnInit() {
+    console.log('TEAM DATA', this.tableData);
     this.apiService.getAllPictherData().subscribe(data => {
       this.pitcherdata = data;
-      console.log("Data ", this.pitcherdata);
-      for (var i = 0; i < this.pitcherdata.length; i++) {
-        this.apiService.getAvgMax(this.pitcherdata[i]._id).subscribe(data => {
-          console.log("data ", data);
-          this.makeTableData(i, data);
-        });
-      }
+
+      console.log("PITCHER DATA ", this.pitcherdata);
+      
     });
+
+
+    this.apiService.getAvgMax(0).subscribe(data => {
+      this.allData = data;
+      console.log('ALL DATA', data);
+      this.getMaxAvgs(data);
+
+
+    })
+
+    
   }
 
-  makeTableData(id, maxAvg) {
-    // console.log(id)
+  getMaxAvgs(data) {
+   let currentID = data[0].Pitcher_pitcher_id;
+    let ids = [];
+
+    let curPitches = [];
+   for(var i =0; i < data.length; i++) {
+    
+     if(currentID != data[i].Pitcher_pitcher_id) {
+       ids.push(currentID);
+       this.tableData.push(this.makeTableData(curPitches));
+       currentID = data[i].Pitcher_pitcher_id;
+       curPitches = [];
+     }
+     else {
+      curPitches.push(data[i]);
+     }
+
+     if(i == data.length -1) {
+       ids.push(currentID);
+       this.tableData.push(this.makeTableData(curPitches));
+     }
+   }
+
+   console.log('IDS: ', ids);
+   console.log('TABLE DATA', this.tableData);
+  //  this.tableData[currentID] = [];
+  
+  }
+
+  makeTableData(maxAvg) {
     console.log("MAX AVG", maxAvg);
     var pitchTypes = {};
 
@@ -92,7 +131,7 @@ export class TeamStatsComponent implements OnInit {
           break;
       }
     }
-
+    return pitchTypes;
     this.tableData.push(pitchTypes);
 
     // console.log(this.sessionMaxAvg[0]);
