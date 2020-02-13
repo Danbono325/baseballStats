@@ -21,7 +21,7 @@
           <th colspan="2">Cut Fastball</th>
         </tr>
         <tr>
-          <th scope="col">Date</th>
+          <th scope="col" sortable="date" (sort)="onSort($event)">Date</th>
           <th scope="col">Session</th>
           <th scope="col">Max. Velo</th>
           <th scope="col">Avg. Velo</th>
@@ -38,8 +38,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor="let session of sessions; let i = index">
-          <td>{{ session.date | muDate}}</td>
+        <tr *ngFor="let session of sessions; let i = index">
+          <td>{{ session.date | muDate }}</td>
           <td>
             <button
               class="btn btn-primary"
@@ -86,7 +86,7 @@
           <td>
             {{ this.sessionMaxAvg[i]["Cut Fastball"][1] | number: "1.1-1" }}
           </td>
-        </tr >
+        </tr>
       </tbody>
     </table>
   </div>
