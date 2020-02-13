@@ -25,7 +25,6 @@ export class TeamStatsComponent implements OnInit {
       "white";
   }
 
-
   allData;
 
   ngOnInit() {
@@ -42,37 +41,34 @@ export class TeamStatsComponent implements OnInit {
       this.allData = data;
       console.log('ALL DATA', data);
       this.getMaxAvgs(data);
+    });
 
-
-    })
+   
 
     
   }
 
   getMaxAvgs(data) {
    let currentID = data[0].Pitcher_pitcher_id;
-    let ids = [];
 
     let curPitches = [];
    for(var i =0; i < data.length; i++) {
     
      if(currentID != data[i].Pitcher_pitcher_id) {
-       ids.push(currentID);
        this.tableData.push(this.makeTableData(curPitches));
        currentID = data[i].Pitcher_pitcher_id;
        curPitches = [];
+       curPitches.push(data[i]);
      }
      else {
       curPitches.push(data[i]);
      }
 
      if(i == data.length -1) {
-       ids.push(currentID);
        this.tableData.push(this.makeTableData(curPitches));
      }
    }
 
-   console.log('IDS: ', ids);
    console.log('TABLE DATA', this.tableData);
   //  this.tableData[currentID] = [];
   
@@ -132,7 +128,6 @@ export class TeamStatsComponent implements OnInit {
       }
     }
     return pitchTypes;
-    this.tableData.push(pitchTypes);
 
     // console.log(this.sessionMaxAvg[0]);
   }

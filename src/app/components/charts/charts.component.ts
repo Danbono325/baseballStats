@@ -9,6 +9,7 @@ import "chartjs-plugin-zoom";
   templateUrl: "./charts.component.html",
   styleUrls: ["./charts.component.scss"]
 })
+
 export class ChartsComponent implements OnInit {
   curSessionID;
 
