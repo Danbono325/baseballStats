@@ -16,15 +16,16 @@ import { ApiService } from "./services/api.service";
 import { TeamStatsComponent } from "./components/team-stats/team-stats.component";
 import { SessionsOverviewComponent } from "./components/sessions-overview/sessions-overview.component";
 import { SessionComponent } from "./components/session/session.component";
-import { SessionChartsComponent } from './components/session-charts/session-charts.component';
+import { SessionChartsComponent } from "./components/session-charts/session-charts.component";
 
 //Pipe
-import { PitchType } from './pipes/pitch-type.pipe';
-import { MuDate } from './pipes/muData.pipe';
+import { PitchType } from "./pipes/pitch-type.pipe";
+import { MuDate } from "./pipes/muData.pipe";
 
-import { ChartsComponent } from './components/charts/charts.component';
+import { ChartsComponent } from "./components/charts/charts.component";
 
-
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbdSortableHeader } from './helpers/NgbdSortableHeader';
 
 @NgModule({
   declarations: [
@@ -38,9 +39,16 @@ import { ChartsComponent } from './components/charts/charts.component';
     SessionChartsComponent,
     PitchType,
     MuDate,
-    ChartsComponent
+    ChartsComponent,
+    NgbdSortableHeader
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartsModule],
+  imports: [
+    NgbModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ChartsModule
+  ],
   providers: [UserService, ApiService],
   bootstrap: [AppComponent]
 })

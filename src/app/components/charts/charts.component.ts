@@ -161,42 +161,48 @@ export class ChartsComponent implements OnInit {
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "blue"
+      pointBackgroundColor: "blue",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[0]["releaseCB"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 4,
-      pointBackgroundColor: "red"
+      pointBackgroundColor: "red",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[0]["releaseSL"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 4,
-      pointBackgroundColor: "orange"
+      pointBackgroundColor: "orange",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[0]["releaseCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "green"
+      pointBackgroundColor: "green",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[0]["release2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "yellow"
+      pointBackgroundColor: "yellow",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[0]["releaseCH"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
       pointRadius: 4,
-      pointBackgroundColor: "hotpink"
+      pointBackgroundColor: "hotpink",
+      pointBorderColor: "white"
     }
   ];
 
@@ -206,42 +212,48 @@ export class ChartsComponent implements OnInit {
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "blue"
+      pointBackgroundColor: "blue",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[2]["releaseCBAvg"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 4,
-      pointBackgroundColor: "red"
+      pointBackgroundColor: "red",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[2]["releaseSLAvg"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 4,
-      pointBackgroundColor: "orange"
+      pointBackgroundColor: "orange",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[2]["releaseCUAvg"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "green"
+      pointBackgroundColor: "green",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[2]["release2FBAvg"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "yellow"
+      pointBackgroundColor: "yellow",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[2]["releaseCHAvg"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
       pointRadius: 4,
-      pointBackgroundColor: "hotpink"
+      pointBackgroundColor: "hotpink",
+      pointBorderColor: "white"
     }
   ];
 
@@ -251,42 +263,48 @@ export class ChartsComponent implements OnInit {
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "blue"
+      pointBackgroundColor: "blue",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[1]["movementCB"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 4,
-      pointBackgroundColor: "red"
+      pointBackgroundColor: "red",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[1]["movementSL"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 4,
-      pointBackgroundColor: "orange"
+      pointBackgroundColor: "orange",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[1]["movementCU"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "green"
+      pointBackgroundColor: "green",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[1]["movement2FB"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "yellow"
+      pointBackgroundColor: "yellow",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[1]["movementCH"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
       pointRadius: 4,
-      pointBackgroundColor: "hotpink"
+      pointBackgroundColor: "hotpink",
+      pointBorderColor: "white"
     }
   ];
 
@@ -296,42 +314,48 @@ export class ChartsComponent implements OnInit {
       backgroundColor: ["blue"],
       label: "Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "blue"
+      pointBackgroundColor: "blue",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[3]["movementCBAvg"],
       backgroundColor: ["red"],
       label: "Curveball",
       pointRadius: 4,
-      pointBackgroundColor: "red"
+      pointBackgroundColor: "red",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[3]["movementSLAvg"],
       backgroundColor: ["orange"],
       label: "Slider",
       pointRadius: 4,
-      pointBackgroundColor: "orange"
+      pointBackgroundColor: "orange",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[3]["movementCUAvg"],
       backgroundColor: ["green"],
       label: "Cut Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "green"
+      pointBackgroundColor: "green",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[3]["movement2FBAvg"],
       backgroundColor: ["yellow"],
       label: "2 Seam Fastball",
       pointRadius: 4,
-      pointBackgroundColor: "yellow"
+      pointBackgroundColor: "yellow",
+      pointBorderColor: "white"
     },
     {
       data: this.chartsArray[3]["movementCHAvg"],
       backgroundColor: ["hotpink"],
       label: "Changeup",
       pointRadius: 4,
-      pointBackgroundColor: "hotpink"
+      pointBackgroundColor: "hotpink",
+      pointBorderColor: "white"
     }
   ];
 

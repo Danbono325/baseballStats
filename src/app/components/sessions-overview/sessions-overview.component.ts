@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChildren, QueryList } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "src/app/models/Pitcher";
+import { NgbdSortableHeader, compare } from 'src/app/helpers/NgbdSortableHeader';
+import { SortEvent } from 'src/app/models/SortEvent';
 
 @Component({
   selector: "app-sessions-overview",
@@ -9,6 +11,39 @@ import { Pitcher } from "src/app/models/Pitcher";
   styleUrls: ["./sessions-overview.component.scss"]
 })
 export class SessionsOverviewComponent implements OnInit {
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+  onSort({ column, direction }: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = "";
+      }
+    });
+
+    // sorting countries
+    if (direction === "") {
+      this.sessions = this.sessions;
+    } else {
+      this.sessionMaxAvg = [];
+      this.sessions = [...this.sessions].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === "asc" ? res : -res;
+      });
+      for (var i = 0; i < this.sessions.length; i++) {
+        this.apiService
+          .getAvgMaxByPT(this.sessions[i]["idSession"], 0)
+          .subscribe(data => {
+            let maxAvg = data;
+            // console.log(maxAvg);
+            this.makeMaxAvg(i, maxAvg);
+            // this.sessionMaxAvg.push({i: maxAvg});
+          });
+        // console.log(data[i]['idSession']);
+      }
+    }
+  }
+
   currentPitcher;
   curPlayerID;
 

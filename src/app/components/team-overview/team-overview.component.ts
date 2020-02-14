@@ -1,8 +1,22 @@
-import { Component, OnInit, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Directive,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChildren,
+  QueryList
+} from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "../../models/Pitcher";
+import { NgbdSortableHeader, compare } from 'src/app/helpers/NgbdSortableHeader';
+import { SortEvent } from 'src/app/models/SortEvent';
+
+
 
 @Component({
   selector: "app-team-overview",
@@ -10,8 +24,30 @@ import { Pitcher } from "../../models/Pitcher";
   styleUrls: ["./team-overview.component.scss"]
 })
 export class TeamOverviewComponent implements OnInit {
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+  onSort({ column, direction }: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = "";
+      }
+    });
+
+    // sorting countries
+    if (direction === "") {
+      this.pitchers = this.origPitchers;
+    } else {
+      this.pitchers = [...this.pitchers].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === "asc" ? res : -res;
+      });
+    }
+  }
+
   curUser;
 
+  origPitchers: Pitcher[] = [];
   pitchers: Pitcher[] = [];
 
   constructor(
@@ -42,10 +78,11 @@ export class TeamOverviewComponent implements OnInit {
           data[i].dob
         );
         this.pitchers.push(pitcher);
+        this.origPitchers.push(pitcher);
       }
     });
 
     console.log(this.pitchers.length);
-    console.log('LENGTH: ', this.pitchers)
+    console.log("LENGTH: ", this.pitchers);
   }
 }

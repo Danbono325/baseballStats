@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
-import { Pitcher } from "src/app/models/Pitcher";
+import { Pitcher } from "../../models/Pitcher";
 
 @Component({
   selector: "app-team-stats",
@@ -10,7 +10,6 @@ import { Pitcher } from "src/app/models/Pitcher";
 })
 export class TeamStatsComponent implements OnInit {
   pitchers: Pitcher[] = [];
-
   pitcherdata;
   tableData = [];
 
@@ -28,18 +27,16 @@ export class TeamStatsComponent implements OnInit {
   allData;
 
   ngOnInit() {
-    console.log('TEAM DATA', this.tableData);
+    console.log("TEAM DATA", this.tableData);
     this.apiService.getAllPictherData().subscribe(data => {
       this.pitcherdata = data;
-
-      console.log("PITCHER DATA ", this.pitcherdata);
-      
+      console.log("Data ", this.pitcherdata);
+      console.log(data.length);
     });
-
 
     this.apiService.getAvgMax(0).subscribe(data => {
       this.allData = data;
-      console.log('ALL DATA', data);
+      console.log("ALL DATA", data);
       this.getMaxAvgs(data);
     });
 
