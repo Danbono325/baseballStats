@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChildren, QueryList } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "src/app/models/Pitcher";
-import { NgbdSortableHeader, compare } from 'src/app/helpers/NgbdSortableHeader';
-import { SortEvent } from 'src/app/models/SortEvent';
+import {
+  NgbdSortableHeader,
+  compare
+} from "src/app/helpers/NgbdSortableHeader";
+import { SortEvent } from "src/app/models/SortEvent";
 
 @Component({
   selector: "app-sessions-overview",
@@ -21,7 +24,7 @@ export class SessionsOverviewComponent implements OnInit {
       }
     });
 
-    // sorting countries
+    // sorting sessions
     if (direction === "") {
       this.sessions = this.sessions;
     } else {
