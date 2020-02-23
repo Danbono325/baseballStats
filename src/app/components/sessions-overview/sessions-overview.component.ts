@@ -30,44 +30,22 @@ export class SessionsOverviewComponent implements OnInit {
     if (direction === "") {
       this.sessions = this.sessions;
     } else {
-      this.sessionMaxAvg = [];
 
-      console.log('SESSIONS BEFORE SORT: ', this.sessions);
       this.sessions = [...this.sessions].sort((a, b) => {
-        // console.log("A is: ", a);
-        // console.log('B is: ', b);
-        // console.log('column is: ', column)
-        // console.log('a[column]', a[column]);
-        
-        // console.log();
-        let pitchType = column.split(',')[0];
-        let type = column.split(',')[1];
-        if(column != 'date' && type == 'max') {
-          const res = compare(a['PT'][pitchType][0], b['PT'][pitchType][0]);
-          return direction === "asc" ? res : -res;
-        }
-        else if(column != 'date' && type == 'avg') {
-          const res = compare(a['PT'][pitchType][1], b['PT'][pitchType][1]);
+      
+        if(column != 'date') {
+          let pitchType = column.split(',')[0];
+          let type = Number.parseInt(column.split(',')[1]);
+          const res = compare(a['PT'][pitchType][type], b['PT'][pitchType][type]);
           return direction === "asc" ? res : -res;
         }
         else {
           const res = compare(a[column], b[column]);
         return direction === "asc" ? res : -res;
         }
+
       });
-      console.log('SESSIONS AFTER SORT: ', this.sessions);
-      // for (var i = 0; i < this.sessions.length; i++) {
-      //   // let index = i;
-      //   this.apiService
-      //     .getAvgMaxByPT(this.sessions[i]["idSession"], 0)
-      //     .subscribe(data => {
-      //       let maxAvg = data;
-      //       // console.log(maxAvg);
-      //       this.makeMaxAvg(i, maxAvg);
-      //       // this.sessionMaxAvg.push({i: maxAvg});
-      //     });
-      //   // console.log(data[i]['idSession']);
-      // }
+      
     }
   }
 
@@ -76,7 +54,6 @@ export class SessionsOverviewComponent implements OnInit {
 
   sessions;
 
-  sessionMaxAvg = [];
 
   constructor(
     private apiService: ApiService,
@@ -104,8 +81,6 @@ export class SessionsOverviewComponent implements OnInit {
     this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
       console.log("sessions: ", data);
       this.sessions = data;
-      // console.log(data.length);
-      // console.log(data[])
       for (var i = 0; i < data.length; i++) {
         console.log('INDEX BEFORE LOOP: ', i);
         let index = i;
@@ -113,15 +88,11 @@ export class SessionsOverviewComponent implements OnInit {
           .getAvgMaxByPT(data[i]["idSession"], 0)
           .subscribe(data => {
             let maxAvg = data;
-            // console.log('DATA[i]: ', data[i]);
             this.makeMaxAvg(index, maxAvg);
-            // this.sessionMaxAvg.push({i: maxAvg});
           });
-        // console.log(data[i]['idSession']);
       }
     });
 
-    //console.log(this.sessions);
   }
 
   makeMaxAvg(index, maxAvg) {
@@ -178,10 +149,7 @@ export class SessionsOverviewComponent implements OnInit {
           break;
       }
     }
-
-    // this.sessionMaxAvg.push(pitchTypes);
     this.sessions[index]['PT'] = pitchTypes;
-    // console.log(this.sessionMaxAvg[0]);
   }
 
   createPitcher(pitcher: Pitcher) {
