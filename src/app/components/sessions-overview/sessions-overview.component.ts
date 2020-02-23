@@ -10,6 +10,8 @@ import { SortEvent } from 'src/app/models/SortEvent';
   templateUrl: "./sessions-overview.component.html",
   styleUrls: ["./sessions-overview.component.scss"]
 })
+
+//PUT EVERYTHING INTO ONE ARRAY AND TRY SORTING THAT WAY
 export class SessionsOverviewComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 

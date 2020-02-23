@@ -17,6 +17,7 @@ export class SessionComponent implements OnInit {
   curSessionID;
   sessionData;
   filteredSessionData =[];
+  date;
 
   isFiltered=false;
 
@@ -41,6 +42,8 @@ export class SessionComponent implements OnInit {
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
       console.log(data);
+      this.date = data[0];
+      console.log('DATE', this.date)
     });
 
     this.curUser = this.userService.getUserData();
