@@ -396,7 +396,7 @@ export class SessionChartsComponent implements OnInit {
     });
   }
 
-  makeSessionCharts(id, values) {
+  makeSessionCharts(index, values) {
     // console.log(id)
     var pitchTypes = {};
     //console.log("Values", values);

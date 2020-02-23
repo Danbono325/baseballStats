@@ -82,14 +82,15 @@ export class SessionsOverviewComponent implements OnInit {
       this.sessions = data;
       // console.log(data.length);
       // console.log(data[])
-
       for (var i = 0; i < data.length; i++) {
+        console.log('INDEX BEFORE LOOP: ', i);
+        let index = i;
         this.apiService
           .getAvgMaxByPT(data[i]["idSession"], 0)
           .subscribe(data => {
             let maxAvg = data;
-            // console.log(maxAvg);
-            this.makeMaxAvg(i, maxAvg);
+            // console.log('DATA[i]: ', data[i]);
+            this.makeMaxAvg(index, maxAvg);
             // this.sessionMaxAvg.push({i: maxAvg});
           });
         // console.log(data[i]['idSession']);
@@ -99,8 +100,8 @@ export class SessionsOverviewComponent implements OnInit {
     //console.log(this.sessions);
   }
 
-  makeMaxAvg(id, maxAvg) {
-    // console.log(id)
+  makeMaxAvg(index, maxAvg) {
+    console.log('INDEX: ',index);
     console.log("MAX AVG", maxAvg);
     var pitchTypes = {};
 
@@ -154,8 +155,8 @@ export class SessionsOverviewComponent implements OnInit {
       }
     }
 
-    this.sessionMaxAvg.push(pitchTypes);
-
+    // this.sessionMaxAvg.push(pitchTypes);
+    this.sessions[index]['PT'] = pitchTypes;
     // console.log(this.sessionMaxAvg[0]);
   }
 
