@@ -8,9 +8,119 @@
       <p>{{ currentPitcher.throws }}</p>
       <p>{{ currentPitcher.height }}</p>
       <p>{{ currentPitcher.age }}</p>
-      <p>{{ date }}</p>
-      <button class="btn btn-primary" data-toggle="modal" data-target="#filterModal">Filter Data</button>
-      <button class="btn btn-primary">Session Summary</button>
+      <button
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#filterModal"
+      >
+        Filter Data
+      </button>
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Session Summary</h4>
+        </div>
+        <div class="modal-body">
+          <h5>{{ currentPitcher.name }}</h5>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Pitch Type</th>
+                <th>Avg Velocity</th>
+                <th>Max Velocity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>4 Seam Fastball</td>
+                <td>
+                  {{
+                    this.sessionSummaryData["4 Seam Fastball"][0]
+                      | number: "1.1-1"
+                  }}
+                </td>
+                <td>
+                  {{
+                    this.sessionSummaryData["4 Seam Fastball"][1]
+                      | number: "1.1-1"
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>2 Seam Fastball</td>
+                <td>
+                  {{
+                    this.sessionSummaryData["2 Seam Fastball"][0]
+                      | number: "1.1-1"
+                  }}
+                </td>
+                <td>
+                  {{
+                    this.sessionSummaryData["2 Seam Fastball"][1]
+                      | number: "1.1-1"
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>Changeup</td>
+                <td>
+                  {{ this.sessionSummaryData["Changeup"][0] | number: "1.1-1" }}
+                </td>
+                <td>
+                  {{ this.sessionSummaryData["Changeup"][1] | number: "1.1-1" }}
+                </td>
+              </tr>
+              <tr>
+                <td>Slider</td>
+                <td>
+                  {{ this.sessionSummaryData["Slider"][0] | number: "1.1-1" }}
+                </td>
+                <td>
+                  {{ this.sessionSummaryData["Slider"][1] | number: "1.1-1" }}
+                </td>
+              </tr>
+              <tr>
+                <td>Curveball</td>
+                <td>
+                  {{
+                    this.sessionSummaryData["Curveball"][0] | number: "1.1-1"
+                  }}
+                </td>
+                <td>
+                  {{
+                    this.sessionSummaryData["Curveball"][1] | number: "1.1-1"
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>Cut Fastball</td>
+                <td>
+                  {{
+                    this.sessionSummaryData["Cut Fastball"][0] | number: "1.1-1"
+                  }}
+                </td>
+                <td>
+                  {{
+                    this.sessionSummaryData["Cut Fastball"][1] | number: "1.1-1"
+                  }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="modal.dismiss('Cross click')"
+          >
+            Close
+          </button>
+        </div>
+      </ng-template>
+
+      <button class="btn btn-primary" (click)="open(content)">
+        Session Summary
+      </button>
     </div>
     <!-- <div class="col-md-3">
       <div class="pitcher-dets">
@@ -90,51 +200,93 @@
   <app-charts></app-charts>
 </div>
 
-
-<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModal" aria-hidden="true">
+<div
+  class="modal fade"
+  id="filterModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="filterModal"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Filter Pitches</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="pitch-types" id="pitch-type">
+          <div>
+            <input
+              type="checkbox"
+              id="4FB"
+              (change)="pitchTypeCheckboxes[0] = !pitchTypeCheckboxes[0]"
+            />
+            <label for="4FB">4 Seam Fastball</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="2FB"
+              (change)="pitchTypeCheckboxes[5] = !pitchTypeCheckboxes[5]"
+            />
+            <label for="2FB">2 Seam Fastball</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="CB"
+              (change)="pitchTypeCheckboxes[3] = !pitchTypeCheckboxes[3]"
+            />
+            <label for="CB">Curveball</label>
+          </div>
 
-        <div>
-          <input type="checkbox" id="4FB"  (change)="pitchTypeCheckboxes[0] = !pitchTypeCheckboxes[0]">
-          <label for="4FB">4 Seam Fastball</label>
+          <div>
+            <input
+              type="checkbox"
+              id="SL"
+              (change)="pitchTypeCheckboxes[4] = !pitchTypeCheckboxes[4]"
+            />
+            <label for="SL">Slider</label>
+          </div>
+
+          <div>
+            <input
+              type="checkbox"
+              id="Cut"
+              (change)="pitchTypeCheckboxes[1] = !pitchTypeCheckboxes[1]"
+            />
+            <label for="Cut">Cut Fastball</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="CH"
+              (change)="pitchTypeCheckboxes[6] = !pitchTypeCheckboxes[6]"
+            />
+            <label for="CH">Changeup</label>
+          </div>
         </div>
-       <div>
-        <input type="checkbox" id="2FB"  (change)="pitchTypeCheckboxes[5] = !pitchTypeCheckboxes[5]">
-        <label for="2FB">2 Seam Fastball</label>
-       </div>
-        <div>
-          <input type="checkbox" id="CB"  (change)="pitchTypeCheckboxes[3] = !pitchTypeCheckboxes[3]">
-        <label for="CB">Curveball</label>
-        </div>
-        
-        <div>
-          <input type="checkbox" id="SL"  (change)="pitchTypeCheckboxes[4] = !pitchTypeCheckboxes[4]">
-        <label for="SL">Slider</label>
-        </div>
-        
-        <div>
-          <input type="checkbox" id="Cut" (change)="pitchTypeCheckboxes[1] = !pitchTypeCheckboxes[1]">
-          <label for="Cut">Cut Fastball</label>
-        </div>
-       <div>
-        <input type="checkbox" id="CH" (change)="pitchTypeCheckboxes[6] = !pitchTypeCheckboxes[6]">
-        <label for="CH">Changeup</label>
-       </div>
-        
-      </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="filterItems()">Filter</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="filterItems()"
+        >
+          Filter
+        </button>
       </div>
     </div>
   </div>
