@@ -30,9 +30,7 @@ export class SessionsOverviewComponent implements OnInit {
     if (direction === "") {
       this.sessions = this.sessions;
     } else {
-
       this.sessions = [...this.sessions].sort((a, b) => {
-      
         if(column != 'date') {
           let pitchType = column.split(',')[0];
           let type = Number.parseInt(column.split(',')[1]);
