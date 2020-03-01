@@ -222,7 +222,6 @@
         </button>
       </div>
       <div class="modal-body">
-        
         <div class="pitch-types" id="pitch-type">
           <div>
             <input
@@ -277,27 +276,51 @@
         </div>
         <div class="custom-slider">
           <p>Velocity</p>
-          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+          <ng5-slider
+            [(value)]="lowVelo"
+            [(highValue)]="highVelo"
+            [options]="options"
+          ></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Spin Efficiency</p>
-          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+          <ng5-slider
+            [(value)]="lowSpin"
+            [(highValue)]="highSpin"
+            [options]="options"
+          ></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Vertical Break</p>
-          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+          <ng5-slider
+            [(value)]="lowVbreak"
+            [(highValue)]="highVbreak"
+            [options]="breakOptions"
+          ></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Horizontal Break</p>
-          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+          <ng5-slider
+            [(value)]="lowHbreak"
+            [(highValue)]="highHbreak"
+            [options]="breakOptions"
+          ></ng5-slider>
         </div>
         <div class="custom-slider">
-          <p>Relase Height</p>
-          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+          <p>Release Height</p>
+          <ng5-slider
+            [(value)]="lowRheight"
+            [(highValue)]="highRheight"
+            [options]="heightOptions"
+          ></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Relase Side</p>
-          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+          <ng5-slider
+            [(value)]="lowRside"
+            [(highValue)]="highRside"
+            [options]="sideOptions"
+          ></ng5-slider>
         </div>
       </div>
       <div class="modal-footer">

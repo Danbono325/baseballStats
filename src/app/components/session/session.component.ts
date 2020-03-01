@@ -5,7 +5,7 @@ import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "src/app/models/Pitcher";
 
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Options } from 'ng5-slider';
+import { Options } from "ng5-slider";
 
 @Component({
   selector: "app-session",
@@ -22,12 +22,39 @@ export class SessionComponent implements OnInit {
   filteredSessionData = [];
 
   isFiltered = false;
-  
-  value: number = 0;
-  highValue: number = 100;
+
+  lowVelo: number = 0;
+  highVelo: number = 100;
+  lowSpin: number = 0;
+  highSpin: number = 100;
   options: Options = {
     floor: 0,
     ceil: 100
+  };
+
+  lowVbreak: number = -25;
+  highVbreak: number = 25;
+  lowHbreak: number = -25;
+  highHbreak: number = 25;
+  breakOptions: Options = {
+    floor: -25,
+    ceil: 25
+  };
+
+  lowRheight: number = 0;
+  highRheight: number = 7;
+  heightOptions: Options = {
+    floor: 0,
+    ceil: 7,
+    step: 0.5
+  };
+
+  lowRside: number = -5;
+  highRside: number = 5;
+  sideOptions: Options = {
+    floor: -5,
+    ceil: 5,
+    step: 0.5
   };
 
   pitchTypeCheckboxes = {
