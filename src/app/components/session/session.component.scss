@@ -43,6 +43,12 @@ h2 {
 }
 
 ::ng-deep {
+
+  .custom-slider {
+    p {
+    margin-bottom: 0px;
+    }
+  }
   .custom-slider .ng5-slider .ng5-slider-bar {
     background: red;
     height: 2px;

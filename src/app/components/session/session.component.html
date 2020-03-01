@@ -222,10 +222,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="custom-slider">
-        <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
-      </div>
-        <p>Low: {{value}}  High: {{highValue}}</p>
+        
         <div class="pitch-types" id="pitch-type">
           <div>
             <input
@@ -269,7 +266,7 @@
             />
             <label for="Cut">Cut Fastball</label>
           </div>
-          <div>
+          <div style="margin-bottom: 1vh;">
             <input
               type="checkbox"
               id="CH"
@@ -277,6 +274,30 @@
             />
             <label for="CH">Changeup</label>
           </div>
+        </div>
+        <div class="custom-slider">
+          <p>Velocity</p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+        <div class="custom-slider">
+          <p>Spin Efficiency</p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+        <div class="custom-slider">
+          <p>Vertical Break</p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+        <div class="custom-slider">
+          <p>Horizontal Break</p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+        <div class="custom-slider">
+          <p>Relase Height</p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+        <div class="custom-slider">
+          <p>Relase Side</p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
         </div>
       </div>
       <div class="modal-footer">
