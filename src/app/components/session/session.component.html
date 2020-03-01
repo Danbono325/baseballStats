@@ -222,6 +222,10 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="custom-slider">
+        <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+      </div>
+        <p>Low: {{value}}  High: {{highValue}}</p>
         <div class="pitch-types" id="pitch-type">
           <div>
             <input
