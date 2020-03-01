@@ -5,6 +5,7 @@ import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "src/app/models/Pitcher";
 
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: "app-session",
@@ -21,6 +22,13 @@ export class SessionComponent implements OnInit {
   filteredSessionData = [];
 
   isFiltered = false;
+  
+  value: number = 0;
+  highValue: number = 100;
+  options: Options = {
+    floor: 0,
+    ceil: 100
+  };
 
   pitchTypeCheckboxes = {
     0: false,
