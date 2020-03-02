@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChildren, QueryList } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "src/app/services/user.service";
 import { ApiService } from "src/app/services/api.service";
@@ -6,6 +6,11 @@ import { Pitcher } from "src/app/models/Pitcher";
 
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Options } from "ng5-slider";
+import {
+  NgbdSortableHeader,
+  compare
+} from "src/app/helpers/NgbdSortableHeader";
+import { SortEvent } from "src/app/models/SortEvent";
 
 @Component({
   selector: "app-session",
@@ -13,6 +18,29 @@ import { Options } from "ng5-slider";
   styleUrls: ["./session.component.scss"]
 })
 export class SessionComponent implements OnInit {
+
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+  onSort({ column, direction }: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = "";
+      }
+    });
+
+    // sorting countries
+    if (direction === "") {
+      this.sessionData = this.sessionData;
+    } else {
+      this.sessionData = [...this.sessionData].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === "asc" ? res : -res;
+      });
+    }
+  }
+
+
   curUser;
   currentPitcher;
   curPlayerID;
@@ -76,7 +104,7 @@ export class SessionComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-  }
+  } 
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {

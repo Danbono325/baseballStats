@@ -28,7 +28,7 @@ export class SessionsOverviewComponent implements OnInit {
 
     // sorting sessions
     if (direction === "") {
-      this.sessions = this.sessions;
+      this.sessions = this.sessions; 
     } else {
       this.sessions = [...this.sessions].sort((a, b) => {
         if(column != 'date') {

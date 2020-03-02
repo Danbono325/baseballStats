@@ -135,21 +135,21 @@
         <thead class="thead-dark">
           <tr>
             <th>Pitch Type</th>
-            <th>R. Side</th>
-            <th>R. Height</th>
-            <th>H. Break</th>
-            <th>V. Break</th>
-            <th>Spin</th>
-            <th>True Spin</th>
-            <th>SZX</th>
-            <th>SZY</th>
-            <th>Speed</th>
-            <th>Spin Conf.</th>
-            <th>Spin Eff.</th>
-            <th>Launch Angle</th>
-            <th>H. Angle</th>
-            <th>Rifle Spin</th>
-            <th>Gyro</th>
+            <th sortable="releaseSide" (sort)="onSort($event)">R. Side</th>
+            <th sortable="releaseHeight" (sort)="onSort($event)">R. Height</th>
+            <th sortable="horizontalBreak" (sort)="onSort($event)">H. Break</th>
+            <th sortable="verticalBreak" (sort)="onSort($event)">V. Break</th>
+            <th sortable="spin" (sort)="onSort($event)">Spin</th>
+            <th sortable="trueSpin" (sort)="onSort($event)">True Spin</th>
+            <th sortable="szx" (sort)="onSort($event)">SZX</th>
+            <th sortable="szy" (sort)="onSort($event)">SZY</th>
+            <th sortable="speed" (sort)="onSort($event)">Speed</th>
+            <th sortable="spinConfidence" (sort)="onSort($event)">Spin Conf.</th>
+            <th sortable="spinEfficiency" (sort)="onSort($event)">Spin Eff.</th>
+            <th sortable="launchAngle" (sort)="onSort($event)">Launch Angle</th>
+            <th sortable="horizontalAngle" (sort)="onSort($event)">H. Angle</th>
+            <th sortable="rifleSpin" (sort)="onSort($event)">Rifle Spin</th>
+            <th sortable="gyroDegree" (sort)="onSort($event)">Gyro</th>
           </tr>
         </thead>
         <tbody>
