@@ -181,46 +181,93 @@ export class SessionComponent implements OnInit {
     this.isFiltered = true;
     console.log(this.pitchTypeCheckboxes);
     this.filteredSessionData = [];
-
-    for (var i = 0; i < this.sessionData.length; i++) {
-      switch (this.sessionData[i]["Pitch_Type_pitchType"]) {
-        case 0:
-          if (this.pitchTypeCheckboxes[0]) {
-            this.filteredSessionData.push(this.sessionData[i]);
+    this.sessionData = [];
+    
+    this.apiService.getFilteredData(
+      this.curSessionID, this.lowVelo, this.highVelo, this.lowSpin,
+       this.highSpin, this.lowVbreak, this.highVbreak, this.lowHbreak, 
+       this.highHbreak, this.lowRheight, this.highRheight, this.lowRside, this.highRside).subscribe(data => {
+        //  this.sessionData = [];
+        console.log('DATA Length is: ', data.length);
+         for (var i = 0; i < data.length; i++) {
+          switch (data[i]["Pitch_Type_pitchType"]) {
+            case 0:
+              if (this.pitchTypeCheckboxes[0]) {
+                this.sessionData.push(data[i]);
+              }
+              break;
+            case 1:
+              if (this.pitchTypeCheckboxes[1]) {
+                this.sessionData.push(data[i]);
+              }
+              break;
+            case 3:
+              if (this.pitchTypeCheckboxes[3]) {
+                this.sessionData.push(data[i]);
+              }
+              break;
+            case 4:
+              if (this.pitchTypeCheckboxes[4]) {
+                this.sessionData.push(data[i]);
+              }
+              break;
+            case 5:
+              if (this.pitchTypeCheckboxes[5]) {
+                this.sessionData.push(data[i]);
+              }
+              break;
+            case 6:
+              if (this.pitchTypeCheckboxes[6]) {
+                this.sessionData.push(data[i]);
+              }
+              break;
+            default:
+              break;
           }
-          break;
-        case 1:
-          if (this.pitchTypeCheckboxes[1]) {
-            this.filteredSessionData.push(this.sessionData[i]);
-          }
-          break;
-        case 3:
-          if (this.pitchTypeCheckboxes[3]) {
-            this.filteredSessionData.push(this.sessionData[i]);
-          }
-          break;
-        case 4:
-          if (this.pitchTypeCheckboxes[4]) {
-            this.filteredSessionData.push(this.sessionData[i]);
-          }
-          break;
-        case 5:
-          if (this.pitchTypeCheckboxes[5]) {
-            this.filteredSessionData.push(this.sessionData[i]);
-          }
-          break;
-        case 6:
-          if (this.pitchTypeCheckboxes[6]) {
-            this.filteredSessionData.push(this.sessionData[i]);
-          }
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (this.filteredSessionData.length == 0) {
-      this.isFiltered = false;
-    }
+         
+        }
+        if(this.sessionData.length == 0) {
+          this.sessionData = data;
+        }
+       });
   }
+
+
+  resetFilter() {
+    this.isFiltered = false;
+
+  this.lowVelo = 0;
+  this.highVelo = 100;
+  this.lowSpin = 0;
+  this.highSpin = 100;
+
+
+  this.lowVbreak= -25;
+  this.highVbreak = 25;
+  this.lowHbreak= -25;
+  this.highHbreak = 25;
+  this.lowRheight = 0;
+  this.highRheight = 7;
+  this.lowRside = -5;
+  this.highRside = 5;
+  
+  this.pitchTypeCheckboxes = {
+    0: false,
+    5: false,
+    1: false,
+    6: false,
+    4: false,
+    3: false
+  };
+
+  console.log('PT CB', this.pitchTypeCheckboxes);
+  this.sessionData = [];
+  this.apiService.getSessionData(this.curSessionID).subscribe(data => {
+    this.sessionData = data;
+    console.log("Session Data", data);
+  });
+
+  }
+
+
 }

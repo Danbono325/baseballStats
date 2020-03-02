@@ -31,6 +31,7 @@ import { NgbdSortableHeader } from './helpers/NgbdSortableHeader';
 
 //slider
 import { Ng5SliderModule } from 'ng5-slider';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     AppRoutingModule,
     HttpClientModule,
     ChartsModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    FormsModule
   ],
   providers: [UserService, ApiService],
   bootstrap: [AppComponent]
