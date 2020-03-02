@@ -1,7 +1,9 @@
-import { Component, OnInit, ElementRef } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChildren, QueryList } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "../../models/Pitcher";
+import { NgbdSortableHeader, compare } from 'src/app/helpers/NgbdSortableHeader';
+import { SortEvent } from 'src/app/models/SortEvent';
 
 @Component({
   selector: "app-team-stats",
@@ -9,8 +11,40 @@ import { Pitcher } from "../../models/Pitcher";
   styleUrls: ["./team-stats.component.scss"]
 })
 export class TeamStatsComponent implements OnInit {
+
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+  onSort({ column, direction }: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = "";
+      }
+    });
+
+    // sorting sessions
+    if (direction === "") {
+      this.pitcherdata = this.pitcherdata; 
+    } else {
+      this.pitcherdata = [...this.pitcherdata].sort((a, b) => {
+        if(column != 'date') {
+          let pitchType = column.split(',')[0];
+          let type = Number.parseInt(column.split(',')[1]);
+          const res = compare(a['PT'][pitchType][type], b['PT'][pitchType][type]);
+          return direction === "asc" ? res : -res;
+        }
+        else {
+          const res = compare(a[column], b[column]);
+        return direction === "asc" ? res : -res;
+        }
+
+      });
+      
+    }
+  }
+
   pitchers: Pitcher[] = [];
-  pitcherdata;
+  pitcherdata: any;
   tableData = [];
 
   constructor(
@@ -52,7 +86,9 @@ export class TeamStatsComponent implements OnInit {
    for(var i =0; i < data.length; i++) {
     
      if(currentID != data[i].Pitcher_pitcher_id) {
-       this.tableData.push(this.makeTableData(curPitches));
+      //  this.tableData.push(this.makeTableData(curPitches));
+      let index = this.pitcherdata.findIndex(item => item["_id"] === currentID);
+      this.makeTableData(curPitches, index);
        currentID = data[i].Pitcher_pitcher_id;
        curPitches = [];
        curPitches.push(data[i]);
@@ -62,16 +98,19 @@ export class TeamStatsComponent implements OnInit {
      }
 
      if(i == data.length -1) {
-       this.tableData.push(this.makeTableData(curPitches));
+      //  this.tableData.push(this.makeTableData(curPitches));
+      let index = this.pitcherdata.findIndex(item => item["_id"] === currentID);
+      this.makeTableData(curPitches, index);
      }
    }
 
-   console.log('TABLE DATA', this.tableData);
+   console.log('PITCHER FULL DATA', this.pitcherdata);
   //  this.tableData[currentID] = [];
   
   }
 
-  makeTableData(maxAvg) {
+  makeTableData(maxAvg, index) {
+    console.log('index in makeTableData: ', index);
     console.log("MAX AVG", maxAvg);
     var pitchTypes = {};
 
@@ -124,7 +163,9 @@ export class TeamStatsComponent implements OnInit {
           break;
       }
     }
-    return pitchTypes;
+    console.log('Pitcht tYpes: ', pitchTypes);
+    this.pitcherdata[index]["PT"] = pitchTypes;
+    // return pitchTypes;
 
     // console.log(this.sessionMaxAvg[0]);
   }
