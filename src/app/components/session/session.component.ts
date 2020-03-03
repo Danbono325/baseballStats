@@ -49,6 +49,7 @@ export class SessionComponent implements OnInit {
   sessionSummaryData = {};
   filteredSessionData = [];
 
+  filterStrikes = false;
   isFiltered = false;
 
   lowVelo: number = 0;
@@ -254,14 +255,21 @@ export class SessionComponent implements OnInit {
           }
          
         }
+
+        
         if(this.sessionData.length == 0) {
           this.sessionData = data;
+        }
+        if(this.filterStrikes) {
+          console.log('FILTERTING')
+          this.sessionData = this.sessionData.filter(session => session.strike == 'Y');
         }
        });
   }
 
 
   resetFilter() {
+    this.filterStrikes = false;
     this.isFiltered = false;
 
   this.lowVelo = 0;

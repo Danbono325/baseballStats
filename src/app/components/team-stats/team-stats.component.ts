@@ -24,7 +24,9 @@ export class TeamStatsComponent implements OnInit {
 
     // sorting sessions
     if (direction === "") {
-      this.pitcherdata = this.pitcherdata; 
+      this.pitcherdata = this.pitcherdata;
+      let index = this.pitcherdata.findIndex(item => item["_id"] === 510895);
+      this.pitcherdata.splice(index, 1); 
     } else {
       this.pitcherdata = [...this.pitcherdata].sort((a, b) => {
         if(column != 'date') {
@@ -63,7 +65,10 @@ export class TeamStatsComponent implements OnInit {
   ngOnInit() {
     console.log("TEAM DATA", this.tableData);
     this.apiService.getAllPictherData().subscribe(data => {
+
       this.pitcherdata = data;
+      let index = this.pitcherdata.findIndex(item => item["_id"] === 510895);
+      this.pitcherdata.splice(index, 1);
       console.log("Data ", this.pitcherdata);
       console.log(data.length);
     });
