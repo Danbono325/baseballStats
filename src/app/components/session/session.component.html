@@ -130,7 +130,7 @@
     </div> -->
   </div>
   <div class="row ">
-    <div class="table-responsive">
+    <div class="table-responsive" *ngIf="sessionData.length != 0">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -178,9 +178,16 @@
     </div>
   </div>
 </div>
-<div>
+
+<div *ngIf="sessionData.length != 0">
   <app-charts></app-charts>
 </div>
+
+<div *ngIf="sessionData.length == 0">
+  <p class="no-results">No Results Found</p>
+</div>
+
+
 
 <div
   class="modal fade"

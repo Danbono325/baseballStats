@@ -217,37 +217,44 @@ export class SessionComponent implements OnInit {
        this.highSpin, this.lowVbreak, this.highVbreak, this.lowHbreak, 
        this.highHbreak, this.lowRheight, this.highRheight, this.lowRside, this.highRside).subscribe(data => {
         //  this.sessionData = [];
+        let addedSelected = false;
         console.log('DATA Length is: ', data.length);
          for (var i = 0; i < data.length; i++) {
           switch (data[i]["Pitch_Type_pitchType"]) {
             case 0:
               if (this.pitchTypeCheckboxes[0]) {
                 this.sessionData.push(data[i]);
+                addedSelected = true;
               }
               break;
             case 1:
               if (this.pitchTypeCheckboxes[1]) {
                 this.sessionData.push(data[i]);
+                addedSelected = true;
               }
               break;
             case 3:
               if (this.pitchTypeCheckboxes[3]) {
                 this.sessionData.push(data[i]);
+                addedSelected = true;
               }
               break;
             case 4:
               if (this.pitchTypeCheckboxes[4]) {
                 this.sessionData.push(data[i]);
+                addedSelected = true;
               }
               break;
             case 5:
               if (this.pitchTypeCheckboxes[5]) {
                 this.sessionData.push(data[i]);
+                addedSelected = true;
               }
               break;
             case 6:
               if (this.pitchTypeCheckboxes[6]) {
                 this.sessionData.push(data[i]);
+                addedSelected = true;
               }
               break;
             default:
@@ -256,8 +263,8 @@ export class SessionComponent implements OnInit {
          
         }
 
-        
-        if(this.sessionData.length == 0) {
+        if(this.sessionData.length == 0 && !addedSelected) {
+          console.log('NOTHING');
           this.sessionData = data;
         }
         if(this.filterStrikes) {

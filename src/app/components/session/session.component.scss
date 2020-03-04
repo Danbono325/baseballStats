@@ -121,3 +121,9 @@ th[sortable].desc:before {
   transform: rotate(180deg);
   -ms-transform: rotate(180deg);
 }
+
+.no-results {
+  margin-top: 10vh;
+  text-align: center;
+  font-size: 3rem;
+}
