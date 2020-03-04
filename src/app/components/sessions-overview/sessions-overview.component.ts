@@ -2,15 +2,35 @@ import { Component, OnInit, ViewChildren, QueryList } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "src/app/models/Pitcher";
-import { NgbdSortableHeader, compare } from 'src/app/helpers/NgbdSortableHeader';
-import { SortEvent } from 'src/app/models/SortEvent';
+import {
+  NgbdSortableHeader,
+  compare
+} from "src/app/helpers/NgbdSortableHeader";
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
+import { SortEvent } from "src/app/models/SortEvent";
+import { from } from 'rxjs';
 
 @Component({
   selector: "app-sessions-overview",
   templateUrl: "./sessions-overview.component.html",
   styleUrls: ["./sessions-overview.component.scss"]
 })
+
+//PUT EVERYTHING INTO ONE ARRAY AND TRY SORTING THAT WAY
 export class SessionsOverviewComponent implements OnInit {
+
+
+  hoveredDate: NgbDate;
+
+  fromDate: NgbDate;
+  toDate: NgbDate;
+  fromDateDATE ='';
+  toDateDATE ='';
+
+
+
+
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   onSort({ column, direction }: SortEvent) {
@@ -21,26 +41,24 @@ export class SessionsOverviewComponent implements OnInit {
       }
     });
 
-    // sorting countries
+    // sorting sessions
     if (direction === "") {
-      this.sessions = this.sessions;
+      this.sessions = this.sessions; 
     } else {
-      this.sessionMaxAvg = [];
       this.sessions = [...this.sessions].sort((a, b) => {
-        const res = compare(a[column], b[column]);
+        if(column != 'date') {
+          let pitchType = column.split(',')[0];
+          let type = Number.parseInt(column.split(',')[1]);
+          const res = compare(a['PT'][pitchType][type], b['PT'][pitchType][type]);
+          return direction === "asc" ? res : -res;
+        }
+        else {
+          const res = compare(a[column], b[column]);
         return direction === "asc" ? res : -res;
+        }
+
       });
-      for (var i = 0; i < this.sessions.length; i++) {
-        this.apiService
-          .getAvgMaxByPT(this.sessions[i]["idSession"], 0)
-          .subscribe(data => {
-            let maxAvg = data;
-            // console.log(maxAvg);
-            this.makeMaxAvg(i, maxAvg);
-            // this.sessionMaxAvg.push({i: maxAvg});
-          });
-        // console.log(data[i]['idSession']);
-      }
+      
     }
   }
 
@@ -49,13 +67,16 @@ export class SessionsOverviewComponent implements OnInit {
 
   sessions;
 
-  sessionMaxAvg = [];
 
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    calendar: NgbCalendar
+  ) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -77,27 +98,22 @@ export class SessionsOverviewComponent implements OnInit {
     this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
       console.log("sessions: ", data);
       this.sessions = data;
-      // console.log(data.length);
-      // console.log(data[])
-
       for (var i = 0; i < data.length; i++) {
+        console.log('INDEX BEFORE LOOP: ', i);
+        let index = i;
         this.apiService
           .getAvgMaxByPT(data[i]["idSession"], 0)
           .subscribe(data => {
             let maxAvg = data;
-            // console.log(maxAvg);
-            this.makeMaxAvg(i, maxAvg);
-            // this.sessionMaxAvg.push({i: maxAvg});
+            this.makeMaxAvg(index, maxAvg);
           });
-        // console.log(data[i]['idSession']);
       }
     });
 
-    //console.log(this.sessions);
   }
 
-  makeMaxAvg(id, maxAvg) {
-    // console.log(id)
+  makeMaxAvg(index, maxAvg) {
+    console.log('INDEX: ',index);
     console.log("MAX AVG", maxAvg);
     var pitchTypes = {};
 
@@ -150,13 +166,54 @@ export class SessionsOverviewComponent implements OnInit {
           break;
       }
     }
-
-    this.sessionMaxAvg.push(pitchTypes);
-
-    // console.log(this.sessionMaxAvg[0]);
+    this.sessions[index]['PT'] = pitchTypes;
   }
 
   createPitcher(pitcher: Pitcher) {
     this.currentPitcher = pitcher;
+  }
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    
+    this.fromDateDATE = this.fromDate.year+"-"+this.fromDate.month+"-"+this.fromDate.day;
+    this.toDateDATE = this.toDate.year+"-"+this.toDate.month+"-"+this.toDate.day;
+    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  }
+
+  filterDate() {
+    console.log('FROM DATE: ', this.fromDateDATE);
+    console.log('to DATE: ', this.toDateDATE);
+    this.apiService.filterSessionByDate(this.curPlayerID, this.fromDateDATE, this.toDateDATE).subscribe(data => {
+      this.sessions = data;
+      for (var i = 0; i < data.length; i++) {
+        console.log('INDEX BEFORE LOOP: ', i);
+        let index = i;
+        this.apiService
+          .getAvgMaxByPT(data[i]["idSession"], 0)
+          .subscribe(data => {
+            let maxAvg = data;
+            this.makeMaxAvg(index, maxAvg);
+          });
+      }
+    })
   }
 }

@@ -7,7 +7,24 @@
     <p>{{ currentPitcher.height }}</p>
     <p>{{ currentPitcher.age }}</p>
   </div>
-  <div class="table-responsive">
+
+
+ 
+  <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+  </ngb-datepicker>
+  
+  <ng-template #t let-date let-focused="focused">
+    <span class="custom-day"
+          [class.focused]="focused"
+          [class.range]="isRange(date)"
+          [class.faded]="isHovered(date) || isInside(date)"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null">
+      {{ date.day }}
+    </span>
+  </ng-template>
+<button (click)="filterDate()" class="btn btn-primary"> FILTER BOI</button>
+  <div class="table-responsive"> 
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -23,18 +40,18 @@
         <tr>
           <th scope="col" sortable="date" (sort)="onSort($event)">Date</th>
           <th scope="col">Session</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
+          <th scope="col" sortable="4 Seam Fastball,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="4 Seam Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="2 Seam Fastball,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="2 Seam Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Changeup,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="Changeup,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Slider,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="Slider,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Curveball,0" (sort)=onSort($event) >Max. Velo</th>
+          <th scope="col" sortable="Curveball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Cut Fastball,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="Cut Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
         </tr>
       </thead>
       <tbody>
@@ -51,40 +68,40 @@
             </button>
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["4 Seam Fastball"][0] | number: "1.1-1" }}
+            {{ session["PT"]["4 Seam Fastball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["4 Seam Fastball"][1] | number: "1.1-1" }}
+            {{ session["PT"]["4 Seam Fastball"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["2 Seam Fastball"][0] | number: "1.1-1" }}
+            {{ session["PT"]["2 Seam Fastball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["2 Seam Fastball"][1] | number: "1.1-1" }}
+            {{ session["PT"]["2 Seam Fastball"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Changeup"][0] | number: "1.1-1" }}
+            {{ session["PT"]["Changeup"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Changeup"][1] | number: "1.1-1" }}
+            {{ session["PT"]["Changeup"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Slider"][0] | number: "1.1-1" }}
+            {{ session["PT"]["Slider"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Slider"][1] | number: "1.1-1" }}
+            {{ session["PT"]["Slider"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Curveball"][0] | number: "1.1-1" }}
+            {{ session["PT"]["Curveball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Curveball"][1] | number: "1.1-1" }}
+            {{ session["PT"]["Curveball"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Cut Fastball"][0] | number: "1.1-1" }}
+            {{ session["PT"]["Cut Fastball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.sessionMaxAvg[i]["Cut Fastball"][1] | number: "1.1-1" }}
+            {{ session["PT"]["Cut Fastball"][1] | number: "1.1-1" }}
           </td>
         </tr>
       </tbody>

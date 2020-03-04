@@ -18,18 +18,18 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Session</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
-          <th scope="col">Max. Velo</th>
-          <th scope="col">Avg. Velo</th>
+          <th scope="col" sortable="4 Seam Fastball,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="4 Seam Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="2 Seam Fastball,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="2 Seam Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Changeup,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="Changeup,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Slider,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="Slider,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Curveball,0" (sort)=onSort($event) >Max. Velo</th>
+          <th scope="col" sortable="Curveball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="Cut Fastball,0" (sort)=onSort($event)>Max. Velo</th>
+          <th scope="col" sortable="Cut Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
         </tr>
       </thead>
       <tbody>
@@ -44,40 +44,40 @@
             </button>
           </td>
           <td>
-            {{ this.tableData[i]["4 Seam Fastball"][0] | number: "1.1-1" }}
+            {{ pitcher["PT"]["4 Seam Fastball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["4 Seam Fastball"][1] | number: "1.1-1" }}
+            {{ pitcher["PT"]["4 Seam Fastball"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["2 Seam Fastball"][0] | number: "1.1-1" }}
+            {{ pitcher["PT"]["2 Seam Fastball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["2 Seam Fastball"][1] | number: "1.1-1" }}
+            {{ pitcher["PT"]["2 Seam Fastball"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Changeup"][0] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Changeup"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Changeup"][1] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Changeup"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Slider"][0] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Slider"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Slider"][1] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Slider"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Curveball"][0] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Curveball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Curveball"][1] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Curveball"][1] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Cut Fastball"][0] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Cut Fastball"][0] | number: "1.1-1" }}
           </td>
           <td>
-            {{ this.tableData[i]["Cut Fastball"][1] | number: "1.1-1" }}
+            {{ pitcher["PT"]["Cut Fastball"][1] | number: "1.1-1" }}
           </td>
         </tr>
       </tbody>

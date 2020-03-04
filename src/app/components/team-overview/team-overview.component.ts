@@ -2,10 +2,6 @@ import {
   Component,
   OnInit,
   ElementRef,
-  Directive,
-  Input,
-  Output,
-  EventEmitter,
   ViewChildren,
   QueryList
 } from "@angular/core";
@@ -13,10 +9,11 @@ import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pitcher } from "../../models/Pitcher";
-import { NgbdSortableHeader, compare } from 'src/app/helpers/NgbdSortableHeader';
-import { SortEvent } from 'src/app/models/SortEvent';
-
-
+import {
+  NgbdSortableHeader,
+  compare
+} from "src/app/helpers/NgbdSortableHeader";
+import { SortEvent } from "src/app/models/SortEvent";
 
 @Component({
   selector: "app-team-overview",

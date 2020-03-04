@@ -8,7 +8,7 @@ import { Pitcher } from "../models/Pitcher";
 })
 export class ApiService {
   apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
-  // apiHost = "https://localhost:3000";
+  // apiHost = "http://localhost:3000";
 
   constructor(private http: HttpClient) {}
 
@@ -60,5 +60,21 @@ export class ApiService {
     return this.http.get<any[]>(
       this.apiHost + "/sessions/one/chartDataAvg/" + sessionID
     );
+  }
+
+  getFilteredData(
+    sessionID, lowVelo, highVelo, lowSpin,
+     highSpin, lowVbreak, highVbreak, lowHbreak, 
+     highHbreak, lowRheight, highRheight, lowRside, highRside): Observable<any[]> {
+      return this.http.get<any[]>(
+        this.apiHost + "/sessions/filter/" + sessionID + "/" + lowVelo+"/"+
+        highVelo+"/"+lowSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
+        lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
+        "/"+highRside +"/");
+      
+  }
+
+  filterSessionByDate(pitcherID, fromDate, toDate) {
+    return this.http.get<any[]>(this.apiHost + "/sessions/date/" + pitcherID + "/" + fromDate + "/" + toDate + "/");
   }
 }

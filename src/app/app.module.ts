@@ -24,8 +24,14 @@ import { MuDate } from "./pipes/muData.pipe";
 
 import { ChartsComponent } from "./components/charts/charts.component";
 
+
+//ng boostrap
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgbdSortableHeader } from './helpers/NgbdSortableHeader';
+
+//slider
+import { Ng5SliderModule } from 'ng5-slider';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,7 +53,9 @@ import { NgbdSortableHeader } from './helpers/NgbdSortableHeader';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    Ng5SliderModule,
+    FormsModule
   ],
   providers: [UserService, ApiService],
   bootstrap: [AppComponent]
