@@ -6,7 +6,10 @@ import {
   NgbdSortableHeader,
   compare
 } from "src/app/helpers/NgbdSortableHeader";
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
 import { SortEvent } from "src/app/models/SortEvent";
+import { from } from 'rxjs';
 
 @Component({
   selector: "app-sessions-overview",
@@ -16,6 +19,18 @@ import { SortEvent } from "src/app/models/SortEvent";
 
 //PUT EVERYTHING INTO ONE ARRAY AND TRY SORTING THAT WAY
 export class SessionsOverviewComponent implements OnInit {
+
+
+  hoveredDate: NgbDate;
+
+  fromDate: NgbDate;
+  toDate: NgbDate;
+  fromDateDATE ='';
+  toDateDATE ='';
+
+
+
+
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   onSort({ column, direction }: SortEvent) {
@@ -56,8 +71,12 @@ export class SessionsOverviewComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    calendar: NgbCalendar
+  ) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -152,5 +171,49 @@ export class SessionsOverviewComponent implements OnInit {
 
   createPitcher(pitcher: Pitcher) {
     this.currentPitcher = pitcher;
+  }
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    
+    this.fromDateDATE = this.fromDate.year+"-"+this.fromDate.month+"-"+this.fromDate.day;
+    this.toDateDATE = this.toDate.year+"-"+this.toDate.month+"-"+this.toDate.day;
+    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  }
+
+  filterDate() {
+    console.log('FROM DATE: ', this.fromDateDATE);
+    console.log('to DATE: ', this.toDateDATE);
+    this.apiService.filterSessionByDate(this.curPlayerID, this.fromDateDATE, this.toDateDATE).subscribe(data => {
+      this.sessions = data;
+      for (var i = 0; i < data.length; i++) {
+        console.log('INDEX BEFORE LOOP: ', i);
+        let index = i;
+        this.apiService
+          .getAvgMaxByPT(data[i]["idSession"], 0)
+          .subscribe(data => {
+            let maxAvg = data;
+            this.makeMaxAvg(index, maxAvg);
+          });
+      }
+    })
   }
 }

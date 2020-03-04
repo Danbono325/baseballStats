@@ -73,4 +73,8 @@ export class ApiService {
         "/"+highRside +"/");
       
   }
+
+  filterSessionByDate(pitcherID, fromDate, toDate) {
+    return this.http.get<any[]>(this.apiHost + "/sessions/date/" + pitcherID + "/" + fromDate + "/" + toDate + "/");
+  }
 }
