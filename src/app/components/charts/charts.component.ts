@@ -9,7 +9,6 @@ import "chartjs-plugin-zoom";
   templateUrl: "./charts.component.html",
   styleUrls: ["./charts.component.scss"]
 })
-
 export class ChartsComponent implements OnInit {
   curSessionID;
 
@@ -97,7 +96,18 @@ export class ChartsComponent implements OnInit {
         },
         zoom: {
           enabled: true,
-          mode: "xy"
+          mode: "xy",
+
+          rangeMin: {
+            // Format of min zoom range depends on scale type
+            x: -10,
+            y: 0
+          },
+          rangeMax: {
+            // Format of max zoom range depends on scale type
+            x: 10,
+            y: 10
+          }
         }
       }
     }
@@ -149,7 +159,18 @@ export class ChartsComponent implements OnInit {
         },
         zoom: {
           enabled: true,
-          mode: "xy"
+          mode: "xy",
+
+          rangeMin: {
+            // Format of min zoom range depends on scale type
+            x: -60,
+            y: -60
+          },
+          rangeMax: {
+            // Format of max zoom range depends on scale type
+            x: 60,
+            y: 60
+          }
         }
       }
     }
