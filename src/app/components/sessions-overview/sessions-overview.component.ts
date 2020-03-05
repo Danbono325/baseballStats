@@ -322,4 +322,11 @@ export class SessionsOverviewComponent implements OnInit {
 
     this.isFiltered = false;
   }
+
+  goToSession(sessionId, date) {
+    // this.router.navigate['/session'], qu
+    // from /results?page=1 to /view?page=1&page=2xw
+    this.router.navigate(['/session/:id/:sessionID/:sessionDate/'], { queryParams: { id: this.curPlayerID, sessionID: sessionId, sessionDate: date }, preserveFragment: true });
+    // this.router.navigate(['/session'], {id: this.curPlayerID, sessionID: sessionId, sessionDate: date});
+  }
 }

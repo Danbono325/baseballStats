@@ -85,6 +85,14 @@ export class SessionComponent implements OnInit {
     step: 0.5
   };
 
+  lowTotalSpin: number = 100;
+  highTotalSpin: number = 3000;
+  totalSpinOptions: Options = {
+    floor: 100,
+    ceil: 3000,
+    step: 100
+  }
+
   pitchTypeCheckboxes = {
     0: false,
     5: false,
@@ -107,7 +115,7 @@ export class SessionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.curPlayerID = params["id"];
       this.curSessionID = params["sessionID"];
       this.sessionDate = params["sessionDate"];
@@ -218,6 +226,8 @@ export class SessionComponent implements OnInit {
         this.curSessionID,
         this.lowVelo,
         this.highVelo,
+        this.lowTotalSpin,
+        this.highTotalSpin,
         this.lowSpin,
         this.highSpin,
         this.lowVbreak,

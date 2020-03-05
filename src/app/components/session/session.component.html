@@ -289,6 +289,14 @@
           ></ng5-slider>
         </div>
         <div class="custom-slider">
+          <p>Total Spin</p>
+          <ng5-slider
+            [(value)]="lowTotalSpin"
+            [(highValue)]="highTotalSpin"
+            [options]="totalSpinOptions"
+          ></ng5-slider>
+        </div>
+        <div class="custom-slider">
           <p>Spin Efficiency</p>
           <ng5-slider
             [(value)]="lowSpin"
