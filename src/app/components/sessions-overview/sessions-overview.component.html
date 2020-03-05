@@ -8,23 +8,22 @@
     <p>{{ currentPitcher.age }}</p>
   </div>
 
-
+  <button
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#filterModal"
+>
+  Filter Data
+</button>
+<button
+class="btn btn-primary"
+(click)=resetFilter()
+*ngIf="isFiltered"
+>
+Reset
+</button>
  
-  <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
-  </ngb-datepicker>
-  
-  <ng-template #t let-date let-focused="focused">
-    <span class="custom-day"
-          [class.focused]="focused"
-          [class.range]="isRange(date)"
-          [class.faded]="isHovered(date) || isInside(date)"
-          (mouseenter)="hoveredDate = date"
-          (mouseleave)="hoveredDate = null">
-      {{ date.day }}
-    </span>
-  </ng-template>
-<button (click)="filterDate()" class="btn btn-primary"> FILTER BOI</button>
-  <div class="table-responsive"> 
+<div class="table-responsive"> 
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -110,4 +109,115 @@
 </div>
 <div>
   <app-session-charts></app-session-charts>
+</div>
+
+<div
+  class="modal fade"
+  id="filterModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="filterModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Filter Pitches</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+        </ngb-datepicker>
+        
+        <ng-template #t let-date let-focused="focused">
+          <span class="custom-day"
+                [class.focused]="focused"
+                [class.range]="isRange(date)"
+                [class.faded]="isHovered(date) || isInside(date)"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null">
+                {{date.day}}
+          </span>
+        </ng-template>
+        <div class="pitch-types" id="pitch-type">
+          <div>
+            <input
+              type="checkbox"
+              id="monday"
+              [(ngModel)]="daysOfWeekBox[1]"
+            />
+            <label for="monday">Monday</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="tuesday"
+              [(ngModel)]="daysOfWeekBox[2]"
+            />
+            <label for="tuesday">Tuesday</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="wednesday"
+              [(ngModel)]="daysOfWeekBox[3]"
+            />
+            <label for="wednesday">Wednesday</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="thursday"
+              [(ngModel)]="daysOfWeekBox[4]"
+            />
+            <label for="thursday">Thursday</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="friday"
+              [(ngModel)]="daysOfWeekBox[5]"
+            />
+            <label for="friday">Friday</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="saturday"
+              [(ngModel)]="daysOfWeekBox[6]"
+            />
+            <label for="saturday">Saturday</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="sunday"
+              [(ngModel)]="daysOfWeekBox[7]"
+            />
+            <label for="sunday">Sunday</label>
+          </div>
+          </div>
+        </div>        
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="filterDate()"
+        >
+          Filter
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

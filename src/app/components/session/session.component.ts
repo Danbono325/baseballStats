@@ -304,6 +304,7 @@ export class SessionComponent implements OnInit {
   };
 
   console.log('PT CB', this.pitchTypeCheckboxes);
+  
   this.sessionData = [];
   this.apiService.getSessionData(this.curSessionID).subscribe(data => {
     this.sessionData = data;
