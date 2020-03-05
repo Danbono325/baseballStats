@@ -1,29 +1,33 @@
 <app-navbar></app-navbar>
 <h2>Sessions Overview</h2>
 <div class="container">
-  <div class="pitcher-dets col-md-12">
-    <p>{{ currentPitcher.name }}</p>
-    <p>{{ currentPitcher.throws }}</p>
-    <p>{{ currentPitcher.height }}</p>
-    <p>{{ currentPitcher.age }}</p>
+  <div class="row">
+    <div class="pitcher-dets col-md-8">
+      <p>{{ currentPitcher.name }}</p>
+      <p>{{ currentPitcher.throws }}</p>
+      <p>{{ currentPitcher.height }}</p>
+      <p>{{ currentPitcher.age }}</p>
+    </div>
+    <div class="col-md-2">
+      <button
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#filterModal"
+      >
+        Filter Data
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        class="btn btn-primary"
+        (click)="resetFilter()"
+        *ngIf="isFiltered"
+      >
+        Reset Filter
+      </button>
+    </div>
   </div>
-
-  <button
-  class="btn btn-primary"
-  data-toggle="modal"
-  data-target="#filterModal"
->
-  Filter Data
-</button>
-<button
-class="btn btn-primary"
-(click)=resetFilter()
-*ngIf="isFiltered"
->
-Reset
-</button>
- 
-<div class="table-responsive"> 
+  <div class="table-responsive">
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -39,18 +43,42 @@ Reset
         <tr>
           <th scope="col" sortable="date" (sort)="onSort($event)">Date</th>
           <th scope="col">Session</th>
-          <th scope="col" sortable="4 Seam Fastball,0" (sort)=onSort($event)>Max. Velo</th>
-          <th scope="col" sortable="4 Seam Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
-          <th scope="col" sortable="2 Seam Fastball,0" (sort)=onSort($event)>Max. Velo</th>
-          <th scope="col" sortable="2 Seam Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
-          <th scope="col" sortable="Changeup,0" (sort)=onSort($event)>Max. Velo</th>
-          <th scope="col" sortable="Changeup,1" (sort)=onSort($event)>Avg. Velo</th>
-          <th scope="col" sortable="Slider,0" (sort)=onSort($event)>Max. Velo</th>
-          <th scope="col" sortable="Slider,1" (sort)=onSort($event)>Avg. Velo</th>
-          <th scope="col" sortable="Curveball,0" (sort)=onSort($event) >Max. Velo</th>
-          <th scope="col" sortable="Curveball,1" (sort)=onSort($event)>Avg. Velo</th>
-          <th scope="col" sortable="Cut Fastball,0" (sort)=onSort($event)>Max. Velo</th>
-          <th scope="col" sortable="Cut Fastball,1" (sort)=onSort($event)>Avg. Velo</th>
+          <th scope="col" sortable="4 Seam Fastball,0" (sort)="onSort($event)">
+            Max. Velo
+          </th>
+          <th scope="col" sortable="4 Seam Fastball,1" (sort)="onSort($event)">
+            Avg. Velo
+          </th>
+          <th scope="col" sortable="2 Seam Fastball,0" (sort)="onSort($event)">
+            Max. Velo
+          </th>
+          <th scope="col" sortable="2 Seam Fastball,1" (sort)="onSort($event)">
+            Avg. Velo
+          </th>
+          <th scope="col" sortable="Changeup,0" (sort)="onSort($event)">
+            Max. Velo
+          </th>
+          <th scope="col" sortable="Changeup,1" (sort)="onSort($event)">
+            Avg. Velo
+          </th>
+          <th scope="col" sortable="Slider,0" (sort)="onSort($event)">
+            Max. Velo
+          </th>
+          <th scope="col" sortable="Slider,1" (sort)="onSort($event)">
+            Avg. Velo
+          </th>
+          <th scope="col" sortable="Curveball,0" (sort)="onSort($event)">
+            Max. Velo
+          </th>
+          <th scope="col" sortable="Curveball,1" (sort)="onSort($event)">
+            Avg. Velo
+          </th>
+          <th scope="col" sortable="Cut Fastball,0" (sort)="onSort($event)">
+            Max. Velo
+          </th>
+          <th scope="col" sortable="Cut Fastball,1" (sort)="onSort($event)">
+            Avg. Velo
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -133,26 +161,30 @@ Reset
         </button>
       </div>
       <div class="modal-body">
-        <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+        <ngb-datepicker
+          #dp
+          (dateSelect)="onDateSelection($event)"
+          [displayMonths]="2"
+          [dayTemplate]="t"
+          outsideDays="hidden"
+        >
         </ngb-datepicker>
-        
+
         <ng-template #t let-date let-focused="focused">
-          <span class="custom-day"
-                [class.focused]="focused"
-                [class.range]="isRange(date)"
-                [class.faded]="isHovered(date) || isInside(date)"
-                (mouseenter)="hoveredDate = date"
-                (mouseleave)="hoveredDate = null">
-                {{date.day}}
+          <span
+            class="custom-day"
+            [class.focused]="focused"
+            [class.range]="isRange(date)"
+            [class.faded]="isHovered(date) || isInside(date)"
+            (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null"
+          >
+            {{ date.day }}
           </span>
         </ng-template>
         <div class="pitch-types" id="pitch-type">
           <div>
-            <input
-              type="checkbox"
-              id="monday"
-              [(ngModel)]="daysOfWeekBox[1]"
-            />
+            <input type="checkbox" id="monday" [(ngModel)]="daysOfWeekBox[1]" />
             <label for="monday">Monday</label>
           </div>
           <div>
@@ -180,11 +212,7 @@ Reset
             <label for="thursday">Thursday</label>
           </div>
           <div>
-            <input
-              type="checkbox"
-              id="friday"
-              [(ngModel)]="daysOfWeekBox[5]"
-            />
+            <input type="checkbox" id="friday" [(ngModel)]="daysOfWeekBox[5]" />
             <label for="friday">Friday</label>
           </div>
           <div>
@@ -196,15 +224,11 @@ Reset
             <label for="saturday">Saturday</label>
           </div>
           <div>
-            <input
-              type="checkbox"
-              id="sunday"
-              [(ngModel)]="daysOfWeekBox[7]"
-            />
+            <input type="checkbox" id="sunday" [(ngModel)]="daysOfWeekBox[7]" />
             <label for="sunday">Sunday</label>
           </div>
-          </div>
-        </div>        
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
