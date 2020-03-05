@@ -87,9 +87,8 @@
           <td>
             <button
               class="btn btn-primary"
-              routerLink="/session/{{ currentPitcher.id }}/{{
-                session.idSession
-              }}/{{ session.date }}"
+              (click)="goToSession(session.idSession, session.date)"
+          
             >
               Session
             </button>
