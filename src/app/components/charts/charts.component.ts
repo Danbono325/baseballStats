@@ -388,7 +388,8 @@ export class ChartsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
+
       this.curSessionID = params["sessionID"];
       //console.log("Params ", params);
     });
