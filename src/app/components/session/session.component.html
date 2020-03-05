@@ -9,18 +9,10 @@
       <p>{{ currentPitcher.height }}</p>
       <p>{{ currentPitcher.age }}</p>
       <p>{{ sessionDate | muDate }}</p>
-      <button
-        class="btn btn-primary"
-        data-toggle="modal"
-        data-target="#filterModal"
-      >
+      <button class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
         Filter Data
       </button>
-      <button
-        class="btn btn-primary"
-        *ngIf="isFiltered"
-        (click)="resetFilter()"
-      >
+      <button class="btn btn-primary" *ngIf="isFiltered" (click)="resetFilter()">
         Reset
       </button>
       <ng-template #content let-modal>
@@ -116,11 +108,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-outline-dark"
-            (click)="modal.dismiss('Cross click')"
-          >
+          <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">
             Close
           </button>
         </div>
@@ -196,157 +184,81 @@
   <p class="no-results">No Results Found</p>
 </div>
 
-<div
-  class="modal fade"
-  id="filterModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="filterModal"
-  aria-hidden="true"
->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Filter Pitches</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="pitch-types" id="pitch-type">
-          <div>
-            <input
-              type="checkbox"
-              id="4FB"
-              [(ngModel)]="pitchTypeCheckboxes[0]"
-            />
+          <div *ngIf="pitchTypesEnable['4FB']">
+            <input type="checkbox" id="4FB" [(ngModel)]="pitchTypeCheckboxes[0]" />
             <label for="4FB">4 Seam Fastball</label>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              id="2FB"
-              [(ngModel)]="pitchTypeCheckboxes[5]"
-            />
+          <div *ngIf="pitchTypesEnable['2FB']">
+            <input type="checkbox" id="2FB" [(ngModel)]="pitchTypeCheckboxes[5]" />
             <label for="2FB">2 Seam Fastball</label>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              id="CB"
-              [(ngModel)]="pitchTypeCheckboxes[3]"
-            />
+          <div *ngIf="pitchTypesEnable['CUR']">
+            <input type="checkbox" id="CB" [(ngModel)]="pitchTypeCheckboxes[3]" />
             <label for="CB">Curveball</label>
           </div>
-
-          <div>
-            <input
-              type="checkbox"
-              id="SL"
-              [(ngModel)]="pitchTypeCheckboxes[4]"
-            />
+          <div *ngIf="pitchTypesEnable['SLI']">
+            <input type="checkbox" id="SL" [(ngModel)]="pitchTypeCheckboxes[4]" />
             <label for="SL">Slider</label>
           </div>
-
-          <div>
-            <input
-              type="checkbox"
-              id="Cut"
-              [(ngModel)]="pitchTypeCheckboxes[1]"
-            />
+          <div *ngIf="pitchTypesEnable['CUT']">
+            <input type="checkbox" id="Cut" [(ngModel)]="pitchTypeCheckboxes[1]" />
             <label for="Cut">Cut Fastball</label>
           </div>
-          <div style="margin-bottom: 1vh;">
-            <input
-              type="checkbox"
-              id="CH"
-              value="pitchTypeCheckboxes[6]"
-              (change)="pitchTypeCheckboxes[6] = !pitchTypeCheckboxes[6]"
-            />
+          <div *ngIf="pitchTypesEnable['CHA']" style="margin-bottom: 1vh;">
+            <input type="checkbox" id="CH" value="pitchTypeCheckboxes[6]"
+              (change)="pitchTypeCheckboxes[6] = !pitchTypeCheckboxes[6]" />
             <label for="CH">Changeup</label>
           </div>
           <div style="margin-bottom: 1vh;">
-            <input
-              type="checkbox"
-              id="strikes"
-              value="filterStrikes"
-              (change)="filterStrikes = !filterStrikes"
-            />
+            <input type="checkbox" id="strikes" value="filterStrikes" (change)="filterStrikes = !filterStrikes" />
             <label for="strikes">Show Only Strikes</label>
           </div>
         </div>
         <div class="custom-slider">
           <p>Velocity</p>
-          <ng5-slider
-            [(value)]="lowVelo"
-            [(highValue)]="highVelo"
-            [options]="options"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowVelo" [(highValue)]="highVelo" [options]="options"></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Total Spin</p>
-          <ng5-slider
-            [(value)]="lowTotalSpin"
-            [(highValue)]="highTotalSpin"
-            [options]="totalSpinOptions"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowTotalSpin" [(highValue)]="highTotalSpin" [options]="totalSpinOptions"></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Spin Efficiency</p>
-          <ng5-slider
-            [(value)]="lowSpin"
-            [(highValue)]="highSpin"
-            [options]="options"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowSpin" [(highValue)]="highSpin" [options]="options"></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Vertical Break</p>
-          <ng5-slider
-            [(value)]="lowVbreak"
-            [(highValue)]="highVbreak"
-            [options]="breakOptions"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowVbreak" [(highValue)]="highVbreak" [options]="breakOptions"></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Horizontal Break</p>
-          <ng5-slider
-            [(value)]="lowHbreak"
-            [(highValue)]="highHbreak"
-            [options]="breakOptions"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowHbreak" [(highValue)]="highHbreak" [options]="breakOptions"></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Release Height</p>
-          <ng5-slider
-            [(value)]="lowRheight"
-            [(highValue)]="highRheight"
-            [options]="heightOptions"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowRheight" [(highValue)]="highRheight" [options]="heightOptions"></ng5-slider>
         </div>
         <div class="custom-slider">
           <p>Relase Side</p>
-          <ng5-slider
-            [(value)]="lowRside"
-            [(highValue)]="highRside"
-            [options]="sideOptions"
-          ></ng5-slider>
+          <ng5-slider [(value)]="lowRside" [(highValue)]="highRside" [options]="sideOptions"></ng5-slider>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-dismiss="modal"
-          (click)="filterItems()"
-        >
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="filterItems()">
           Filter
         </button>
       </div>

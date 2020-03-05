@@ -91,7 +91,7 @@ export class SessionComponent implements OnInit {
     floor: 100,
     ceil: 3000,
     step: 100
-  }
+  };
 
   pitchTypeCheckboxes = {
     0: false,
@@ -102,13 +102,22 @@ export class SessionComponent implements OnInit {
     3: false
   };
 
+  pitchTypesEnable = {
+    "4FB": false,
+    "2FB": false,
+    "SLI": false,
+    "CHA": false,
+    "CUR": false,
+    "CUT": false
+  };
+
   constructor(
     private apiService: ApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
@@ -137,8 +146,34 @@ export class SessionComponent implements OnInit {
 
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
+      for (var index = 0; index < this.sessionData.length; index++) {
+        switch (this.sessionData[index]["Pitch_Type_pitchType"]) {
+          case 0:
+            this.pitchTypesEnable["4FB"] = true;
+            break;
+          case 1:
+            this.pitchTypesEnable["CUT"] = true;
+            break;
+          case 3:
+            this.pitchTypesEnable["CUR"] = true;
+            break;
+          case 4:
+            this.pitchTypesEnable["SLI"] = true;
+            break;
+          case 5:
+            this.pitchTypesEnable["2FB"] = true;
+            break;
+          case 6:
+            this.pitchTypesEnable["CHA"] = true;
+            break;
+          default:
+            break;
+        }
+      }
+      console.log("Pitchs Enabled", this.pitchTypesEnable);
       console.log("Session Data", data);
     });
+
 
     this.apiService
       .getAvgMaxByPT(this.curSessionID, this.curPlayerID)
