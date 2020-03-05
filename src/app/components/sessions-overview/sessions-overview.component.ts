@@ -6,10 +6,10 @@ import {
   NgbdSortableHeader,
   compare
 } from "src/app/helpers/NgbdSortableHeader";
-import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbCalendar } from "@ng-bootstrap/ng-bootstrap";
 
 import { SortEvent } from "src/app/models/SortEvent";
-import { from } from 'rxjs';
+import { from } from "rxjs";
 
 @Component({
   selector: "app-sessions-overview",
@@ -19,17 +19,16 @@ import { from } from 'rxjs';
 
 //PUT EVERYTHING INTO ONE ARRAY AND TRY SORTING THAT WAY
 export class SessionsOverviewComponent implements OnInit {
-
   isFiltered = false;
 
   hoveredDate: NgbDate;
 
   fromDate: NgbDate;
   toDate: NgbDate;
-  fromDateDATE ='';
-  toDateDATE ='';
+  fromDateDATE = "";
+  toDateDATE = "";
 
-  daysOfWeekBox= {
+  daysOfWeekBox = {
     1: false,
     2: false,
     3: false,
@@ -37,8 +36,7 @@ export class SessionsOverviewComponent implements OnInit {
     5: false,
     6: false,
     7: false
-  }
-
+  };
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
@@ -52,22 +50,22 @@ export class SessionsOverviewComponent implements OnInit {
 
     // sorting sessions
     if (direction === "") {
-      this.sessions = this.sessions; 
+      this.sessions = this.sessions;
     } else {
       this.sessions = [...this.sessions].sort((a, b) => {
-        if(column != 'date') {
-          let pitchType = column.split(',')[0];
-          let type = Number.parseInt(column.split(',')[1]);
-          const res = compare(a['PT'][pitchType][type], b['PT'][pitchType][type]);
+        if (column != "date") {
+          let pitchType = column.split(",")[0];
+          let type = Number.parseInt(column.split(",")[1]);
+          const res = compare(
+            a["PT"][pitchType][type],
+            b["PT"][pitchType][type]
+          );
+          return direction === "asc" ? res : -res;
+        } else {
+          const res = compare(a[column], b[column]);
           return direction === "asc" ? res : -res;
         }
-        else {
-          const res = compare(a[column], b[column]);
-        return direction === "asc" ? res : -res;
-        }
-
       });
-      
     }
   }
 
@@ -76,7 +74,6 @@ export class SessionsOverviewComponent implements OnInit {
 
   sessions;
 
-
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -84,7 +81,7 @@ export class SessionsOverviewComponent implements OnInit {
     calendar: NgbCalendar
   ) {
     this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.toDate = calendar.getNext(calendar.getToday(), "d", 10);
   }
 
   ngOnInit() {
@@ -108,7 +105,7 @@ export class SessionsOverviewComponent implements OnInit {
       console.log("sessions: ", data);
       this.sessions = data;
       for (var i = 0; i < data.length; i++) {
-        console.log('INDEX BEFORE LOOP: ', i);
+        console.log("INDEX BEFORE LOOP: ", i);
         let index = i;
         this.apiService
           .getAvgMaxByPT(data[i]["idSession"], 0)
@@ -118,11 +115,10 @@ export class SessionsOverviewComponent implements OnInit {
           });
       }
     });
-
   }
 
   makeMaxAvg(index, maxAvg) {
-    console.log('INDEX: ',index);
+    console.log("INDEX: ", index);
     console.log("MAX AVG", maxAvg);
     var pitchTypes = {};
 
@@ -175,7 +171,7 @@ export class SessionsOverviewComponent implements OnInit {
           break;
       }
     }
-    this.sessions[index]['PT'] = pitchTypes;
+    this.sessions[index]["PT"] = pitchTypes;
   }
 
   createPitcher(pitcher: Pitcher) {
@@ -194,7 +190,13 @@ export class SessionsOverviewComponent implements OnInit {
   }
 
   isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+    return (
+      this.fromDate &&
+      !this.toDate &&
+      this.hoveredDate &&
+      date.after(this.fromDate) &&
+      date.before(this.hoveredDate)
+    );
   }
 
   isInside(date: NgbDate) {
@@ -202,10 +204,16 @@ export class SessionsOverviewComponent implements OnInit {
   }
 
   isRange(date: NgbDate) {
-    
-    this.fromDateDATE = this.fromDate.year+"-"+this.fromDate.month+"-"+this.fromDate.day;
-    this.toDateDATE = this.toDate.year+"-"+this.toDate.month+"-"+this.toDate.day;
-    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+    this.fromDateDATE =
+      this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day;
+    this.toDateDATE =
+      this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day;
+    return (
+      date.equals(this.fromDate) ||
+      date.equals(this.toDate) ||
+      this.isInside(date) ||
+      this.isHovered(date)
+    );
   }
 
   filterDate() {
@@ -214,74 +222,76 @@ export class SessionsOverviewComponent implements OnInit {
     // console.log('FROM DATE: ', this.fromDateDATE);
     // console.log('to DATE: ', this.toDateDATE);
     // console.log('FROM DATE DOW: ', (new Date(this.fromDate.year, this.fromDate.month, this.fromDate.day).getDay()))
-    this.apiService.filterSessionByDate(this.curPlayerID, this.fromDateDATE, this.toDateDATE).subscribe(data => {
-      // this.sessions = data;
-     
-      let dayPicked = false;
-      for(var i =0; i < data.length; i++) {
-        let date = new Date(data[i]['date']);
-        switch(date.getDay()) {
-          case 1: 
-            if(this.daysOfWeekBox[1]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          case 2: 
-            if(this.daysOfWeekBox[2]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          case 3: 
-            if(this.daysOfWeekBox[3]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          case 4: 
-            if(this.daysOfWeekBox[4]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          case 5: 
-            if(this.daysOfWeekBox[5]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          case 6: 
-            if(this.daysOfWeekBox[6]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          case 7: 
-            if(this.daysOfWeekBox[7]) {
-              this.sessions.push(data[i]);
-              dayPicked = true;
-            }
-            break;
-          default:
-            break;
-        }
-      }
-      if(!dayPicked) {
-        this.sessions = data;
-      }
+    this.apiService
+      .filterSessionByDate(this.curPlayerID, this.fromDateDATE, this.toDateDATE)
+      .subscribe(data => {
+        // this.sessions = data;
 
-      for (var i = 0; i < this.sessions.length; i++) {
-        // console.log('INDEX BEFORE LOOP: ', i);
-        let index = i;
-        this.apiService
-          .getAvgMaxByPT(this.sessions[i]["idSession"], 0)
-          .subscribe(data => {
-            let maxAvg = data;
-            this.makeMaxAvg(index, maxAvg);
-          });
-      }
-    })
+        let dayPicked = false;
+        for (var i = 0; i < data.length; i++) {
+          let date = new Date(data[i]["date"]);
+          switch (date.getDay()) {
+            case 1:
+              if (this.daysOfWeekBox[1]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 2:
+              if (this.daysOfWeekBox[2]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 3:
+              if (this.daysOfWeekBox[3]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 4:
+              if (this.daysOfWeekBox[4]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 5:
+              if (this.daysOfWeekBox[5]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 6:
+              if (this.daysOfWeekBox[6]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 7:
+              if (this.daysOfWeekBox[7]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            default:
+              break;
+          }
+        }
+        if (!dayPicked) {
+          this.sessions = data;
+        }
+
+        for (var i = 0; i < this.sessions.length; i++) {
+          // console.log('INDEX BEFORE LOOP: ', i);
+          let index = i;
+          this.apiService
+            .getAvgMaxByPT(this.sessions[i]["idSession"], 0)
+            .subscribe(data => {
+              let maxAvg = data;
+              this.makeMaxAvg(index, maxAvg);
+            });
+        }
+      });
   }
 
   resetFilter() {
@@ -289,7 +299,7 @@ export class SessionsOverviewComponent implements OnInit {
       console.log("sessions: ", data);
       this.sessions = data;
       for (var i = 0; i < data.length; i++) {
-        console.log('INDEX BEFORE LOOP: ', i);
+        console.log("INDEX BEFORE LOOP: ", i);
         let index = i;
         this.apiService
           .getAvgMaxByPT(data[i]["idSession"], 0)
@@ -300,7 +310,7 @@ export class SessionsOverviewComponent implements OnInit {
       }
     });
 
-    this.daysOfWeekBox= {
+    this.daysOfWeekBox = {
       1: false,
       2: false,
       3: false,
@@ -308,7 +318,7 @@ export class SessionsOverviewComponent implements OnInit {
       5: false,
       6: false,
       7: false
-    }
+    };
 
     this.isFiltered = false;
   }

@@ -8,6 +8,7 @@
       <p>{{ currentPitcher.throws }}</p>
       <p>{{ currentPitcher.height }}</p>
       <p>{{ currentPitcher.age }}</p>
+      <p>{{ sessionDate | muDate }}</p>
       <button
         class="btn btn-primary"
         data-toggle="modal"
@@ -15,7 +16,13 @@
       >
         Filter Data
       </button>
-      <button class="btn btn-primary" *ngIf="isFiltered" (click)="resetFilter()">Reset</button>
+      <button
+        class="btn btn-primary"
+        *ngIf="isFiltered"
+        (click)="resetFilter()"
+      >
+        Reset
+      </button>
       <ng-template #content let-modal>
         <div class="modal-header">
           <h4 class="modal-title" id="modal-basic-title">Session Summary</h4>
@@ -145,7 +152,9 @@
             <th sortable="szy" (sort)="onSort($event)">SZY</th>
             <th sortable="strike" (sort)="onSort($event)">Strike</th>
             <th sortable="speed" (sort)="onSort($event)">Speed</th>
-            <th sortable="spinConfidence" (sort)="onSort($event)">Spin Conf.</th>
+            <th sortable="spinConfidence" (sort)="onSort($event)">
+              Spin Conf.
+            </th>
             <th sortable="spinEfficiency" (sort)="onSort($event)">Spin Eff.</th>
             <th sortable="launchAngle" (sort)="onSort($event)">Launch Angle</th>
             <th sortable="horizontalAngle" (sort)="onSort($event)">H. Angle</th>
@@ -164,7 +173,7 @@
             <td>{{ data["trueSpin"] | number: "1.1-1" }}</td>
             <td>{{ data["szx"] | number: "1.1-1" }}</td>
             <td>{{ data["szy"] | number: "1.1-1" }}</td>
-            <td>{{ data["strike"]}}</td>
+            <td>{{ data["strike"] }}</td>
             <td>{{ data["speed"] | number: "1.1-1" }}</td>
             <td>{{ data["spinConfidence"] | number: "1.1-1" }}</td>
             <td>{{ data["spinEfficiency"] | number: "1.1-1" }}</td>
@@ -186,8 +195,6 @@
 <div *ngIf="sessionData.length == 0">
   <p class="no-results">No Results Found</p>
 </div>
-
-
 
 <div
   class="modal fade"
@@ -268,7 +275,7 @@
               type="checkbox"
               id="strikes"
               value="filterStrikes"
-              (change)="filterStrikes= !filterStrikes"
+              (change)="filterStrikes = !filterStrikes"
             />
             <label for="strikes">Show Only Strikes</label>
           </div>
