@@ -125,7 +125,7 @@ export class SessionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
@@ -155,7 +155,7 @@ export class SessionComponent implements OnInit {
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
 
-      for(var i = 0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         switch (data[i]["Pitch_Type_pitchType"]) {
           case 0:
             this.pitchTypesEnable['4FB'] = true;
@@ -179,7 +179,7 @@ export class SessionComponent implements OnInit {
             break;
         }
       }
-      
+
       console.log("Session Data", data);
     });
 
@@ -259,11 +259,12 @@ export class SessionComponent implements OnInit {
   }
 
   filterItems() {
-    this.apiService.filterSingleSession = true;
+    this.apiService.singleSessionChartFiltered = true;
     this.isFiltered = true;
     console.log(this.pitchTypeCheckboxes);
     this.filteredSessionData = [];
     this.sessionData = [];
+    this.apiService.singleSessionPitchCheckbox = this.pitchTypeCheckboxes;
 
     this.apiService
       .getFilteredData(
@@ -332,6 +333,7 @@ export class SessionComponent implements OnInit {
 
         if (this.sessionData.length == 0 && !addedSelected) {
           console.log("NOTHING");
+          this.apiService.noneSelected = true;
           this.sessionData = data;
         }
         if (this.filterStrikes) {
@@ -344,6 +346,7 @@ export class SessionComponent implements OnInit {
   }
 
   resetFilter() {
+    this.apiService.singleSessionChartFiltered = false;
     this.filterStrikes = false;
     this.isFiltered = false;
 

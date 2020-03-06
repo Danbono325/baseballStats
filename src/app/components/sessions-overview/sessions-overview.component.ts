@@ -70,18 +70,11 @@ export class SessionsOverviewComponent implements OnInit {
     }
   }
 
-
   curPlayerID;
 
   sessions;
 
-  currentPitcher = new Pitcher(
-    "",
-    0,
-    0,
-    0,
-    new Date()
-  );
+  currentPitcher = new Pitcher("", 0, 0, 0, new Date());
 
   constructor(
     private apiService: ApiService,
@@ -113,7 +106,7 @@ export class SessionsOverviewComponent implements OnInit {
     this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
       console.log("sessions: ", data);
       this.sessions = data;
-      for(var i = 0; i < this.sessions.length; i++) {
+      for (var i = 0; i < this.sessions.length; i++) {
         var pitchTypes = {};
 
         pitchTypes["4 Seam Fastball"] = [0, 0];
@@ -124,7 +117,6 @@ export class SessionsOverviewComponent implements OnInit {
         pitchTypes["Cut Fastball"] = [0, 0];
         this.sessions[i]["PT"] = pitchTypes;
       }
-     
 
       for (var i = 0; i < data.length; i++) {
         console.log("INDEX BEFORE LOOP: ", i);
@@ -226,7 +218,6 @@ export class SessionsOverviewComponent implements OnInit {
   }
 
   isRange(date: NgbDate) {
-   
     return (
       date.equals(this.fromDate) ||
       date.equals(this.toDate) ||
@@ -247,7 +238,7 @@ export class SessionsOverviewComponent implements OnInit {
     // console.log('FROM DATE: ', this.fromDateDATE);
     // console.log('to DATE: ', this.toDateDATE);
     // console.log('FROM DATE DOW: ', (new Date(this.fromDate.year, this.fromDate.month, this.fromDate.day).getDay()))
-    if(this.chooseDateRange) {
+    if (this.chooseDateRange) {
       this.apiService
         .filterSessionByDate(this.curPlayerID, this.fromDate, this.toDate)
         .subscribe(data => {
@@ -318,11 +309,8 @@ export class SessionsOverviewComponent implements OnInit {
               });
           }
         });
-    }
-    else {
-      this.apiService
-      .getSessionsById(this.curPlayerID)
-      .subscribe(data => {
+    } else {
+      this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
         // this.sessions = data;
 
         let dayPicked = false;
@@ -425,7 +413,14 @@ export class SessionsOverviewComponent implements OnInit {
   goToSession(sessionId, date) {
     // this.router.navigate['/session'], qu
     // from /results?page=1 to /view?page=1&page=2xw
-    this.router.navigate(['/session/:id/:sessionID/:sessionDate/'], { queryParams: { id: this.curPlayerID, sessionID: sessionId, sessionDate: date }, preserveFragment: true });
+    this.router.navigate(["/session/:id/:sessionID/:sessionDate/"], {
+      queryParams: {
+        id: this.curPlayerID,
+        sessionID: sessionId,
+        sessionDate: date
+      },
+      preserveFragment: true
+    });
     // this.router.navigate(['/session'], {id: this.curPlayerID, sessionID: sessionId, sessionDate: date});
   }
 }
