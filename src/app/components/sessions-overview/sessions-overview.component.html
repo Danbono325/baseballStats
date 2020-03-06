@@ -160,6 +160,8 @@
         </button>
       </div>
       <div class="modal-body">
+        <!-- <p>{{fromDate.month}} {{fromDate.day}}, {{fromDate.year}}</p>
+        <p>{{toDate.month}} {{toDate.day}}, {{toDate.year}}</p> -->
         <ngb-datepicker
           #dp
           (dateSelect)="onDateSelection($event)"
@@ -181,6 +183,8 @@
             {{ date.day }}
           </span>
         </ng-template>
+        <pre>From: {{ fromDate | json }} </pre>
+<pre>To: {{ toDate | json }} </pre>
         <div class="pitch-types" id="pitch-type">
           <div>
             <input type="checkbox" id="monday" [(ngModel)]="daysOfWeekBox[1]" />

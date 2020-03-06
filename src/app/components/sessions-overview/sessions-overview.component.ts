@@ -204,10 +204,10 @@ export class SessionsOverviewComponent implements OnInit {
   }
 
   isRange(date: NgbDate) {
-    this.fromDateDATE =
-      this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day;
-    this.toDateDATE =
-      this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day;
+    // this.fromDateDATE =
+    //   this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day;
+    // this.toDateDATE =
+    //   this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day;
     return (
       date.equals(this.fromDate) ||
       date.equals(this.toDate) ||

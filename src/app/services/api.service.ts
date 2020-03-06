@@ -7,9 +7,11 @@ import { Pitcher } from "../models/Pitcher";
   providedIn: "root"
 })
 export class ApiService {
-  apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
-  // apiHost = "http://localhost:3000"; 
+  // apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
+  apiHost = "http://localhost:3000"; 
 
+
+  filterSingleSession = false;
   constructor(private http: HttpClient) {}
 
   getAllPictherData(): Observable<any[]> {
@@ -66,9 +68,10 @@ export class ApiService {
     sessionID, lowVelo, highVelo, lowTotalSpin, highTotalSpin, lowSpin,
      highSpin, lowVbreak, highVbreak, lowHbreak, 
      highHbreak, lowRheight, highRheight, lowRside, highRside): Observable<any[]> {
+       console.log('GRABBING DATA');
       return this.http.get<any[]>(
         this.apiHost + "/sessions/filter/" + sessionID + "/" + lowVelo+"/"+
-        highVelo+"/"+lowSpin+"/"+lowTotalSpin+"/"+highTotalSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
+        highVelo+"/"+lowTotalSpin+"/"+highTotalSpin+"/"+lowSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
         lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
         "/"+highRside +"/");
       

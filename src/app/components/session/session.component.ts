@@ -102,6 +102,14 @@ export class SessionComponent implements OnInit {
     3: false
   };
 
+  pitchTypesEnabled = {
+    "4FB": false,
+    "CUT": false,
+    "CUR": true,
+    "2FB": false,
+    "SLI": false
+  };
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -137,6 +145,7 @@ export class SessionComponent implements OnInit {
 
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
+      
       console.log("Session Data", data);
     });
 
@@ -216,6 +225,7 @@ export class SessionComponent implements OnInit {
   }
 
   filterItems() {
+    this.apiService.filterSingleSession = true;
     this.isFiltered = true;
     console.log(this.pitchTypeCheckboxes);
     this.filteredSessionData = [];

@@ -394,21 +394,26 @@ export class ChartsComponent implements OnInit {
       //console.log("Params ", params);
     });
 
-    this.apiService.getChartDataSession(this.curSessionID).subscribe(data => {
-      let maxAvg = data;
-      // console.log(maxAvg);
-      this.makeSessionCharts(0, maxAvg);
-      // this.sessionMaxAvg.push({i: maxAvg});
-    });
-    // console.log(data[i]['idSession']);
-    this.apiService
-      .getChartDataSessionAvg(this.curSessionID)
-      .subscribe(data => {
-        let averages = data;
-        console.log("Averages: ", averages);
-        this.makeSessionChartsAvg(0, averages);
+    if(this.apiService.filterSingleSession) {
+      console.log('THERE IS A FILTER NO DATA');
+    } else {
+      this.apiService.getChartDataSession(this.curSessionID).subscribe(data => {
+        let maxAvg = data;
+        // console.log(maxAvg);
+        this.makeSessionCharts(0, maxAvg);
         // this.sessionMaxAvg.push({i: maxAvg});
       });
+      // console.log(data[i]['idSession']);
+      this.apiService
+        .getChartDataSessionAvg(this.curSessionID)
+        .subscribe(data => {
+          let averages = data;
+          console.log("Averages: ", averages);
+          this.makeSessionChartsAvg(0, averages);
+          // this.sessionMaxAvg.push({i: maxAvg});
+        });
+    }
+    
 
     // this.apiService.getChartData(this.curPlayerID).subscribe(data => {
     //   let values = data;
