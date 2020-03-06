@@ -666,7 +666,7 @@ export class ChartsComponent implements OnInit {
         }
           break;
         case 4:
-          if(this.apiService.singleSessionPitchCheckbox[2]) {
+          if(this.apiService.singleSessionPitchCheckbox[4]) {
           this.chartsArray[2]["releaseSLAvg"].push({
             x: values[i]["AVG(releaseSide)"],
             y: values[i]["AVG(releaseHeight)"]
