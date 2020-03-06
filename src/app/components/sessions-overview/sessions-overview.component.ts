@@ -17,10 +17,10 @@ import { from } from 'rxjs';
   styleUrls: ["./sessions-overview.component.scss"]
 })
 
-//PUT EVERYTHING INTO ONE ARRAY AND TRY SORTING THAT WAY
 export class SessionsOverviewComponent implements OnInit {
 
   isFiltered = false;
+  chooseDateRange = false;
 
   hoveredDate: NgbDate;
 
@@ -214,6 +214,77 @@ export class SessionsOverviewComponent implements OnInit {
     // console.log('FROM DATE: ', this.fromDateDATE);
     // console.log('to DATE: ', this.toDateDATE);
     // console.log('FROM DATE DOW: ', (new Date(this.fromDate.year, this.fromDate.month, this.fromDate.day).getDay()))
+    if(!this.chooseDateRange) {
+      this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
+        // this.sessions = data;
+       
+        let dayPicked = false;
+        for(var i =0; i < data.length; i++) {
+          let date = new Date(data[i]['date']);
+          switch(date.getDay()) {
+            case 1: 
+              if(this.daysOfWeekBox[1]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 2: 
+              if(this.daysOfWeekBox[2]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 3: 
+              if(this.daysOfWeekBox[3]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 4: 
+              if(this.daysOfWeekBox[4]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 5: 
+              if(this.daysOfWeekBox[5]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 6: 
+              if(this.daysOfWeekBox[6]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            case 7: 
+              if(this.daysOfWeekBox[7]) {
+                this.sessions.push(data[i]);
+                dayPicked = true;
+              }
+              break;
+            default:
+              break;
+          }
+        }
+        if(!dayPicked) {
+          this.sessions = data;
+        }
+  
+        for (var i = 0; i < this.sessions.length; i++) {
+          // console.log('INDEX BEFORE LOOP: ', i);
+          let index = i;
+          this.apiService
+            .getAvgMaxByPT(this.sessions[i]["idSession"], 0)
+            .subscribe(data => {
+              let maxAvg = data;
+              this.makeMaxAvg(index, maxAvg);
+            });
+        }
+      })
+    }
+    else {
     this.apiService.filterSessionByDate(this.curPlayerID, this.fromDateDATE, this.toDateDATE).subscribe(data => {
       // this.sessions = data;
      
@@ -283,6 +354,7 @@ export class SessionsOverviewComponent implements OnInit {
       }
     })
   }
+  }
 
   resetFilter() {
     this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
@@ -311,5 +383,6 @@ export class SessionsOverviewComponent implements OnInit {
     }
 
     this.isFiltered = false;
+    this.chooseDateRange = false;
   }
 }

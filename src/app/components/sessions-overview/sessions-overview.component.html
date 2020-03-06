@@ -161,6 +161,8 @@
         </button>
       </div>
       <div class="modal-body">
+        <button class="btn btn-primary" (click)="chooseDateRange = !chooseDateRange">Choose Dates</button>
+        <div *ngIf="chooseDateRange">
         <ngb-datepicker
           #dp
           (dateSelect)="onDateSelection($event)"
@@ -182,6 +184,7 @@
             {{ date.day }}
           </span>
         </ng-template>
+      </div>
         <div class="pitch-types" id="pitch-type">
           <div>
             <input type="checkbox" id="monday" [(ngModel)]="daysOfWeekBox[1]" />
