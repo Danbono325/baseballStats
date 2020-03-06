@@ -117,6 +117,11 @@ export class ApiService {
     return this.http.get<any[]>(this.apiHost + "/sessions/date/" + pitcherID + "/" + fromDate + "/" + toDate + "/");
   }
 
+
+  getLogs() {
+    return this.http.get<any[]>(this.apiHost +"/admin/");
+  }
+
   makeSingleSessionFiltered(sessionID, lowVelo, highVelo, lowTotalSpin, highTotalSpin, lowSpin,
     highSpin, lowVbreak, highVbreak, lowHbreak, 
     highHbreak, lowRheight, highRheight, lowRside, highRside) {
@@ -127,5 +132,4 @@ export class ApiService {
     lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
     "/"+highRside +"/");
   }
-  
 }
