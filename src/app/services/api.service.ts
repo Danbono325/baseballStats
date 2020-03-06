@@ -7,8 +7,8 @@ import { Pitcher } from "../models/Pitcher";
   providedIn: "root"
 })
 export class ApiService {
-  // apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
-  apiHost = "http://localhost:3000"; 
+  apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
+  // apiHost = "http://localhost:3000"; 
 
 
   filterSingleSession = false;

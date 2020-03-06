@@ -70,10 +70,18 @@ export class SessionsOverviewComponent implements OnInit {
     }
   }
 
-  currentPitcher;
+
   curPlayerID;
 
   sessions;
+
+  currentPitcher = new Pitcher(
+    "",
+    0,
+    0,
+    0,
+    new Date()
+  );
 
   constructor(
     private apiService: ApiService,
@@ -105,6 +113,19 @@ export class SessionsOverviewComponent implements OnInit {
     this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
       console.log("sessions: ", data);
       this.sessions = data;
+      for(var i = 0; i < this.sessions.length; i++) {
+        var pitchTypes = {};
+
+        pitchTypes["4 Seam Fastball"] = [0, 0];
+        pitchTypes["2 Seam Fastball"] = [0, 0];
+        pitchTypes["Changeup"] = [0, 0];
+        pitchTypes["Curveball"] = [0, 0];
+        pitchTypes["Slider"] = [0, 0];
+        pitchTypes["Cut Fastball"] = [0, 0];
+        this.sessions[i]["PT"] = pitchTypes;
+      }
+     
+
       for (var i = 0; i < data.length; i++) {
         console.log("INDEX BEFORE LOOP: ", i);
         let index = i;

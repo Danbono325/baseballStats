@@ -40,10 +40,16 @@ export class SessionComponent implements OnInit {
   }
 
   curUser;
-  currentPitcher;
+  currentPitcher = new Pitcher(
+    "",
+    0,
+    0,
+    0,
+    new Date()
+  );
   curPlayerID;
   curSessionID;
-  sessionData;
+  sessionData = [];
   sessionDate;
   sessionSummaryData = {};
   filteredSessionData = [];
