@@ -7,8 +7,8 @@ import { Pitcher } from "../models/Pitcher";
   providedIn: "root"
 })
 export class ApiService {
-  apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
-  // apiHost = "http://localhost:3000"; 
+  // apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
+  apiHost = "http://localhost:3000"; 
 
   constructor(private http: HttpClient) {}
 
@@ -76,5 +76,9 @@ export class ApiService {
 
   filterSessionByDate(pitcherID, fromDate, toDate) {
     return this.http.get<any[]>(this.apiHost + "/sessions/date/" + pitcherID + "/" + fromDate + "/" + toDate + "/");
+  }
+
+  getLogs() {
+    return this.http.get<any[]>(this.apiHost +"/admin/");
   }
 }

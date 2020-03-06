@@ -15,7 +15,10 @@
             </tr>
         </thead>
         <tbody>
-
+            <tr *ngFor="let log of logs">
+                <td>{{ log.cur_date | muDate }}</td>
+                <td>{{ log.num_records }}</td>
+            </tr>
         </tbody>
     </table>
 </div>
