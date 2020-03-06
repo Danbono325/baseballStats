@@ -7,8 +7,8 @@ import { Pitcher } from "../models/Pitcher";
   providedIn: "root"
 })
 export class ApiService {
-  // apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
-  apiHost = "http://localhost:3000"; 
+  apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
+  // apiHost = "http://localhost:3000"; 
 
 
   singleSessionChartFiltered = false;
@@ -18,7 +18,7 @@ export class ApiService {
   noneSelected = false;
 
   singleSessionPitchCheckbox = {};
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllPictherData(): Observable<any[]> {
     return this.http.get<any[]>(this.apiHost + "/pitchers");
@@ -72,39 +72,39 @@ export class ApiService {
 
   getFilteredData(
     sessionID, lowVelo, highVelo, lowTotalSpin, highTotalSpin, lowSpin,
-     highSpin, lowVbreak, highVbreak, lowHbreak, 
-     highHbreak, lowRheight, highRheight, lowRside, highRside): Observable<any[]> {
+    highSpin, lowVbreak, highVbreak, lowHbreak,
+    highHbreak, lowRheight, highRheight, lowRside, highRside): Observable<any[]> {
 
 
-      if(this.singleSessionChartFiltered) {
-        this.singleSessionFiltered =[];
-        this.singleSessionAVGFiltered = [];
-        this.http.get<any[]>(
-          this.apiHost + "/sessions/one/filter/" + sessionID + "/" + lowVelo+"/"+
-          highVelo+"/"+lowTotalSpin+"/"+highTotalSpin+"/"+lowSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
-          lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
-          "/"+highRside +"/").subscribe(data => {
-            this.singleSessionFiltered = data;
-          });
+    if (this.singleSessionChartFiltered) {
+      this.singleSessionFiltered = [];
+      this.singleSessionAVGFiltered = [];
+      this.http.get<any[]>(
+        this.apiHost + "/sessions/one/filter/" + sessionID + "/" + lowVelo + "/" +
+        highVelo + "/" + lowTotalSpin + "/" + highTotalSpin + "/" + lowSpin + "/" + highSpin + "/" + lowVbreak + "/" + highVbreak + "/" +
+        lowHbreak + "/" + highHbreak + "/" + lowRheight + "/" + highRheight + "/" + lowRside +
+        "/" + highRside + "/").subscribe(data => {
+          this.singleSessionFiltered = data;
+        });
 
-          this.http.get<any[]>(
-            this.apiHost + "/sessions/one/avg/filter/" + sessionID + "/" + lowVelo+"/"+
-            highVelo+"/"+lowTotalSpin+"/"+highTotalSpin+"/"+lowSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
-            lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
-            "/"+highRside +"/").subscribe(data => {
-              this.singleSessionAVGFiltered = data;
-            });
-      }
-      return this.http.get<any[]>(
-        this.apiHost + "/sessions/filter/" + sessionID + "/" + lowVelo+"/"+
-        highVelo+"/"+lowTotalSpin+"/"+highTotalSpin+"/"+lowSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
-        lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
-        "/"+highRside +"/");
-      
+      this.http.get<any[]>(
+        this.apiHost + "/sessions/one/avg/filter/" + sessionID + "/" + lowVelo + "/" +
+        highVelo + "/" + lowTotalSpin + "/" + highTotalSpin + "/" + lowSpin + "/" + highSpin + "/" + lowVbreak + "/" + highVbreak + "/" +
+        lowHbreak + "/" + highHbreak + "/" + lowRheight + "/" + highRheight + "/" + lowRside +
+        "/" + highRside + "/").subscribe(data => {
+          this.singleSessionAVGFiltered = data;
+        });
+    }
+    return this.http.get<any[]>(
+      this.apiHost + "/sessions/filter/" + sessionID + "/" + lowVelo + "/" +
+      highVelo + "/" + lowTotalSpin + "/" + highTotalSpin + "/" + lowSpin + "/" + highSpin + "/" + lowVbreak + "/" + highVbreak + "/" +
+      lowHbreak + "/" + highHbreak + "/" + lowRheight + "/" + highRheight + "/" + lowRside +
+      "/" + highRside + "/");
+
   }
 
   getFilteredChartSingle() {
-      return this.singleSessionFiltered;
+    return this.singleSessionFiltered;
   }
 
   getFilteredChartAVGSingle() {
@@ -112,24 +112,24 @@ export class ApiService {
   }
 
   filterSessionByDate(pitcherID, fromDate, toDate) {
-     fromDate = fromDate.year + "-" + fromDate.month + "-" + fromDate.day;
+    fromDate = fromDate.year + "-" + fromDate.month + "-" + fromDate.day;
     toDate = toDate.year + "-" + toDate.month + "-" + toDate.day;
     return this.http.get<any[]>(this.apiHost + "/sessions/date/" + pitcherID + "/" + fromDate + "/" + toDate + "/");
   }
 
 
   getLogs() {
-    return this.http.get<any[]>(this.apiHost +"/admin/");
+    return this.http.get<any[]>(this.apiHost + "/admin/");
   }
 
   makeSingleSessionFiltered(sessionID, lowVelo, highVelo, lowTotalSpin, highTotalSpin, lowSpin,
-    highSpin, lowVbreak, highVbreak, lowHbreak, 
+    highSpin, lowVbreak, highVbreak, lowHbreak,
     highHbreak, lowRheight, highRheight, lowRside, highRside) {
-    
 
-    this.http.get<any[]>( this.apiHost + "/sessions/filter/" + sessionID + "/" + lowVelo+"/"+
-    highVelo+"/"+lowTotalSpin+"/"+highTotalSpin+"/"+lowSpin+"/"+highSpin+"/"+lowVbreak+"/"+highVbreak+"/"+
-    lowHbreak+"/"+highHbreak+"/"+lowRheight+"/"+highRheight+"/"+lowRside+
-    "/"+highRside +"/");
+
+    this.http.get<any[]>(this.apiHost + "/sessions/filter/" + sessionID + "/" + lowVelo + "/" +
+      highVelo + "/" + lowTotalSpin + "/" + highTotalSpin + "/" + lowSpin + "/" + highSpin + "/" + lowVbreak + "/" + highVbreak + "/" +
+      lowHbreak + "/" + highHbreak + "/" + lowRheight + "/" + highRheight + "/" + lowRside +
+      "/" + highRside + "/");
   }
 }
