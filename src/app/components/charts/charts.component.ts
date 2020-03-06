@@ -14,6 +14,9 @@ export class ChartsComponent implements OnInit {
 
   sessions;
 
+  singleSessionFilter = [];
+  singleSessionAVGFilter = [];
+
   allPitches = [];
 
   chartsArray = [
@@ -388,26 +391,35 @@ export class ChartsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.curSessionID = params["sessionID"];
       //console.log("Params ", params);
     });
 
-    this.apiService.getChartDataSession(this.curSessionID).subscribe(data => {
-      let maxAvg = data;
-      // console.log(maxAvg);
-      this.makeSessionCharts(0, maxAvg);
-      // this.sessionMaxAvg.push({i: maxAvg});
-    });
-    // console.log(data[i]['idSession']);
-    this.apiService
-      .getChartDataSessionAvg(this.curSessionID)
-      .subscribe(data => {
-        let averages = data;
-        console.log("Averages: ", averages);
-        this.makeSessionChartsAvg(0, averages);
+    if (this.apiService.singleSessionChartFiltered) {
+      console.log('FILTERED')
+      this.singleSessionFilter = this.apiService.getFilteredChartSingle();
+      this.singleSessionAVGFilter = this.apiService.getFilteredChartAVGSingle();
+
+      this.makeSessionCharts(0, this.singleSessionFilter);
+      this.makeSessionChartsAvg(0, this.singleSessionAVGFilter);
+    } else {
+      this.apiService.getChartDataSession(this.curSessionID).subscribe(data => {
+        let maxAvg = data;
+        // console.log(maxAvg);
+        this.makeSessionCharts(0, maxAvg);
         // this.sessionMaxAvg.push({i: maxAvg});
       });
+      // console.log(data[i]['idSession']);
+      this.apiService
+        .getChartDataSessionAvg(this.curSessionID)
+        .subscribe(data => {
+          let averages = data;
+          console.log("Averages: ", averages);
+          this.makeSessionChartsAvg(0, averages);
+          // this.sessionMaxAvg.push({i: maxAvg});
+        });
+    }
 
     // this.apiService.getChartData(this.curPlayerID).subscribe(data => {
     //   let values = data;
@@ -437,72 +449,156 @@ export class ChartsComponent implements OnInit {
     pitchTypes["Slider"] = [0, 0, 0, 0];
     pitchTypes["Cut Fastball"] = [0, 0, 0, 0];
 
-    for (var i = 0; i < values.length; i++) {
-      switch (values[i]["Pitch_Type_pitchType"]) {
-        case 0:
-          this.chartsArray[0]["release4FB"].push({
-            x: values[i]["releaseSide"],
-            y: values[i]["releaseHeight"]
-          });
-          this.chartsArray[1]["movement4FB"].push({
-            x: values[i]["horizontalBreak"],
-            y: values[i]["verticalBreak"]
-          });
-          break;
-        case 1:
-          this.chartsArray[0]["releaseCU"].push({
-            x: values[i]["releaseSide"],
-            y: values[i]["releaseHeight"]
-          });
-          this.chartsArray[1]["movementCU"].push({
-            x: values[i]["horizontalBreak"],
-            y: values[i]["verticalBreak"]
-          });
-          break;
-        case 3:
-          this.chartsArray[0]["releaseCB"].push({
-            x: values[i]["releaseSide"],
-            y: values[i]["releaseHeight"]
-          });
-          this.chartsArray[1]["movementCB"].push({
-            x: values[i]["horizontalBreak"],
-            y: values[i]["verticalBreak"]
-          });
-          break;
-        case 4:
-          this.chartsArray[0]["releaseSL"].push({
-            x: values[i]["releaseSide"],
-            y: values[i]["releaseHeight"]
-          });
-          this.chartsArray[1]["movementSL"].push({
-            x: values[i]["horizontalBreak"],
-            y: values[i]["verticalBreak"]
-          });
-          break;
-        case 5:
-          this.chartsArray[0]["release2FB"].push({
-            x: values[i]["releaseSide"],
-            y: values[i]["releaseHeight"]
-          });
-          this.chartsArray[1]["movement2FB"].push({
-            x: values[i]["horizontalBreak"],
-            y: values[i]["verticalBreak"]
-          });
-          break;
-        case 6:
-          this.chartsArray[0]["releaseCH"].push({
-            x: values[i]["releaseSide"],
-            y: values[i]["releaseHeight"]
-          });
-          this.chartsArray[1]["movementCH"].push({
-            x: values[i]["horizontalBreak"],
-            y: values[i]["verticalBreak"]
-          });
-          break;
-        default:
-          break;
+    if(this.apiService.singleSessionChartFiltered && !this.apiService.noneSelected) {
+
+      for (var i = 0; i < values.length; i++) {
+        switch (values[i]["Pitch_Type_pitchType"]) {
+          case 0:
+            if(this.apiService.singleSessionPitchCheckbox[0]) {
+            this.chartsArray[0]["release4FB"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movement4FB"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+          }
+            break;
+          case 1:
+            if(this.apiService.singleSessionPitchCheckbox[1] ) {
+            this.chartsArray[0]["releaseCU"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movementCU"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+          }
+            break;
+          case 3:
+            if(this.apiService.singleSessionPitchCheckbox[3]) {
+            this.chartsArray[0]["releaseCB"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movementCB"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+          }
+            break;
+          case 4:
+            if(this.apiService.singleSessionPitchCheckbox[4]) {
+            this.chartsArray[0]["releaseSL"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movementSL"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+          }
+            break;
+          case 5:
+            if(this.apiService.singleSessionPitchCheckbox[5]) {
+            this.chartsArray[0]["release2FB"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movement2FB"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+          }
+            break;
+          case 6:
+            if(this.apiService.singleSessionPitchCheckbox[6] ) {
+            this.chartsArray[0]["releaseCH"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movementCH"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+          }
+            break;
+          default:
+            break;
+        }
       }
     }
+     else {
+      //  this.apiService.noneSelected = false;s
+      for (var i = 0; i < values.length; i++) {
+        switch (values[i]["Pitch_Type_pitchType"]) {
+          case 0:
+            this.chartsArray[0]["release4FB"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movement4FB"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+            break;
+          case 1:
+            this.chartsArray[0]["releaseCU"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movementCU"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+            break;
+          case 3:
+            this.chartsArray[0]["releaseCB"].push({
+              x: values[i]["releaseSide"],
+              y: values[i]["releaseHeight"]
+            });
+            this.chartsArray[1]["movementCB"].push({
+              x: values[i]["horizontalBreak"],
+              y: values[i]["verticalBreak"]
+            });
+            break; 
+            case 4:
+              this.chartsArray[0]["releaseSL"].push({
+                x: values[i]["releaseSide"],
+                y: values[i]["releaseHeight"]
+              });
+              this.chartsArray[1]["movementSL"].push({
+                x: values[i]["horizontalBreak"],
+                y: values[i]["verticalBreak"]
+              });
+              break;
+            case 5:
+              this.chartsArray[0]["release2FB"].push({
+                x: values[i]["releaseSide"],
+                y: values[i]["releaseHeight"]
+              });
+              this.chartsArray[1]["movement2FB"].push({
+                x: values[i]["horizontalBreak"],
+                y: values[i]["verticalBreak"]
+              });
+              break;
+            case 6:
+              this.chartsArray[0]["releaseCH"].push({
+                x: values[i]["releaseSide"],
+                y: values[i]["releaseHeight"]
+              });
+              this.chartsArray[1]["movementCH"].push({
+                x: values[i]["horizontalBreak"],
+                y: values[i]["verticalBreak"]
+              });
+              break;
+            default:
+              break;
+          }
+        }
+     }
     console.log("chartsTEST: ", pitchTypes);
     this.allPitches.push(pitchTypes);
 
@@ -510,6 +606,7 @@ export class ChartsComponent implements OnInit {
   }
 
   makeSessionChartsAvg(id, values) {
+    console.log('VALUES: ', values);
     // console.log(id)
     var pitchTypes = {};
     //console.log("Values", values);
@@ -529,6 +626,88 @@ export class ChartsComponent implements OnInit {
     pitchTypes["Slider"] = [0, 0, 0, 0];
     pitchTypes["Cut Fastball"] = [0, 0, 0, 0];
 
+    if(this.apiService.singleSessionChartFiltered && !this.apiService.noneSelected) {
+    for (var i = 0; i < values.length; i++) {
+      switch (values[i]["Pitch_Type_pitchType"]) {
+        case 0:
+          if(this.apiService.singleSessionPitchCheckbox[0]) {
+          this.chartsArray[2]["release4FBAvg"].push({
+            x: values[i]["AVG(releaseSide)"],
+            y: values[i]["AVG(releaseHeight)"]
+          });
+          this.chartsArray[3]["movement4FBAvg"].push({
+            x: values[i]["AVG(horizontalBreak)"],
+            y: values[i]["AVG(verticalBreak)"]
+          });
+        }
+          break;
+        case 1:
+          if(this.apiService.singleSessionPitchCheckbox[1]) {
+          this.chartsArray[2]["releaseCUAvg"].push({
+            x: values[i]["AVG(releaseSide)"],
+            y: values[i]["AVG(releaseHeight)"]
+          });
+          this.chartsArray[3]["movementCUAvg"].push({
+            x: values[i]["AVG(horizontalBreak)"],
+            y: values[i]["AVG(verticalBreak)"]
+          });
+        }
+          break;
+        case 3:
+          if(this.apiService.singleSessionPitchCheckbox[3]) {
+          this.chartsArray[2]["releaseCBAvg"].push({
+            x: values[i]["AVG(releaseSide)"],
+            y: values[i]["AVG(releaseHeight)"]
+          });
+          this.chartsArray[3]["movementCBAvg"].push({
+            x: values[i]["AVG(horizontalBreak)"],
+            y: values[i]["AVG(verticalBreak)"]
+          });
+        }
+          break;
+        case 4:
+          if(this.apiService.singleSessionPitchCheckbox[4]) {
+          this.chartsArray[2]["releaseSLAvg"].push({
+            x: values[i]["AVG(releaseSide)"],
+            y: values[i]["AVG(releaseHeight)"]
+          });
+          this.chartsArray[3]["movementSLAvg"].push({
+            x: values[i]["AVG(horizontalBreak)"],
+            y: values[i]["AVG(verticalBreak)"]
+          });
+        }
+          break;
+        case 5:
+          if(this.apiService.singleSessionPitchCheckbox[5]) {
+          this.chartsArray[2]["release2FBAvg"].push({
+            x: values[i]["AVG(releaseSide)"],
+            y: values[i]["AVG(releaseHeight)"]
+          });
+          this.chartsArray[3]["movement2FBAvg"].push({
+            x: values[i]["AVG(horizontalBreak)"],
+            y: values[i]["AVG(verticalBreak)"]
+          });
+        }
+          break;
+        case 6:
+          if(this.apiService.singleSessionPitchCheckbox[6]) {
+          this.chartsArray[2]["releaseCHAvg"].push({
+            x: values[i]["AVG(releaseSide)"],
+            y: values[i]["AVG(releaseHeight)"]
+          });
+          this.chartsArray[3]["movementCHAvg"].push({
+            x: values[i]["AVG(horizontalBreak)"],
+            y: values[i]["AVG(verticalBreak)"]
+          });
+        }
+          break;
+        default:
+          break;
+      }
+    }
+  }
+  else {
+    this.apiService.noneSelected = false;
     for (var i = 0; i < values.length; i++) {
       switch (values[i]["Pitch_Type_pitchType"]) {
         case 0:
@@ -595,6 +774,8 @@ export class ChartsComponent implements OnInit {
           break;
       }
     }
+
+  }
     console.log("chartsTEST: ", pitchTypes);
     this.allPitches.push(pitchTypes);
 

@@ -389,18 +389,13 @@ export class SessionChartsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
+      // console.log('PARAMAS ARE: ',params);
       this.curPlayerID = params["id"];
     });
 
     this.apiService.getSessionsById(this.curPlayerID).subscribe(data => {
       console.log("chart sessions: ", data);
       this.sessions = data;
-      // console.log(data.length);
-      // console.log(data[])
-      // for (var i = 0; i < data.length; i++) {
-
-      // console.log(data[i]['idSession']);
-      // }
     });
 
     this.apiService.getChartData(this.curPlayerID).subscribe(data => {
