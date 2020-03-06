@@ -91,7 +91,7 @@ export class SessionComponent implements OnInit {
     floor: 100,
     ceil: 3000,
     step: 100
-  };
+  }
 
   pitchTypeCheckboxes = {
     0: false,
@@ -102,23 +102,16 @@ export class SessionComponent implements OnInit {
     3: false
   };
 
-<<<<<<< HEAD
-  pitchTypesEnabled = {
-    "4FB": false,
-    "CUT": false,
-    "CUR": true,
-    "2FB": false,
-    "SLI": false
-=======
   pitchTypesEnable = {
     "4FB": false,
     "2FB": false,
-    "SLI": false,
     "CHA": false,
     "CUR": false,
-    "CUT": false
->>>>>>> a8f3dd6f29995782e046a5902ded579f3699cf80
-  };
+    "CUT": false,
+    "SLI": false
+  }
+
+
 
   constructor(
     private apiService: ApiService,
@@ -126,7 +119,7 @@ export class SessionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
@@ -155,38 +148,34 @@ export class SessionComponent implements OnInit {
 
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
-<<<<<<< HEAD
-      
-=======
-      for (var index = 0; index < this.sessionData.length; index++) {
-        switch (this.sessionData[index]["Pitch_Type_pitchType"]) {
+
+      for(var i = 0; i < data.length; i++) {
+        switch (data[i]["Pitch_Type_pitchType"]) {
           case 0:
-            this.pitchTypesEnable["4FB"] = true;
+            this.pitchTypesEnable['4FB'] = true;
             break;
           case 1:
-            this.pitchTypesEnable["CUT"] = true;
+            this.pitchTypesEnable['CUT'] = true;
             break;
           case 3:
-            this.pitchTypesEnable["CUR"] = true;
+            this.pitchTypesEnable['CUR'] = true;
             break;
           case 4:
-            this.pitchTypesEnable["SLI"] = true;
+            this.pitchTypesEnable['SLI'] = true;
             break;
           case 5:
-            this.pitchTypesEnable["2FB"] = true;
+            this.pitchTypesEnable['2FB'] = true;
             break;
           case 6:
-            this.pitchTypesEnable["CHA"] = true;
+            this.pitchTypesEnable['CHA'] = true;
             break;
           default:
             break;
         }
       }
-      console.log("Pitchs Enabled", this.pitchTypesEnable);
->>>>>>> a8f3dd6f29995782e046a5902ded579f3699cf80
+      
       console.log("Session Data", data);
     });
-
 
     this.apiService
       .getAvgMaxByPT(this.curSessionID, this.curPlayerID)

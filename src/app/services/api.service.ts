@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 import { Pitcher } from "../models/Pitcher";
 
 @Injectable({
@@ -78,6 +78,8 @@ export class ApiService {
   }
 
   filterSessionByDate(pitcherID, fromDate, toDate) {
+     fromDate = fromDate.year + "-" + fromDate.month + "-" + fromDate.day;
+    toDate = toDate.year + "-" + toDate.month + "-" + toDate.day;
     return this.http.get<any[]>(this.apiHost + "/sessions/date/" + pitcherID + "/" + fromDate + "/" + toDate + "/");
   }
 }
