@@ -22,6 +22,13 @@ export class UserService {
     return this.curUserData.givenName;
   }
 
+  getEmail() {
+    if (localStorage.getItem("curUserData") != null) {
+      this.curUserData = JSON.parse(localStorage.getItem("curUserData"));
+      return this.curUserData.mail;
+    }
+  }
+
   logout() {
     this.userAgent.logout();
   }

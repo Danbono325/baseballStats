@@ -17,7 +17,7 @@
           <a ng-class="getClass('/stats')" class="nav-link" href="" routerLink="/stats" [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: true }">Team Stats</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="curEmail == 's1049491@monmouth.edu'">
           <a class="nav-link" routerLink="/adminpanel" [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: true }">Admin Panel<span class="sr-only">(current)</span></a>
         </li>
