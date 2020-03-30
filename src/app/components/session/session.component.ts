@@ -18,7 +18,6 @@ import { SortEvent } from "src/app/models/SortEvent";
   styleUrls: ["./session.component.scss"]
 })
 export class SessionComponent implements OnInit {
-
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   onSort({ column, direction }: SortEvent) {
@@ -40,12 +39,12 @@ export class SessionComponent implements OnInit {
     }
   }
 
-
   curUser;
   currentPitcher;
   curPlayerID;
   curSessionID;
   sessionData;
+  sessionDate;
   sessionSummaryData = {};
   filteredSessionData = [];
 
@@ -86,6 +85,14 @@ export class SessionComponent implements OnInit {
     step: 0.5
   };
 
+  lowTotalSpin: number = 100;
+  highTotalSpin: number = 3000;
+  totalSpinOptions: Options = {
+    floor: 100,
+    ceil: 3000,
+    step: 100
+  };
+
   pitchTypeCheckboxes = {
     0: false,
     5: false,
@@ -95,24 +102,35 @@ export class SessionComponent implements OnInit {
     3: false
   };
 
+  pitchTypesEnable = {
+    "4FB": false,
+    "2FB": false,
+    "SLI": false,
+    "CHA": false,
+    "CUR": false,
+    "CUT": false
+  };
+
   constructor(
     private apiService: ApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-  } 
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.curPlayerID = params["id"];
       this.curSessionID = params["sessionID"];
+      this.sessionDate = params["sessionDate"];
     });
 
+    console.log("Session Date", this.sessionDate);
     this.apiService.getPitcherById(this.curPlayerID).subscribe(data => {
       console.log(data);
       let pitcher = new Pitcher(
@@ -128,8 +146,34 @@ export class SessionComponent implements OnInit {
 
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
+      for (var index = 0; index < this.sessionData.length; index++) {
+        switch (this.sessionData[index]["Pitch_Type_pitchType"]) {
+          case 0:
+            this.pitchTypesEnable["4FB"] = true;
+            break;
+          case 1:
+            this.pitchTypesEnable["CUT"] = true;
+            break;
+          case 3:
+            this.pitchTypesEnable["CUR"] = true;
+            break;
+          case 4:
+            this.pitchTypesEnable["SLI"] = true;
+            break;
+          case 5:
+            this.pitchTypesEnable["2FB"] = true;
+            break;
+          case 6:
+            this.pitchTypesEnable["CHA"] = true;
+            break;
+          default:
+            break;
+        }
+      }
+      console.log("Pitchs Enabled", this.pitchTypesEnable);
       console.log("Session Data", data);
     });
+
 
     this.apiService
       .getAvgMaxByPT(this.curSessionID, this.curPlayerID)
@@ -211,15 +255,30 @@ export class SessionComponent implements OnInit {
     console.log(this.pitchTypeCheckboxes);
     this.filteredSessionData = [];
     this.sessionData = [];
-    
-    this.apiService.getFilteredData(
-      this.curSessionID, this.lowVelo, this.highVelo, this.lowSpin,
-       this.highSpin, this.lowVbreak, this.highVbreak, this.lowHbreak, 
-       this.highHbreak, this.lowRheight, this.highRheight, this.lowRside, this.highRside).subscribe(data => {
+
+    this.apiService
+      .getFilteredData(
+        this.curSessionID,
+        this.lowVelo,
+        this.highVelo,
+        this.lowTotalSpin,
+        this.highTotalSpin,
+        this.lowSpin,
+        this.highSpin,
+        this.lowVbreak,
+        this.highVbreak,
+        this.lowHbreak,
+        this.highHbreak,
+        this.lowRheight,
+        this.highRheight,
+        this.lowRside,
+        this.highRside
+      )
+      .subscribe(data => {
         //  this.sessionData = [];
         let addedSelected = false;
-        console.log('DATA Length is: ', data.length);
-         for (var i = 0; i < data.length; i++) {
+        console.log("DATA Length is: ", data.length);
+        for (var i = 0; i < data.length; i++) {
           switch (data[i]["Pitch_Type_pitchType"]) {
             case 0:
               if (this.pitchTypeCheckboxes[0]) {
@@ -260,58 +319,54 @@ export class SessionComponent implements OnInit {
             default:
               break;
           }
-         
         }
 
-        if(this.sessionData.length == 0 && !addedSelected) {
-          console.log('NOTHING');
+        if (this.sessionData.length == 0 && !addedSelected) {
+          console.log("NOTHING");
           this.sessionData = data;
         }
-        if(this.filterStrikes) {
-          console.log('FILTERTING')
-          this.sessionData = this.sessionData.filter(session => session.strike == 'Y');
+        if (this.filterStrikes) {
+          console.log("FILTERTING");
+          this.sessionData = this.sessionData.filter(
+            session => session.strike == "Y"
+          );
         }
-       });
+      });
   }
-
 
   resetFilter() {
     this.filterStrikes = false;
     this.isFiltered = false;
 
-  this.lowVelo = 0;
-  this.highVelo = 100;
-  this.lowSpin = 0;
-  this.highSpin = 100;
+    this.lowVelo = 0;
+    this.highVelo = 100;
+    this.lowSpin = 0;
+    this.highSpin = 100;
 
+    this.lowVbreak = -25;
+    this.highVbreak = 25;
+    this.lowHbreak = -25;
+    this.highHbreak = 25;
+    this.lowRheight = 0;
+    this.highRheight = 7;
+    this.lowRside = -5;
+    this.highRside = 5;
 
-  this.lowVbreak= -25;
-  this.highVbreak = 25;
-  this.lowHbreak= -25;
-  this.highHbreak = 25;
-  this.lowRheight = 0;
-  this.highRheight = 7;
-  this.lowRside = -5;
-  this.highRside = 5;
-  
-  this.pitchTypeCheckboxes = {
-    0: false,
-    5: false,
-    1: false,
-    6: false,
-    4: false,
-    3: false
-  };
+    this.pitchTypeCheckboxes = {
+      0: false,
+      5: false,
+      1: false,
+      6: false,
+      4: false,
+      3: false
+    };
 
-  console.log('PT CB', this.pitchTypeCheckboxes);
-  
-  this.sessionData = [];
-  this.apiService.getSessionData(this.curSessionID).subscribe(data => {
-    this.sessionData = data;
-    console.log("Session Data", data);
-  });
+    console.log("PT CB", this.pitchTypeCheckboxes);
 
+    this.sessionData = [];
+    this.apiService.getSessionData(this.curSessionID).subscribe(data => {
+      this.sessionData = data;
+      console.log("Session Data", data);
+    });
   }
-
-
 }

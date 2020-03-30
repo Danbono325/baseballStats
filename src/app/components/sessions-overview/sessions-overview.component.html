@@ -87,9 +87,8 @@
           <td>
             <button
               class="btn btn-primary"
-              routerLink="/session/{{ currentPitcher.id }}/{{
-                session.idSession
-              }}"
+              (click)="goToSession(session.idSession, session.date)"
+          
             >
               Session
             </button>
@@ -161,7 +160,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <button class="btn btn-primary" (click)="chooseDateRange = !chooseDateRange">Choose Dates</button>
+        <button class="btn btn-primary" (click)="showCalendar()">Choose Dates</button>
         <div *ngIf="chooseDateRange">
         <ngb-datepicker
           #dp

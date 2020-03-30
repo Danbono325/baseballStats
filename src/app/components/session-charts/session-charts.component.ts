@@ -96,7 +96,18 @@ export class SessionChartsComponent implements OnInit {
         },
         zoom: {
           enabled: true,
-          mode: "xy"
+          mode: "xy",
+
+          rangeMin: {
+            // Format of min zoom range depends on scale type
+            x: -10,
+            y: 0
+          },
+          rangeMax: {
+            // Format of max zoom range depends on scale type
+            x: 10,
+            y: 10
+          }
         }
       }
     }
@@ -148,7 +159,18 @@ export class SessionChartsComponent implements OnInit {
         },
         zoom: {
           enabled: true,
-          mode: "xy"
+          mode: "xy",
+
+          rangeMin: {
+            // Format of min zoom range depends on scale type
+            x: -60,
+            y: -60
+          },
+          rangeMax: {
+            // Format of max zoom range depends on scale type
+            x: 60,
+            y: 60
+          }
         }
       }
     }
@@ -367,6 +389,7 @@ export class SessionChartsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
+      // console.log('PARAMAS ARE: ',params);
       this.curPlayerID = params["id"];
     });
 
