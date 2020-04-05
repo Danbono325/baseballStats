@@ -17,6 +17,7 @@ import { TeamStatsComponent } from "./components/team-stats/team-stats.component
 import { SessionsOverviewComponent } from "./components/sessions-overview/sessions-overview.component";
 import { SessionComponent } from "./components/session/session.component";
 import { SessionChartsComponent } from "./components/session-charts/session-charts.component";
+import { AdminpanelComponent } from './components/adminpanel/adminpanel.component';
 
 //Pipe
 import { PitchType } from "./pipes/pitch-type.pipe";
@@ -33,6 +34,7 @@ import { NgbdSortableHeader } from './helpers/NgbdSortableHeader';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { FormsModule } from '@angular/forms';
     PitchType,
     MuDate,
     ChartsComponent,
-    NgbdSortableHeader
+    NgbdSortableHeader,
+    AdminpanelComponent
   ],
   imports: [
     NgbModule,
@@ -60,4 +63,4 @@ import { FormsModule } from '@angular/forms';
   providers: [UserService, ApiService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

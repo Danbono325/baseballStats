@@ -40,10 +40,16 @@ export class SessionComponent implements OnInit {
   }
 
   curUser;
-  currentPitcher;
+  currentPitcher = new Pitcher(
+    "",
+    0,
+    0,
+    0,
+    new Date()
+  );
   curPlayerID;
   curSessionID;
-  sessionData;
+  sessionData = [];
   sessionDate;
   sessionSummaryData = {};
   filteredSessionData = [];
@@ -91,7 +97,7 @@ export class SessionComponent implements OnInit {
     floor: 100,
     ceil: 3000,
     step: 100
-  };
+  }
 
   pitchTypeCheckboxes = {
     0: false,
@@ -105,11 +111,13 @@ export class SessionComponent implements OnInit {
   pitchTypesEnable = {
     "4FB": false,
     "2FB": false,
-    "SLI": false,
     "CHA": false,
     "CUR": false,
-    "CUT": false
-  };
+    "CUT": false,
+    "SLI": false
+  }
+
+
 
   constructor(
     private apiService: ApiService,
@@ -146,34 +154,34 @@ export class SessionComponent implements OnInit {
 
     this.apiService.getSessionData(this.curSessionID).subscribe(data => {
       this.sessionData = data;
-      for (var index = 0; index < this.sessionData.length; index++) {
-        switch (this.sessionData[index]["Pitch_Type_pitchType"]) {
+
+      for (var i = 0; i < data.length; i++) {
+        switch (data[i]["Pitch_Type_pitchType"]) {
           case 0:
-            this.pitchTypesEnable["4FB"] = true;
+            this.pitchTypesEnable['4FB'] = true;
             break;
           case 1:
-            this.pitchTypesEnable["CUT"] = true;
+            this.pitchTypesEnable['CUT'] = true;
             break;
           case 3:
-            this.pitchTypesEnable["CUR"] = true;
+            this.pitchTypesEnable['CUR'] = true;
             break;
           case 4:
-            this.pitchTypesEnable["SLI"] = true;
+            this.pitchTypesEnable['SLI'] = true;
             break;
           case 5:
-            this.pitchTypesEnable["2FB"] = true;
+            this.pitchTypesEnable['2FB'] = true;
             break;
           case 6:
-            this.pitchTypesEnable["CHA"] = true;
+            this.pitchTypesEnable['CHA'] = true;
             break;
           default:
             break;
         }
       }
-      console.log("Pitchs Enabled", this.pitchTypesEnable);
+
       console.log("Session Data", data);
     });
-
 
     this.apiService
       .getAvgMaxByPT(this.curSessionID, this.curPlayerID)
@@ -251,10 +259,12 @@ export class SessionComponent implements OnInit {
   }
 
   filterItems() {
+    this.apiService.singleSessionChartFiltered = true;
     this.isFiltered = true;
     console.log(this.pitchTypeCheckboxes);
     this.filteredSessionData = [];
     this.sessionData = [];
+    this.apiService.singleSessionPitchCheckbox = this.pitchTypeCheckboxes;
 
     this.apiService
       .getFilteredData(
@@ -323,6 +333,7 @@ export class SessionComponent implements OnInit {
 
         if (this.sessionData.length == 0 && !addedSelected) {
           console.log("NOTHING");
+          this.apiService.noneSelected = true;
           this.sessionData = data;
         }
         if (this.filterStrikes) {
@@ -335,6 +346,7 @@ export class SessionComponent implements OnInit {
   }
 
   resetFilter() {
+    this.apiService.singleSessionChartFiltered = false;
     this.filterStrikes = false;
     this.isFiltered = false;
 
