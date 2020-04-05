@@ -34,6 +34,9 @@ import { NgbdSortableHeader } from './helpers/NgbdSortableHeader';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FormsModule } from '@angular/forms';
 
+//ngx-pagination
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +61,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     ChartsModule,
     Ng5SliderModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [UserService, ApiService],
   bootstrap: [AppComponent]

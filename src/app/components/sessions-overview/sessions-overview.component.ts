@@ -17,13 +17,11 @@ import { from } from "rxjs";
   styleUrls: ["./sessions-overview.component.scss"]
 })
 
-//PUT EVERYTHING INTO ONE ARRAY AND TRY SORTING THAT WAY
 export class SessionsOverviewComponent implements OnInit {
   isFiltered = false;
+  chooseDateRange = false;
 
   hoveredDate: NgbDate;
-
-  chooseDateRange = false;
   fromDate: NgbDate;
   toDate: NgbDate;
   fromDateDATE = "";
@@ -38,6 +36,7 @@ export class SessionsOverviewComponent implements OnInit {
     6: false,
     7: false
   };
+
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
@@ -353,8 +352,8 @@ export class SessionsOverviewComponent implements OnInit {
                 dayPicked = true;
               }
               break;
-            case 7:
-              if (this.daysOfWeekBox[7]) {
+            case 7: 
+              if(this.daysOfWeekBox[7]) {
                 this.sessions.push(data[i]);
                 dayPicked = true;
               }
@@ -363,10 +362,11 @@ export class SessionsOverviewComponent implements OnInit {
               break;
           }
         }
-        if (!dayPicked) {
+        if(!dayPicked) {
           this.sessions = data;
         }
-
+        
+  
         for (var i = 0; i < this.sessions.length; i++) {
           // console.log('INDEX BEFORE LOOP: ', i);
           let index = i;
@@ -379,6 +379,7 @@ export class SessionsOverviewComponent implements OnInit {
         }
       });
     }
+   
   }
 
   resetFilter() {
@@ -408,6 +409,7 @@ export class SessionsOverviewComponent implements OnInit {
     };
 
     this.isFiltered = false;
+    this.chooseDateRange = false;
   }
 
   goToSession(sessionId, date) {
