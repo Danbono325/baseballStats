@@ -2,23 +2,33 @@
 <h2>Administration Panel</h2>
 
 <div class="container">
-    <div class="col-md-2" style="margin-bottom: 10px;">
-        <button class="btn btn-primary" routerLink="/">
-            Run Scrape
-        </button>
-    </div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Date Ran</th>
-                <th>Number of Pitches Added</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let log of logs">
-                <td>{{ log.cur_date | muDate }}</td>
-                <td>{{ log.num_records }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <div class="col-md-2" style="margin-bottom: 10px;">
+    <button class="btn btn-primary" routerLink="/">
+      Run Scrape
+    </button>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date Ran</th>
+        <th>Number of Pitches Added</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let log of logs | paginate: { itemsPerPage: 15, currentPage: p }
+        "
+      >
+        <td>{{ log.cur_date | muDate }}</td>
+        <td>{{ log.num_records }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    (pageChange)="p = $event"
+    directionLinks="true"
+    autoHide="true"
+    responsive="true"
+  ></pagination-controls>
 </div>
