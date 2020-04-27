@@ -10,8 +10,6 @@ import { NgbDate, NgbCalendar } from "@ng-bootstrap/ng-bootstrap";
 })
 export class ApiService {
   apiHost = 'https://hawksbaseballpitchplus.csse-projects.monmouth.edu:3000';
-  // apiHost = "http://localhost:3000"; 
-
 
   singleSessionChartFiltered = false;
   singleSessionFiltered = [];
@@ -22,6 +20,10 @@ export class ApiService {
   singleSessionPitchCheckbox = {};
   constructor(private http: HttpClient) { }
 
+  callAdmin() {
+    return this.http.get(this.apiHost+ "/adminpull");
+  }
+  
   getAllPictherData(): Observable<any[]> {
     return this.http.get<any[]>(this.apiHost + "/pitchers");
   }
